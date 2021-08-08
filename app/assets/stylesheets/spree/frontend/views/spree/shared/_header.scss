@@ -12,6 +12,10 @@
   line-height: 20px;
   color: #6F6354;
 }
+.dis_link, .dis_link:visited, .dis_link:link, .dis_link:hover, .dis_link:active{
+  color: white;
+  text-decoration: none;
+}
 #sidenav{
   overflow-x: hidden;
   height: 100%;

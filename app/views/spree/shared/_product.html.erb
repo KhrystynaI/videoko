@@ -16,10 +16,10 @@
   <%else%>
   <%if !product.price_for_index(role_id: id).nil?%>
   <%product.price_for_index(role_id: id).each do |price|%>
-  <%= number_to_currency(price, unit: "₴", separator: ".", delimiter: "", format: "%u %n") %>
+  <%= number_to_currency(price, unit: "грн.", separator: ".", delimiter: "", format: "%n %u") %>
 <%end%>
 <%else%>
-<%= number_to_currency(0.00, unit: "₴", separator: ".", delimiter: "", format: "%u %n") %>
+<%= number_to_currency(0.00, unit: "грн.", separator: ".", delimiter: "", format: "%n %u") %>
 <%end%>
 <%end%>
 </div>
