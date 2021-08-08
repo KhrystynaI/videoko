@@ -5,7 +5,9 @@
  *
  *= require spree/backend
  *= require spree/backend/products
+ *= require intlTelInput
  *= require_self
  *= require_tree .
  *= require spree/backend/spree_globalize
+ *= require spree/backend/spree_editor
 */

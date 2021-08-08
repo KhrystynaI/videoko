@@ -23,13 +23,6 @@ module Spree
 
     self.whitelisted_ransackable_attributes = ['amount']
 
-    after_commit :reindex_product
-
-    def reindex_product
-      self.variant.product.reindex
-    end
-
-
     def money
       Spree::Money.new(amount || 0, currency: currency)
     end

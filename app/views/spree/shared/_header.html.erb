@@ -5,13 +5,20 @@
   <div id="sidenav">
   <a href='#' class='closebtn' id="closeNav" >&times;</a>
   <ul class="header_ul_sidenav">
-    <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.main_page'), spree.root_path, class: "blue" %></li>
+    <li class="header_ul_sidenav_li">
+      <%if spree_current_user.nil? %>
+      <%= link_to Spree.t('homepage.main_page'), spree.root_path, class: "blue" %>
+      <%else %>
+      <%= link_to Spree.t('homepage.account'), spree.account_path, class: "blue" %>
+      <%end%>
+    </li>
 
     <% spree_navigation_data.each do |root| %>
     <li class="header_ul_sidenav_li"><%= link_to Spree.t(root[:title]), spree.nested_taxons_path(root[:url]),class:"blue" %></li>
     <%end%>
 
   <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.contact'), spree.contact_us_path, class: "blue" %></li>
+  <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.news'), spree.posts_path, class: "blue" %></li>
   <% if !spree_user_signed_in? %>
     <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "blue"  %>
         <%else%>
@@ -24,15 +31,16 @@
   <%=link_to image_tag("inst_header.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
   </div>
   <div class="col-12 text-center">
-  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= @mob_tel%></span></div></div></p>
-  <p><div class="row"><div class="col-2"><%=image_tag "viber_header.png", class: "header_icon_img"%></div><div class="col-9"><span class="header_icon"><%= @viber%></span></div></div></p>
-  <p><div class="row"><div class="col-2"><%=image_tag "teleg_header.png", class: "header_icon_img"%></div><div class="col-9"><span class="header_icon"><%= @telegram%></span></div></div></p>
-  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= @tel%></span></div></div></p>
-  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= @tel_second%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= Spree::Config.first_mob%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= Spree::Config.second_mob%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%=image_tag "viber_header.png", class: "header_icon_img"%></div><div class="col-9"><span class="header_icon"><%= Spree::Config.viber%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%=image_tag "teleg_header.png", class: "header_icon_img"%></div><div class="col-9"><span class="header_icon"><%= Spree::Config.telegram%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= Spree::Config.first_phone%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= Spree::Config.second_phone%></span></div></div></p>
 </div>
   <div class="col-12 text-center">
   <%= image_tag("mail_header.png", class: "footer_icon")%>
-  <span class="header_icon"><%=@email%></span>
+  <span class="header_icon"><%=Spree::Config.email%></span>
 </div>
 
   </div>
@@ -45,9 +53,9 @@
       <div class="row justify-content-center logo_head">
           <div>
             <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0 float">
-              <%= logo %>
+              <%= link_to logo, root_path %>
             </figure>
-            <span class="padding_top"><span class="zn_title"><span class="second"><%=Spree.t('homepage.znak')%></span></span></span>
+            <span class="padding_top"><span class="zn_title"><span class="second"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></span></span></span>
           </div>
         </div>
 
@@ -72,9 +80,9 @@
       <div class="logo_second">
         <div class="center_second">
           <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0 float">
-            <%= logo %>
+            <%= link_to logo, root_path %>
           </figure>
-          <div class="log_small"><%=Spree.t('homepage.znak')%></div>
+          <div class="log_small"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></div>
         </div>
       </div>
         <div id="main-nav-bar" class=" flex-grow-0 display h-100 header-spree-fluid-primary-navigation">
@@ -91,4 +99,4 @@
     </div>
   </header>
 </div>
-<% end %>
+<%end %>

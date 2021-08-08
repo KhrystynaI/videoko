@@ -1,0 +1,114 @@
+
+<h1>Контакти</h1>
+<ul class="list-group">
+  <li class="list-group-item">
+    <span>Перший мобільний телефон</span>
+    <%=Spree::Config.first_mob%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :first_mob %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+  </li>
+  <li class="list-group-item">
+    <span>Другий мобільний телефон</span>
+    <%=Spree::Config.second_mob%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :second_mob %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+  </li>
+  <li class="list-group-item">
+    <span>viber</span>
+    <%=Spree::Config.viber%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :viber %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>telegram</span>
+    <%=Spree::Config.telegram%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :telegram %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>Перший стаціонарний телефон</span>
+    <%=Spree::Config.first_phone%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :first_phone %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>Другий стаціонарний телефон</span>
+    <%=Spree::Config.second_phone%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :second_phone %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>email</span>
+    <%=Spree::Config.email%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :email %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>Вулиця українською</span>
+    <%=Spree::Config.street_uk%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :street_uk %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>Вулиця російською</span>
+    <%=Spree::Config.street_ru%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :street_ru %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>Години роботи від понеділка по п'ятницю</span>
+    <%=Spree::Config.hours_week%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :hours_week %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+</li>
+  <li class="list-group-item">
+    <span>Години роботи в суботу</span>
+    <%=Spree::Config.hours_weekend%>
+    <%= form_with url: spree.admin_change_path, local: true do |form| %>
+    <%= form.text_field :name_new %>
+    <%= form.hidden_field :name, :value => :hours_weekend %>
+    <%= form.submit 'Змінити' %>
+    <% end %>
+
+</li>
+<li class="list-group-item">
+  <span>Електронна скринька на яку приходять повідомлення про замовлення -- </span>
+  <%=Spree::Config.email_admin%>
+  <%= form_with url: spree.admin_change_path, local: true do |form| %>
+  <%= form.text_field :name_new %>
+  <%= form.hidden_field :name, :value => :email_admin %>
+  <%= form.submit 'Змінити' %>
+  <% end %>
+
+</li>
+</ul>

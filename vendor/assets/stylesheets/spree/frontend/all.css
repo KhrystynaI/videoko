@@ -6,6 +6,9 @@
  *= require spree/frontend
  *= require spree/frontend/contact
  *= require spree/frontend/views/spree/products/sort_desktop
+ *= require spree/frontend/views/spree/products/show
+ *= require spree/frontend/views/spree/posts/show
+ *= require intlTelInput
  *= require_self
  *= require_tree .
 */

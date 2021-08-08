@@ -1,7 +1,7 @@
 <% permitted_params = params.permit(filtering_params(@taxon_id)) %>
 
 <div data-hook="search_results">
-  <% if @products.empty? %>
+  <% if @products.nil? || @products.empty? %>
     <% if permitted_params[:keywords].present? && permitted_params.to_h.one? %>
       <%= render 'spree/products/no_results' %>
     <% else %>
@@ -44,11 +44,4 @@
       <% end %>
     </div>
 
-    <%#= render 'spree/products/filters_mobile', permitted_params: permitted_params, id: @taxon_id %>
     <%= render 'spree/products/sort_mobile', permitted_params: permitted_params, id: @taxon_id  %>
-
-<% unless @products.empty? %>
-  <% cache cache_key_for_products(@products, 'json-ld') do %>
-    <%= products_structured_data(@products, Spree::Role.find_by(name: :rozdrib).id) %>
-  <% end %>
-<% end %>

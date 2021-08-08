@@ -1,0 +1,5 @@
+<div class="container">
+<p><%=link_to "Додати видаткову накладну", admin_new_sales_invoice_path(mutual: @mutual_settlement.id)%></p>
+<p><%=link_to "Додати ПКО", admin_new_income_invoice_path(mutual_id: @mutual_settlement.id)%></p>
+<p><%=link_to "Додати прибуткову накладну", admin_new_return_invoice_path(mutual: @mutual_settlement.id)%></p>
+</div>

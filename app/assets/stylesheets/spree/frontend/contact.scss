@@ -1,3 +1,58 @@
+.about_variant{
+  border-left: 0.2rem solid black;
+  margin-top: 3%;
+}
+.about_ul{
+  list-style: none;
+  padding: 0;
+}
+
+.empty_image{
+  margin-left: auto;
+  margin-right: auto;
+}
+.multy_image{
+	width: 100% !important;
+}
+.product-carousel-control--previous{
+	left: 5% !important;
+}
+.product-carousel-control--next{
+	right: 5% !important;
+}
+.carousel-rounded{
+	background: none !important;
+}
+.padding_mult_imag{
+	padding-bottom: 70% !important;
+}
+.intl-tel-input{
+	display: block !important;
+}
+
+.center_span{
+	text-align: center;
+	font-size: 1.5rem;
+	color: #00336E;
+}
+.date_btn{
+	color: #00336E;
+	font-size: 1.5rem;
+	text-decoration: none;
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+.color_table_header{
+	background-color: #85F03B;
+}
+.color_table_header_second{
+	background-color: #F7FB71;
+}
+.types{
+	font-size: 0.9rem;
+}
 .go_us{
 padding-top: 5%;
 padding-left: 20%;
@@ -126,9 +181,8 @@ padding-left: 20%;
   text-align: center;
 }
 .address_inside{
-  //text-transform: uppercase;
   display: grid;
-  padding-top: 15%;
+  padding-top: 9%;
 }
 .address_contact{
   padding-top: 5%;
@@ -155,10 +209,15 @@ padding-left: 20%;
 }
 }
 }
+.products_image{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
 .name_product{
   text-align: center;
-  height: 7vw;
-  display: grid;
+  height: 7rem;
+  display: inline-grid;
     align-content: center;
   text-overflow: ellipsis;
     font-size: 15px;
@@ -167,6 +226,10 @@ padding-left: 20%;
     //white-space: nowrap;
     overflow: hidden;
 
+}
+.card-body-prod{
+  flex: 1 1 auto;
+  padding: 1.25vw;
 }
 .money_product{
   background: none !important;
@@ -217,6 +280,12 @@ color: #000000;
   border-left: 1px solid #00336E;
   border-right: 1px solid #00336E;
 
+}
+.first_button{
+  border-right: none;
+  border-left: 0.1rem solid;
+  border-bottom: 0.1rem solid;
+  border-top: 0.1 solid;
 }
 .tab button.active{
   border-bottom: none !important;
@@ -321,8 +390,17 @@ color: #000000;
   .map{
     padding-top: 2%;
   }
+	.types{
+		font-size: 0.7rem;
+	}
 }
 @media (max-width: 800px){
+	.center_span{
+		font-size: 1rem;
+	}
+	.date_btn{
+		font-size: 1rem;
+	}
   #map{
     overflow: scroll !important;
     height: 60vw !important;
@@ -404,6 +482,9 @@ color: #000000;
     line-height: normal;
   }
   .product_d{
+		white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
     font-size: 1rem;
     line-height: normal;
   }

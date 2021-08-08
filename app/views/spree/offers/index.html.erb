@@ -1,0 +1,19 @@
+<p>&nbsp;</p>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Дата створення</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@offers.each do |offer|%>
+    <tr>
+      <td><%=link_to offer.created_at.strftime("%Y-%m-%d"), show_offer_path(offer.id)%></td>
+      <td><%=link_to Spree.t("delete"), delete_offer_path(id: offer.id), method: :delete%></td>
+    </tr>
+    <%end%>
+  </tbody>
+  </table>
+</div>

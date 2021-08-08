@@ -14,14 +14,7 @@ class Spree::ContactUs::ContactsController < Spree::StoreController
   end
 
   def new
-    @tel = "(032)295-1-295"
-    @tel_second = "(032)295-2-295"
-    @mob_tel = "(097) 295-2-295"
-    @viber = "(099) 295-2-295"
-    @telegram = "(063) 295-2-295"
-    @email = "videoko@ukr.net"
     @contact = Spree::ContactUs::Contact.new
-    #@taxonomies = Spree::Taxonomy.includes(root: :children)
   end
 
   def meta_data_tags; end

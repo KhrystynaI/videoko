@@ -73,6 +73,10 @@
           </div>
         </div>
       <% end %>
+      <%if spree_current_user && !spree_current_user.has_spree_role?("rozdrib")%>
+        <%= link_to Spree.t("offer"), new_offer_path(order: @order), class: 'btn btn-block btn-lg index_btn text-uppercase font-weight-bold'%>
+        <p>&nbsp;</p>
+      <%end%>
     </div>
   <% end %>
 </div>

@@ -45,7 +45,11 @@
             <div class="order-show-line-items-line-item-desc-price-attr-name d-inline d-lg-block">
               <span><%= Spree.t(:price) %></span>
             </div>
+            <%if item.variant.product.empty_price%>
+            <span class="font-weight-bold"><%= Spree.t(:empty_price) %></span>
+            <%else%>
             <span class="font-weight-bold"><%= item.single_money.to_html %></span>
+            <%end%>
           </div>
           <div class="order-show-line-items-line-item-desc-quantity">
             <div class="order-show-line-items-line-item-desc-quantity-attr-name d-inline d-lg-block">
@@ -53,12 +57,14 @@
             </div>
             <span class="order-show-line-items-line-item-desc-quantity-val d-lg-block"><%= item.quantity %></span>
           </div>
+          <%if !item.variant.product.empty_price%>
           <div class="order-show-line-items-line-item-desc-total">
             <div class="order-show-line-items-line-item-desc-total-attr-name d-inline d-lg-block">
               <span><%= Spree.t(:total) %></span>
             </div>
             <span class="font-weight-bold d-lg-block"><%= item.display_total.to_s %></span>
           </div>
+          <%end%>
         </div>
       </div>
     <% end %>

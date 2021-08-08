@@ -1,0 +1,18 @@
+<div class="container">
+  <%= form_with url: admin_add_date_to_new_table_mutual_settlement_path, local: true do |f| %>
+  <%= f.hidden_field :user, :value => @user.id %>
+  <div class="form-group">
+    <%= f.label :date_from, "Дата початку таблиці взаєморозрахунків"%><span class="required">*</span>
+    <br/>
+    <%= f.text_field :date_from, class: "form-control datepicker", required: :required, autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date_to, "Дата завершення таблиці взаєморозрахунків"%><span class="required">*</span>
+    <br/>
+    <%= f.text_field :date_to, class: "form-control datepicker", required: :required, autocomplete: "off" %>
+  </div>
+    <div class='form-group'>
+    <%= f.submit 'Зберегти', class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+  <%end%>
+</div>

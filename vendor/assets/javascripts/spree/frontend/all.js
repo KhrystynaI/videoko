@@ -11,4 +11,5 @@
 //= require spree/frontend/views/spree/products/cart_form
 //= require spree/frontend/views/spree/contact_us/contacts/new
 //= require spree/frontend/header
+//= require intlTelInput
 //= require spree/frontend/spree_i18n

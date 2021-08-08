@@ -1,0 +1,26 @@
+<div class="container-fluid">
+<h5>ПКО</h5>
+<table class="table table-bordered">
+  <thead>
+      <th scope="col">Номер</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Зменшення у доларах</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=@income_invoice.name%></td>
+      <td><%=@income_invoice.date.strftime("%d-%m-%Y")%></td>
+      <td><%=@income_invoice.income_usd%></td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<div class="row">
+  <div class="col-6">
+<%=link_to "Повернутися", admin_show_mutual_settlement_path(id: @income_invoice.mutual_settlement.id)%>
+</div>
+<div class="col-6">
+<%=link_to "Видалити", admin_delete_income_invoice_path(id: @income_invoice.id), method: :delete%>
+</div>
+</div>
+</div>

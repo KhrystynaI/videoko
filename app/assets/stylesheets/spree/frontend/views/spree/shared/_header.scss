@@ -4,10 +4,17 @@
 .spree-btn{
   font-size: 0.9rem !important;
 }
+.bar_li_small{
+  flex-wrap: inherit !important;
+}
 .header_icon{
   font-size: 16px;
   line-height: 20px;
   color: #6F6354;
+}
+.dis_link, .dis_link:visited, .dis_link:link, .dis_link:hover, .dis_link:active{
+  color: white;
+  text-decoration: none;
 }
 #sidenav{
   overflow-x: hidden;
@@ -20,7 +27,7 @@
   background-color:white;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 2rem;
+
 }
 .blue{
   font-size: 20px;
@@ -96,7 +103,7 @@
 }
 .closebtn, .closebtn:visited, .closebtn:link, .closebtn:hover, .closebtn:active{
   color: #00336E;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-left: 1rem;
   text-decoration: none;
 }
@@ -162,7 +169,7 @@ ul.header_ul li{
   &:hover{
     color: white;
     padding-bottom: 0.2rem;
-    border-bottom: 0.1rem solid #E1BE64;
+    border-bottom: 0.15rem solid #E1BE64;
     text-decoration: none;
   }
 }
@@ -238,6 +245,8 @@ ul.header_ul li{
   height: 1.8rem;
 }
 .lang{
+  right: 0;
+  left: auto;
   background: #00336E;
   border-color: #00336E;
   padding-top: 1rem;
@@ -389,11 +398,14 @@ ul.header_ul li{
   font-size: 1.6rem;
   }
   .login_out{
-    display: none;
+    //display: none;
   }
 }
 
 @media (max-width: 576px) {
+  .full_name{
+    font-size: 0.6rem;
+  }
   .burger_size{
     flex: 0 0 25%;
     max-width: 25%;
@@ -510,6 +522,20 @@ ul.header_ul li{
   }
 }
 @media (max-width: 400px){
+
+  .text_lang{
+    font-size: 0.7rem;
+  }
+  .locale_size{
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+.for_small_screen{
+  font-size: 0.75rem;
+}
+  .login_out{
+    display: none;
+  }
   .header_icon_img{
     width: 6vw;
   }

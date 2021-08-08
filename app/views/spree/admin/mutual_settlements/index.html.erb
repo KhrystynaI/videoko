@@ -1,0 +1,28 @@
+
+<div class="container">
+  <div class="row">
+    <div class="form-group col-12">
+    <%= form_tag admin_upload_mutual_settlement_path, method: :post, multipart: true do %>
+      <div class="form-group">
+        <%= file_field_tag 'file', accept: 'csv', class: 'upload form-control-file csv-btn' %>
+      </div>
+      <div class="form-group ">
+        <%= submit_tag("Завантажити CSV", class: "btn-success form-control", icon: 'add')%>
+      </div>
+      <%end%>
+</div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h5>Оберіть користувача</h5>
+      </div>
+    </div>
+<div class="row">
+<%@users.each do |user|%>
+<div class="col-6">
+  <%= link_to user.full_name, admin_list_mutual_settlements_path(id: user.id) %>
+</div>
+<%end%>
+</div>
+</div>
+</div>

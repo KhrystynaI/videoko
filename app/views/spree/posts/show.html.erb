@@ -1,0 +1,5 @@
+<div class="container space">
+  <h2 class="text-center"><%= @post.title%></h2>
+  <div id="rich_editor"><%= raw @post.body%></div>
+  <div class="text-center"><%=video_tag(main_app.url_for(@post.video),class: "video_news",controls: true, autobuffer: true) if @post.video.present?%></div>
+</div>

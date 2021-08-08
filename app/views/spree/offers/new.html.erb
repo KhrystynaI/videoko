@@ -1,0 +1,46 @@
+<p>&nbsp;</p>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Фото</th>
+      <th scope="col">Назва</th>
+      <th scope="col">кількість</th>
+    </tr>
+  </thead>
+  <%@order.line_items.each do |item|%>
+  <%variant = Spree::Variant.find(item.variant_id)%>
+  <tbody>
+    <tr>
+      <td><%=small_image_order(variant)%></td>
+      <td><%=variant.product.name%></td>
+      <td><%=item.quantity%></td>
+    </tr>
+    <%end%>
+  </tbody>
+
+</table>
+</div>
+
+<div class="container">
+<%= form_for @offer , :url => {:controller => "offers", :action => "create"} do |form| %>
+<div class="form-group">
+  <%= form.label :currency, Spree.t(:currency) %>
+  <%= form.select(:currency, ['USD','UAH'], {:include_blank => true}, { :class => 'custom-select ' })%>
+  <%= form.hidden_field :order_id, value: form.object.order.id%>
+  <%= form.hidden_field :number, value: form.object.order.number%>
+  <%= form.hidden_field :user_id, value: form.object.user.id%>
+</div>
+<div class="form-group">
+  <%= form.label :price_role, Spree.t(:price_offer) %>
+  <%= form.select(:price_role, @option_for_price, {:include_blank => true}, { :class => 'custom-select ' })%>
+</div>
+<div class="form-group">
+  <%= form.label :comment, Spree.t(:comment) %>
+  <%= form.text_area :comment, :rows => 5, class:"form-control" %>
+</div>
+<div class="form-group">
+ <%= form.submit "Створити", class: "btn btn-block btn-lg index_btn text-uppercase font-weight-bold" %>
+</div>
+<% end %>
+</div>

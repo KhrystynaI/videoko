@@ -1,0 +1,27 @@
+<div class="container">
+  <%= form_for [:admin, @income_invoice], url: admin_income_invoice_path do |f| %>
+  <%= f.hidden_field :mutual_settlement, :value => @mutual %>
+  <div class="form-group">
+    <%= f.label :name, Spree.t(:name)%>
+    <br/>
+    <%= f.text_field :name,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, Spree.t(:date)%>
+    <br/>
+    <%= f.text_field :date, class: "form-control datepicker", autocomplete: "off" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :income_usd, raw("Сума"+ required_span_tag)%>
+    <%= f.number_field :income_usd,min: 0, step: :any, class: "form-control", required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :income_total_usd, "Сальдо"%>
+    <%= f.number_field :income_total_usd,min: 0, step: :any,class: "form-control", required: true %>
+  </div>
+    <div class='form-group'>
+    <%= f.submit 'Зберегти', class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+  <%end%>
+</div>

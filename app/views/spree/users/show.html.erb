@@ -14,7 +14,54 @@
     </div>
 
   </div>
-
+  <%if !@user.has_spree_role?("rozdrib") %>
+  <div class="row">
+  <div class="col-6">
+    <%=link_to Spree.t(:mutual_settlement), user_list_mutual_settlements_path, class: "for_small_screen"%>
+  </div>
+  <div class="col-6"><%=link_to "Статус ремонта", check_repair_path, class: "for_small_screen"%></div>
+</div>
+<%end%>
+<%if @user.has_spree_role?("rozdrib") %>
+<div class="row justify-content-center">
+<div class="col-12"><%=link_to "Статус ремонта", check_repair_path, class: "for_small_screen"%></div>
+</div>
+<%end%>
+  <% if !@user.has_spree_role?("rozdrib") && !@offers_uncomplete.blank?%>
+<div class="container">
+  <div class="text-uppercase spree-mb-medium spree-mt-medium spree-header"><%=Spree.t("my_offer")%></div>
+  <div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col text-uppercase text-secondary account-page-order-date">Назва</th>
+        <th scope="col text-uppercase text-secondary account-page-order-date">Дата створення</th>
+        <th scope="col text-uppercase text-secondary account-page-order-date"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@offers_uncomplete.each do |offer|%>
+      <tr>
+        <td class="account-page-order-date"><span class="for_small_screen"><%=link_to offer.name, show_offer_path(offer.id)%></span></td>
+        <td class="account-page-order-date"><span class="for_small_screen"><%= offer.created_at.strftime("%Y-%m-%d")%></span></td>
+        <td class="account-page-order-date"><span class="for_small_screen"><%=link_to Spree.t("delete"), delete_offer_path(id: offer.id), method: :delete%></span></td>
+      </tr>
+      <%end%>
+    </tbody>
+    </table>
+    <div class="row pl-md-4 pl-sm-4">
+      <div class="col-12">
+        <div class="plp-pagination d-none d-lg-flex">
+          <%= paginate @offers_uncomplete, window: 2, theme: 'twitter-bootstrap-4' %>
+        </div>
+        <div class="plp-pagination d-lg-none">
+          <%= paginate @offers_uncomplete, window: 1, theme: 'twitter-bootstrap-4' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
   <div data-hook="account_my_orders" class="account-page-orders" id="account-my-orders">
 
     <h3 class="text-uppercase spree-mb-medium spree-mt-medium spree-header" ><%= Spree.t(:my_orders) %></h3>
@@ -40,13 +87,46 @@
               </td>
             </tr>
           <% end %>
-        </tbody>
+          </tbody>
       </table>
     <% else %>
       <p class="text-center"><%= Spree.t(:you_have_no_orders_yet) %></p>
     <% end %>
     <br />
   </div>
+  <div class="account-page-orders">
+  <%if !@offers_complete.blank?%>
+    <h3 class="text-uppercase spree-mb-medium spree-mt-medium spree-header" ><%= Spree.t(:my_orders_from_offer) %></h3>
+
+    <table>
+      <thead class="active">
+        <tr>
+          <th class="text-uppercase text-secondary account-page-order-number"><%= Spree::Order.human_attribute_name(:number) %></th>
+          <th class="text-uppercase text-secondary account-page-order-date"><%= Spree.t(:date) %></th>
+          <th class="text-uppercase text-secondary account-page-order-total"><%= Spree.t(:total) %></th>
+        </tr>
+      </thead>
+  <%@offers_complete.each do |offer|%>
+  <tr>
+    <td class="account-page-order-number"><%=link_to offer.name, show_offer_path(offer.id), class: "text-primary" %></td>
+    <td class="account-page-order-date"><%= offer.created_at.strftime("%Y-%m-%d")%></td></td>
+    <td class="account-page-text-primary account-page-order-total account-page-lead"><%= offer.total_price %> <%= Money::Currency.find(offer.currency).symbol %></td>
+    </tr>
+  <%end%>
+</tbody>
+</table>
+<div class="row pl-md-4 pl-sm-4">
+  <div class="col-12">
+    <div class="plp-pagination d-none d-lg-flex">
+      <%= paginate @offers_complete, window: 2, theme: 'twitter-bootstrap-4' %>
+    </div>
+    <div class="plp-pagination d-lg-none">
+      <%= paginate @offers_complete, window: 1, theme: 'twitter-bootstrap-4' %>
+    </div>
+  </div>
+</div>
+  <%end%>
+</div>
   <div id="delete-address-popup" class="delete-address-popup-dropdown hide-on-esc">
     <%= render 'spree/shared/delete_address_popup' %>
   </div>

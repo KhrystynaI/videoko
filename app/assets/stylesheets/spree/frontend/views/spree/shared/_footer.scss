@@ -78,11 +78,15 @@
   }
 }
 .card_index{
+  height: -webkit-fill-available;
   border: 1px solid black;
   padding: 0.5rem;
   &:hover{
     background: #00336E;
   }
+}
+.display_flex{
+  display: flex;
 }
 .last_img_index {
   border: 1px solid black;
@@ -201,4 +205,12 @@
    width: 2rem !important;
    height: 2rem !important;
  }
+}
+@media (max-width: 450px){
+  .for_small_dev{
+  word-break: break-word;
+}
+  .address_info {
+      font-size: 0.65rem;
+    }
 }

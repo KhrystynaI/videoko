@@ -1,0 +1,11 @@
+<p>&nbsp;</p>
+<div class="row d-flex justify-content-center">
+  <div class="col-6 center">
+    <%repair.each do |rep|%>
+<p class="date_btn"><span><%=Spree.t(:number_repair)%></span><span>:</span> <span><%=rep.number%></span></p>
+<p class="date_btn"><span><%=Spree.t(:status)%></span><span>:</span> <span><%= Spree.t(rep.status)%></span></p>
+<p class="date_btn"><%= rep.comment %></p>
+<br/>
+<%end%>
+</div>
+</div>

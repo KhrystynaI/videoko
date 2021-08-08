@@ -20,6 +20,7 @@ uk:
         state:
   activerecord:
     attributes:
+      phone_error: невірний
       spree/address:
         address1: Адреса
         address2: Адреса (2-й рядок)
@@ -126,13 +127,13 @@ uk:
         state: Стан
         total: Разом
       spree/order/bill_address:
-        address1: Платіжна адреса. Вулиця
-        city: Платіжна адреса. Місто
-        firstname: Платіжна адреса. Ім’я
-        lastname: Платіжна адреса. Прізвище
-        phone: Платіжна адреса. Телефон
-        state: Платіжна адреса. Регіон/Область
-        zipcode: Платіжна адреса. Індекс
+        address1: Вулиця
+        city: Місто
+        firstname: Ім’я
+        lastname: Прізвище
+        phone: Телефон
+        state: Регіон/Область
+        zipcode: Індекс
       spree/order/ship_address:
         address1: Адреса доставки. Вулиця
         city: Адреса доставки. Місто
@@ -825,6 +826,56 @@ uk:
         one:
         other:
   spree:
+    empty_price: Ціну уточнюйте
+    country_select: Оберіть країну
+    nova_poshta_address: Населений пункт доставки (Відправлення "Новою поштою")
+    nova_poshta_number: Номер відділення
+    poshta: Відправлення "Укрпоштою"
+    nova_poshta: Відправлення "Новою поштою"
+    number_repair: Номер квитанції
+    search_number: Шукати по квитанції
+    search_phone: Шукати по номеру телефона
+    dont_found: Не знайдено
+    in_progress: В ремонті
+    waiting_for_parts: Очікуємо на запчастини
+    sent_to_manufacturer: Відправлено виробникові
+    repaired: Відремонтовано
+    without_repair: Без ремонту
+    message_send: Повідомлення відправлено
+    additional_information: Текст повідомлення
+    tables_mutual: Таблиці взаєморозрахунків
+    document: Документ
+    header_debt: Борг клієнта у валюті (долари)
+    number_name: Номер
+    date: Дата
+    increase_table: Збільшення
+    decrease_table: Зменшення
+    saldo: Сальдо
+    sales: Видаткова накладна
+    return_table: Прибуткова накладна(повернення)
+    pko: ПКО
+    summary_table: Підсумок
+    require_to_change: Запит про оновлення взаєморозрахунків
+    mutual_settlement: Взаєморозрахунки
+    feel_all_fields: Заповніть, будь ласка, всі поля
+    offers_admin: Замовлення з пропозицій
+    name: Ім'я
+    firstname: Ім'я
+    lastname: Прізвище
+    price: Ціна
+    quantity: Кількість
+    total_price: Загальна вартість
+    currency: Валюта
+    print: Роздрукувати
+    offer: Комерційна пропозиція
+    my_offer: Мої пропозиції
+    my_orders_from_offer: Мої замовлення з пропозицій
+    add_address: Додати адресу
+    price_offer: Доступна градація цін
+    comment: Коментар
+    i18n:
+      translations: Переклад
+    read: Читати далі
     subject: Знак якості
     send: Відправити
     spree_contact_us:
@@ -844,6 +895,8 @@ uk:
     order_success_explain: Деталі замовлення
     added_to_cart: Додано до кошика
     required: "*"
+    volume_image: Об'ємна світлина
+    explanation: Пообертайте картинку
     checkout_page:
       header: Формування замовлення
       back_to_cart: Повернутися до кошика
@@ -1475,6 +1528,7 @@ uk:
     go_to_category: До категорії
     home: Додому
     pdp:
+      continue_buy: Продовжити покупки
       view_cart: Корзина
       checkout: Сформувати
       you_may_also_like: Супутні товари
@@ -1484,7 +1538,7 @@ uk:
       go_to_us_second: Чи не можете приїхати до нас? Тоді ми приїдемо до вас.
       go_to_us_three: Доставка по всій країні!
       shop_address: Адреса магазину
-      street: вулиця Шевченка, 120
+      street: вулиця
       city: Львів, Львівська область
       hours_work: Години роботи
       nd: НД
@@ -1492,6 +1546,7 @@ uk:
       tel_to_us: Телефонуйте
       mail_us: Електронна адреса
     homepage:
+      account: Особистий кабінет
       news: Новини
       znak: Знак якості
       main_page: Головна

@@ -18,15 +18,15 @@
 <div class="col-6 address_inside">
 <p class="big_address"><%= Spree.t("contact.shop_address")%></p>
 <div class="big_address">
-  <p><span><%= Spree.t("contact.street")%></span></p>
-  <p><span><%= Spree.t("contact.city")%></span></p></p>
+  <p><span><%= Spree.t("contact.street")%>&nbsp;<%= Spree::Config["street_#{I18n.locale}"]%></span></p>
+  <p><span><%= Spree.t("contact.city")%></span></p>
   <p><span>79000</span></p></div>
 </div>
 <div class="col-6 address_inside ">
 <p class="big_address"><%= Spree.t("contact.hours_work")%></p>
 <div class="big_address">
-<p><span>ПН-ПТ: </span><span>09.00-18.00</span></p>
-<p><span>СБ: </span><span>09.00-15.00</span></p>
+<p><span>ПН-ПТ: </span><span><%=Spree::Config.hours_week%></span></p>
+<p><span>СБ: </span><span><%=Spree::Config.hours_weekend%></span></p>
 <p><span><%= Spree.t("contact.nd")%>:</span><span>&nbsp;</span><span><%= Spree.t("contact.vuhidnuy")%></span></p>
 </div>
 </div>
@@ -35,13 +35,18 @@
 <p class="our_contact"><%= Spree.t("contact.our_contact")%></p>
 <div class="tel">
 
-  <div class="row"><div class="col-1">&nbsp;</div><div class="col-11"><%= @mob_tel%></div></div>
-  <p><div class="row"><div class="col-2"><%=image_tag "vibe.png"%></div><div class="col-9"><%= @viber%></div></div></p>
-  <p><div class="row"><div class="col-2"><%=image_tag "teleg.png"%></div><div class="col-9"><%= @telegram%></div></div></p>
-  <p><div class="row"><div class="col-1">&nbsp;</div><div class="col-11"><%= @tel%></div></div></p>
-  <p><div class="row"><div class="col-1">&nbsp;</div><div class="col-11"><%= @tel_second%></div></div></p>
+  <div class="row"><div class="col-2">&nbsp;</div><div class="col-10"><%= Spree::Config.first_mob%></div></div>
+  <p></p>
+  <div class="row"><div class="col-2">&nbsp;</div><div class="col-10"><%= Spree::Config.second_mob%></div></div>
+  <p></p>
+  <div class="row"><div class="col-2"><%=image_tag "vibe.png"%></div><div class="col-10"><%= Spree::Config.viber%></div></div>
+  <div class="row"><div class="col-2"><%=image_tag "teleg.png"%></div><div class="col-10"><%= Spree::Config.telegram%></div></div>
+  <div class="row"><div class="col-2">&nbsp;</div><div class="col-10"><%= Spree::Config.first_phone%></div></div>
+  <p></p>
+  <div class="row"><div class="col-2">&nbsp;</div><div class="col-10"><%= Spree::Config.second_phone%></div></div>
+  <p></p>
   </div>
-<div class="tel"><%= Spree.t("contact.mail_us")%>: <span>&nbsp</span><%= @email%></div>
+<div class="tel"><%= Spree.t("contact.mail_us")%>: <span>&nbsp</span><%=Spree::Config.email%></div>
 </div>
 </div>
 <div class="col-lg-4 col-md-12 col-sm-12 map" >

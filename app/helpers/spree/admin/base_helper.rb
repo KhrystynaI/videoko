@@ -37,6 +37,16 @@ module Spree
         end
       end
 
+      def small_image_order(variant)
+        if !variant.images.first.nil?
+        image_tag(main_app.url_for(variant.images.first.attachment.variant(resize: '50x50')))
+      elsif !variant.product.images.first.nil?
+        image_tag(main_app.url_for(variant.product.images.first.attachment.variant(resize: '50x50')))
+      else
+        image_tag('empty.png',size: "50x50")
+      end
+      end
+
       def datepicker_field_value(date)
         unless date.blank?
           l(date, format: '%d.%m.%Y')

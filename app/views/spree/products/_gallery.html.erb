@@ -13,7 +13,7 @@
                   per_page: 5
         %>
       </div>
-      <div class="product-details-single" data-hook="product_images">
+      <div class="product-details-single <%= "multy_image" if @product_images.length > 1 %>" data-hook="product_images">
         <%= render 'spree/shared/carousel/single',
                   images: @product_images,
                   group_id: 'main-product-carousel',
@@ -23,5 +23,9 @@
         %>
       </div>
     </div>
+    <%else%>
+    <div class="col-8 empty_image">
+      <%= image_tag(main_app.url_for("no_img.png"),class: "d-block w-100") %>
+  </div>
   <% end %>
 </div>

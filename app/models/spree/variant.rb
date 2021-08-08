@@ -27,7 +27,7 @@ module Spree
       has_many :stock_locations
       has_many :stock_movements
     end
-
+    has_many :offer_items
     has_many :option_value_variants, class_name: 'Spree::OptionValueVariant'
     has_many :option_values, through: :option_value_variants, class_name: 'Spree::OptionValue'
 
@@ -50,13 +50,12 @@ module Spree
       #validates :cost_price
       validates :price
     end
-    validates :sku, uniqueness: { conditions: -> { where(deleted_at: nil) }, case_sensitive: false }, allow_blank: true
+    #validates :sku, uniqueness: { conditions: -> { where(deleted_at: nil) }, case_sensitive: false }, allow_blank: true
 
     after_create :create_stock_items
     after_create :set_master_out_of_stock, unless: :is_master?
     after_create :set_prices
-    after_commit :product_reindex
-
+    before_save :check_sku
     after_touch :clear_in_stock_cache
 
     scope :in_stock, -> { joins(:stock_items).where('count_on_hand > ? OR track_inventory = ?', 0, false) }
@@ -107,12 +106,46 @@ module Spree
     self.whitelisted_ransackable_associations = %w[option_values product prices default_price]
     self.whitelisted_ransackable_attributes = %w[weight sku]
 
-    def product_reindex
-      self.product.reindex
-    end
-
     def available?
       !discontinued? && product.available?
+    end
+
+    def prices_range(role_id)
+      role = Spree::Role.find(role_id).name
+      case role
+      when "rozdrib"
+        []
+      when "admin"
+        Spree::Offer::PRICES_FOR_VIP1.map do |price_role|
+          price = self.prices.find_by(role_id: Spree::Role.find_by(name: price_role).id)
+          !price.blank? ? price.amount : nil
+          end
+      when "opt"
+        Spree::Offer::PRICES_FOR_OPT.map do |price_role|
+          price = self.prices.find_by(role_id: Spree::Role.find_by(name: price_role).id)
+          !price.blank? ? price.amount : nil
+          end
+      when "gold"
+        Spree::Offer::PRICES_FOR_GOLD.map do |price_role|
+          price = self.prices.find_by(role_id: Spree::Role.find_by(name: price_role).id)
+          !price.blank? ? price.amount : nil
+          end
+      when "vip"
+        Spree::Offer::PRICES_FOR_VIP.map do |price_role|
+          price = self.prices.find_by(role_id: Spree::Role.find_by(name: price_role).id)
+          !price.blank? ? price.amount : nil
+          end
+      when "vip2"
+        Spree::Offer::PRICES_FOR_VIP2.map do |price_role|
+          price = self.prices.find_by(role_id: Spree::Role.find_by(name: price_role).id)
+          !price.blank? ? price.amount : nil
+          end
+      when "vip1"
+        Spree::Offer::PRICES_FOR_VIP1.map do |price_role|
+          price = self.prices.find_by(role_id: Spree::Role.find_by(name: price_role).id)
+          !price.blank? ? price.amount : nil
+          end
+      end
     end
 
     def tax_category
@@ -339,6 +372,14 @@ module Spree
       end
       nil_price = self.prices.find_by(product_id: nil)
       nil_price.delete if !nil_price.nil?
+      end
+    end
+
+    def check_sku
+     if self.is_master? && !self.product.sku.blank?
+         self.sku = self.product.sku
+      elsif self.product.variants.count == 0 && !product.sku.blank?
+        self.sku = self.product.sku
       end
     end
 

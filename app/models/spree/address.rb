@@ -12,7 +12,7 @@ module Spree
 
     # we're not freezing this on purpose so developers can extend and manage
     # those attributes depending of the logic of their applications
-    ADDRESS_FIELDS = %w(firstname lastname address1 city state country phone)
+    ADDRESS_FIELDS = %w(firstname lastname phone country state address1 city nova_poshta_address nova_poshta_number)
     EXCLUDED_KEYS_FOR_COMPARISION = %w(id updated_at created_at deleted_at user_id)
 
     belongs_to :country, class_name: 'Spree::Country'
@@ -24,10 +24,11 @@ module Spree
     before_validation :clear_invalid_state_entities, if: -> { country.present? }, on: :update
 
     with_options presence: true do
-      validates :firstname, :lastname, :address1, :city, :country
-      validates :zipcode, if: :require_zipcode?
-      validates :phone, if: :require_phone?
+      validates :firstname, :lastname,  :country
+      #validates :zipcode, if: :require_zipcode?
     end
+
+    validates :phone, length: { is: 13, message: I18n.t('activerecord.attributes.phone_error') }
 
     validate :state_validate, :postal_code_validate
 
@@ -72,9 +73,11 @@ module Spree
     def to_s
       [
         full_name,
-        company,
+        #company,
         address1,
         #address2,
+        nova_poshta_address,
+        nova_poshta_number,
         "#{city}, #{state_text}",
         country.to_s
       ].reject(&:blank?).map { |attribute| ERB::Util.html_escape(attribute) }.join('<br/>')

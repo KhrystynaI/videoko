@@ -47,14 +47,14 @@
             <td>
             <%if product.prices.count > 0%>
             <a data-toggle="collapse" href="#collapse<%=product.id%>" role="button" aria-expanded="false" aria-controls="collapse<%product.id%>">
-              <%if !product.default_variant.prices.find_by(role_id: Spree::Role.find_by(name: :rozdrib).id).amount_usd.nil?%>
-              <%= number_to_currency(product.default_variant.prices.find_by(role_id: Spree::Role.find_by(name: :rozdrib).id).amount_usd, unit: "$", separator: ".", delimiter: "")%>
+              <%if !product.default_variant.prices.find_by(role_id: Spree::Role.find_by(name: "rozdrib").id).amount_usd.nil?%>
+              <%= number_to_currency(product.default_variant.prices.find_by(role_id: Spree::Role.find_by(name: "rozdrib").id).amount_usd, unit: "$", separator: ".", delimiter: "")%>
               <%else%>
               <%=0%>
               <%end%></a>
             <div class="collapse" id="collapse<%=product.id%>">
             <div class="card card-body">
-              <% product.default_variant.prices.where(variant_id: product.id).each do |v|%>
+              <% product.default_variant.prices.each do |v|%>
                 <p><%= Spree::Role.find(v.role_id).name%>
                 <%=v.amount_usd%></p>
                 <%end%>

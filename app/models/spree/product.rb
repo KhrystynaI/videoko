@@ -3,7 +3,8 @@ module Spree
     extend FriendlyId
     include Spree::ProductScopes
 
-    searchkick index_name: "#{Rails.application.class.parent_name.parameterize.underscore}_spree_products", merge_mappings: true,
+    searchkick callbacks: :async, index_name: "#{Rails.application.class.parent_name.parameterize.underscore}_spree_products",
+     word_middle: [:name], merge_mappings: true,
 
     mappings: {
       properties:{
@@ -27,9 +28,6 @@ module Spree
               "lowercase",
               "asciifolding"
             ],
-            char_filter: [
-              "my_char_filter"
-            ],
           tokenizer: "custom_tokenizer",
           type: "custom"
         }
@@ -44,38 +42,35 @@ module Spree
             "digit"
           ]
         }
-      },
-      char_filter: {
-      my_char_filter: {
-        type: "mapping",
-        mappings: [
-          "' => "
-        ]
-       }
       }
-    }
-    },
-     word_middle: [:name]
 
-     scope :search_import, ->{includes(:translations).includes(:prices).includes(:taxons).includes(:option_types).includes(:variants)}
+    }
+    }
+
     def search_data
+      if self.deleted_at.blank?
     json = {
-      name: name,
-      slug: slug,
+      name: name.gsub('’', '').gsub("'", '').downcase.gsub(/\s+/, "").gsub('-', ''),
       active: available?,
       show: show,
       created_at: created_at,
       updated_at: updated_at,
-      currency: Spree::Config[:currency],
       taxon_ids: taxon_and_ancestors.map(&:id),
       taxon_count: taxon_count,
       taxonomy_ids: taxonomy_ids,
-      price_variant: self.variants.map{|v|v.prices.find_by(role_id: Spree::Role.find_by(name: :rozdrib).id).amount if v.prices.count >0}
+      price_variant: self.variants.map{|v|v.prices.find_by(role_id: Spree::Role.find_by(name: "rozdrib").id).amount if v.prices.count >0}
     }
+  else
+    json={
+     deleted_at: deleted_at,
+     show: false
+    }
+  end
+  if self.deleted_at.blank?
     if self.variants.count > 0 && self.option_types.count > 0
       array =  self.variants.map do |variant|
 
-    keys = variant.option_values.map{|c|c.option_type.presentation.downcase.gsub(/\s+/, "").gsub('-', '')}
+    keys = variant.option_values.map{|c|c.option_type.presentation.downcase.gsub(/\s+/, "").gsub('-', '').gsub('’', '').gsub("'", '')}
     values = variant.option_values.map{|c|c.id}
     hash = Hash[keys.zip values]
   end
@@ -85,12 +80,13 @@ module Spree
     end
     if  self.prices.count > 0
     if self.default_variant.prices.blank?
-    price_hash = Hash[price: self.prices.find_by(role_id: Spree::Role.find_by(name: :rozdrib).id).amount]
+    price_hash = Hash[price: self.prices.find_by(role_id: Spree::Role.find_by(name: "rozdrib").id).amount]
   else
-      price_hash = Hash[price: self.default_variant.prices.find_by(role_id: Spree::Role.find_by(name: :rozdrib).id).amount]
+      price_hash = Hash[price: self.default_variant.prices.find_by(role_id: Spree::Role.find_by(name: "rozdrib").id).amount]
     end
     json.merge!(price_hash)
   end
+end
     json
   end
 
@@ -151,19 +147,21 @@ module Spree
              class_name: 'Spree::Variant',
              dependent: :destroy
 
-    has_many :prices#, -> { order('spree_variants.position, spree_variants.id, currency') }, through: :variants
+    has_many :prices, dependent: :destroy#, -> { order('spree_variants.position, spree_variants.id, currency') }, through: :variants
 
     accepts_nested_attributes_for :prices
 
     has_many :stock_items, through: :variants_including_master
 
     has_many :line_items, through: :variants_including_master
+    has_many :offer_items, through: :variants_including_master
     has_many :orders, through: :line_items
 
     has_one_attached :video, dependent: :destroy
 
     has_many :variant_images, -> { order(:position) }, source: :images, through: :variants_including_master
     has_many :variant_images_without_master, -> { order(:position) }, source: :images, through: :variants
+    has_one :volume, dependent: :destroy
 
     after_create :add_associations_from_prototype
     after_create :build_variants_from_option_values_hash, if: :option_values_hash
@@ -172,14 +170,15 @@ module Spree
     after_restore :update_slug_history
 
     after_initialize :ensure_master
-
+    after_save :check_count_translate
     after_save :save_master
+    after_save :check_default_variant_sku
     after_save :run_touch_callbacks, if: :anything_changed?
     after_save :reset_nested_changes
     after_touch :touch_taxons
-    after_save :reindex_product
     before_validation :normalize_slug, on: :update
     before_validation :validate_master
+    before_save :update_empty_price
 
     with_options length: { maximum: 255 }, allow_blank: true do
       validates :meta_keywords
@@ -214,7 +213,6 @@ module Spree
              :images, to: :find_or_build_master
 
     alias master_images images
-
     # Cant use short form block syntax due to https://github.com/Netflix/fast_jsonapi/issues/259
     def purchasable?
       variants_including_master.any?(&:purchasable?)
@@ -234,8 +232,10 @@ module Spree
       master || build_master
     end
 
-    def reindex_product
-      self.reindex
+    def update_empty_price
+      if will_save_change_to_empty_price? && changes_to_save[:empty_price] == [false, true]
+        UpdateEmptyPriceJob.perform_later(self.id)
+      end
     end
 
     # the master variant is not a member of the variants array
@@ -286,6 +286,37 @@ module Spree
 
     def tax_category
       super || TaxCategory.find_by(is_default: true)
+    end
+
+    def check_default_variant_sku
+      if self.has_variants? && !self.sku.blank?
+          self.variants.first.update(sku: self.sku)
+      end
+    end
+
+    def check_count_translate
+      if self.translations.where(locale: :ru).count > 1
+        last = self.translations.where(locale: :ru).sort_by { |m| [m.created_at, m.updated_at].max }.reverse!.first
+        self.translations.where(locale: :ru).map do |n|
+           if n != last
+             n.delete
+            Spree::Product::Translation.unscoped do
+               Spree::Product::Translation.where(id: n.id).delete_all
+             end
+           end
+         end
+      end
+      if self.translations.where(locale: :uk).count > 1
+        last = self.translations.where(locale: :uk).sort_by { |m| [m.created_at, m.updated_at].max }.reverse!.first
+        self.translations.where(locale: :uk).each do |n|
+          if n != last
+            n.delete
+           Spree::Product::Translation.unscoped do
+              Spree::Product::Translation.where(id: n.id).delete_all
+            end
+          end
+        end
+      end
     end
 
     # Adding properties and option types on creation based on a chosen prototype

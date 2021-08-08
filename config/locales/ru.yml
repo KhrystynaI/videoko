@@ -9,6 +9,7 @@ ru:
         state: Статус
   activerecord:
     attributes:
+      phone_error: неверный
       spree/address:
         address1: Адрес
         address2: Квартира/Офис
@@ -738,6 +739,51 @@ ru:
         one: Пользователь
         other: Пользователи
   spree:
+    empty_price: Цену уточняйте
+    country_select: Выберите страну
+    nova_poshta_address: Город доставки(Доставка "Новою поштою")
+    nova_poshta_number: Номер отделения
+    poshta: Доставка "Укрпоштою"
+    nova_poshta: Доставка "Новою поштою"
+    number_repair: Номер квитанции
+    search_number: Искать по квитанции
+    search_phone: Искать по номеру телефона
+    dont_found: Не найдено
+    in_progress: В ремонте
+    waiting_for_parts: Ожидаем запчасти
+    sent_to_manufacturer: Отправлено производителю
+    repaired: Отремонтировано
+    without_repair: Без ремонта
+    message_send: Сообщение отправлено
+    additional_information: Текст сообщения
+    tables_mutual: Таблицы взаиморасчетов
+    document: Документ
+    header_debt: Долг клиента в валюте (доллары)
+    number_name: Номер
+    date: Дата
+    increase_table: Увеличение
+    decrease_table: Уменьшение
+    saldo: Сальдо
+    sales: Расходная накладная
+    return_table: Приходная накладная (возврат)
+    pko: ПКО
+    summary_table: Итог
+    require_to_change: Запрос об обновлении взаиморасчетов
+    mutual_settlement: Взаиморасчеты
+    feel_all_fields: Заполните, пожалуйста, все поля
+    name: имя
+    firstname: имя
+    lastname: Фамилия
+    price: Цена
+    quantity: количество
+    total_price: Общая стоимость
+    currency: Валюта
+    print: Распечатать
+    offer: Коммерческое предложение
+    my_offer: Мои предложения
+    my_orders_from_offer: Мои заказы из предложений
+    add_address: Добавить адрес
+    read: Читать дальше
     subject: Знак качества
     send: Отправить
     spree_contact_us:
@@ -763,6 +809,8 @@ ru:
     contact_us: Наши контакты
     address: Адрес
     short_description: Характеристики
+    volume_image: Oбъемная фотография
+    explanation: Повращайте картинку
     order_success: заказ сформирован
     order_success_explain: детали заказа
     added_to_cart: Добавлен в корзину
@@ -1310,6 +1358,7 @@ ru:
     home: Домой
     go_to_category: в категориию
     pdp:
+      continue_buy: Продолжить покупки
       view_cart: Корзина
       checkout: сформировать
       you_may_also_like: сопутствующие товары
@@ -1332,14 +1381,15 @@ ru:
       go_to_us_second: Не можете приехать к нам? Тогда мы приедем к вам.
       go_to_us_three: Доставка по всей стране!
       shop_address: Адрес магазина
-      street: улица Шевченка, 120
+      street: улица
       city: Львов, Львовская область
-      hours_work: часы работы
+      hours_work: Часы работы
       nd: ВС
       vuhidnuy: выходной
       tel_to_us: Звоните
       mail_us: E-mail
     homepage:
+      account: Личный кабинет
       news: Новости
       znak: знак качества
       main_page: Главная
@@ -1363,6 +1413,8 @@ ru:
     log_in_to_continue: Войти для продолжения
     sign_up: Регистрация
     log_in: Войти
+    price_offer: Доступна градация цен
+    comment: комментарий
     i18n:
       available_locales: Доступные языки
       fields: Поля

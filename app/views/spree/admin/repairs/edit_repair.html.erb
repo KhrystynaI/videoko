@@ -1,0 +1,33 @@
+<div class="container">
+  <%= form_for [:admin, @repair], url: admin_update_repair_path do |f| %>
+  <%=f.hidden_field :id, value: @repair.id%>
+  <div class="form-group">
+    <%= f.label :user_id, Spree.t(:user)%>
+    <br/>
+    <%= f.collection_select :user_id, Spree::User.all.map{|user| [user.id, user.full_name]}, :first, :second,{},disabled: true, class:'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, "Статус"%>
+    <br/>
+    <%= f.collection_select :status, Spree::Repair.statuses.map{ |a| [a.first,Spree.t(a.first)] }, :first, :second, {prompt: true,include_blank: false,allow_blank: false}, {class:'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :number, "Номер квитанції"%>
+    <br/>
+    <%= f.number_field :number,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone, Spree.t(:phone)%>
+    <br/>
+    <%= f.telephone_field :phone,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :comment, Spree.t(:comment)%>
+    <br/>
+    <%= f.text_area :comment, class: "form-control" %>
+  </div>
+  <div class='form-group'>
+    <%= f.submit 'Зберегти', class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+  <%end%>
+</div>

@@ -1,0 +1,246 @@
+<div class="container">
+      <%= form_with(model: @address, url: offer_address_path, local: true, html: { autocomplete: "off" }) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :firstname, Spree.t(:firstname) %>
+      <%= f.text_field :firstname, class: 'form-control', autocomplete:"new-password"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :lastname, Spree.t(:lastname) %>
+      <%= f.text_field :lastname, class: 'form-control', autocomplete:"new-password" %>
+    </div>
+
+    <div class="form-group" id="phone">
+      <%= f.label :phone, Spree.t(:phone) %>
+      <%= text_field_tag :phone_show, "",class: 'form-control', id: "phone_code" %>
+      <%=f.hidden_field :phone, id:"real_phone"%>
+    </div>
+
+    <%=f.hidden_field :country_id, value: 230%>
+
+    <div class="form-group" id="nova_poshta">
+      <%= f.label :nova_poshta_address, Spree.t(:nova_poshta_address) %>
+      <%=f.text_field :nova_poshta_address, {list:"address_nova_poshta_area", id:"address_nova_poshta_area1", class: 'form-control', autocomplete:"new-password" }%>
+
+      <datalist id="address_nova_poshta_area" autocomplete="off">
+
+      </datalist>
+      <input type="hidden" id="nova_poshta_address" value="">
+    </div>
+
+
+    <div class="form-group" id="nova_poshta_number">
+      <%= f.label :nova_poshta_number, Spree.t(:nova_poshta_number) %>
+      <%= f.collection_select :nova_poshta_number, {},:id, :name, {prompt: true}, {class: 'form-control spree-flat-select'} %>
+    </div>
+
+    <div class="form-group">
+      <%= hidden_field_tag "id", @offer.id %>
+      <%=f.hidden_field "user_id", value: @offer.user.id%>
+      <%=f.submit Spree.t(:add_address), class: 'btn btn-block btn-lg index_btn text-uppercase font-weight-bold', id: "form_address_offer"%>
+  </div>
+    <%end%>
+</div>
+<script>
+document.addEventListener('turbolinks:load', function () {
+
+  $("#phone_code").intlTelInput({
+    allowDropdown: false,
+    autoHideDialCode: false,
+    separateDialCode: true,
+    onlyCountries: ["ua"]
+  });
+
+  $( "#phone_code" ).keyup(function(e) {
+    e.preventDefault();
+    if ($(this).val().length > 8) {
+
+   var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var intlNumber = $("#phone_code").intlTelInput("getSelectedCountryData");
+    var final_phone = `+${intlNumber.dialCode+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+  }
+  });
+
+$('#nova_poshta_number').hide();
+  if ("<%=I18n.locale %>" == "ru"){
+  localStorage.clear();
+
+  var settings = {
+    modelName: "Address",
+    calledMethod: "getCities",
+    methodProperties: {},
+    apiKey: "<%=Rails.application.credentials[:nova_poshta]%>"
+  };
+
+  $.ajax({
+          url: "https://api.novaposhta.ua/v2.0/json/",
+          method: "POST",
+          processData: false,
+          crossDomain: true,
+          async: true,
+          contentType: "application/json",
+          data: JSON.stringify(settings)
+      }).done(function (response) {
+
+        var json = response.data;
+        for (var i = 0; i < json.length; i++) {
+          var obj = json[i];
+          var ru ={
+            "desc": `${obj.SettlementTypeDescriptionRu + ' ' +obj.DescriptionRu.trim().replace(/ *\([^)]*\) */g, "")+ ', '+'обл.'+obj.AreaDescriptionRu}`,
+            "ref": `${obj.Ref}`
+          }
+          localStorage.setItem( `${(obj.DescriptionRu).trim().replace(/ *\([^)]*\) */g, "")}`, JSON.stringify(ru))
+
+        }
+
+      });
+}
+
+  $('#address_nova_poshta_area1').keyup(function(e) {
+    e.preventDefault();
+    if ($(this).val().length > 2) {
+
+   var input_value = $( this ).val();
+   if (input_value.indexOf('місто ') > -1)
+{
+
+  var final_input_value = input_value.split("місто ").slice(1).toString().trim().charAt(0).toUpperCase() + input_value.split("місто ").slice(1).toString().trim().slice(1).toLowerCase();
+
+}
+else if (input_value.indexOf('город ') > -1)
+{
+
+var final_input_value = input_value.split("город ").slice(1).toString().trim().charAt(0).toUpperCase() + input_value.split("город ").slice(1).toString().trim().slice(1).toLowerCase();
+
+}
+else if (input_value.indexOf('село ') > -1)
+{
+
+var final_input_value = input_value.split("село ").slice(1).toString().trim().charAt(0).toUpperCase() + input_value.split("село ").slice(1).toString().trim().slice(1).toLowerCase();
+
+}
+
+else if (input_value.indexOf('селище міського типу ') > -1)
+{
+
+var final_input_value = input_value.split("селище міського типу ").slice(1).toString().trim().charAt(0).toUpperCase() + input_value.split("селище міського типу ").slice(1).toString().trim().slice(1).toLowerCase();
+
+}
+else if (input_value.indexOf('поселок городского типа ') > -1)
+{
+
+var final_input_value = input_value.split("поселок городского типа ").slice(1).toString().trim().charAt(0).toUpperCase() + input_value.split("селище міського типу ").slice(1).toString().trim().slice(1).toLowerCase();
+
+}
+
+else{
+   var final_input_value = input_value.charAt(0).toUpperCase() + input_value.slice(1).toLowerCase();
+ }
+   if ("<%=I18n.locale %>" == "uk"){
+     if(final_input_value.length > 1){
+     var settings = {
+       modelName: "Address",
+       calledMethod: "getCities",
+       methodProperties: {
+         FindByString: final_input_value
+       },
+       apiKey: "<%=Rails.application.credentials[:nova_poshta]%>"
+
+     };
+
+
+   $.ajax({
+         url: "https://api.novaposhta.ua/v2.0/json/",
+         method: "POST",
+         processData: false,
+         crossDomain: true,
+         async: true,
+         contentType: "application/json",
+         data: JSON.stringify(settings)
+     }).done(function (response) {
+       $('#address_nova_poshta_area').empty();
+       var json = response.data;
+       for (var i = 0; i < json.length; i++) {
+         var obj = json[i];
+         $('#address_nova_poshta_area').append(
+           `<option data-value=${obj.Ref}>
+           ${obj.SettlementTypeDescription + ' ' +(obj.Description).trim().replace(/ *\([^)]*\) */g, "") + ', '+"обл."+obj.AreaDescription}
+           </option>`
+         );
+       }
+     });
+}
+ }else{
+
+    var json = JSON.parse(localStorage.getItem(final_input_value))
+
+
+    $('#address_nova_poshta_area').empty();
+
+      $('#address_nova_poshta_area').append(
+        `<option data-value=${json['ref']}>
+        ${json["desc"]}
+        </option>`
+      );
+    }
+
+  }
+e.preventDefault();
+});
+$('#address_nova_poshta_area1').change(function (e) {
+  e.preventDefault();
+    var val =  $(this).val();
+    var hidden_value = $('#address_nova_poshta_area option').filter(function() {
+     return this.value == val;
+   }).data('value');
+   $("#nova_poshta_address").val(hidden_value).trigger('change');
+});
+$('#nova_poshta_address').change(function (e) {
+  e.preventDefault();
+  var cityRef =  $(this).val();
+if (cityRef.length > 4){
+  var settings = {
+    modelName: "AddressGeneral",
+    calledMethod: "getWarehouses",
+    methodProperties: {
+      CityRef: cityRef
+    },
+    apiKey: "<%=Rails.application.credentials[:nova_poshta]%>"
+  };
+
+  $.ajax({
+        url: "https://api.novaposhta.ua/v2.0/json/",
+        method: "POST",
+        processData: false,
+        crossDomain: true,
+        async: true,
+        contentType: "application/json",
+        data: JSON.stringify(settings)
+    }).done(function (response) {
+      $('#address_nova_poshta_number').empty();
+      var json = response.data;
+      for (var i = 0; i < json.length; i++) {
+        var obj = json[i];
+        if ("<%=I18n.locale %>" == "uk"){
+        $('#address_nova_poshta_number').append(new Option(obj.Description, obj.Description));
+      }else{
+        $('#address_nova_poshta_number').append(new Option(obj.DescriptionRu, obj.DescriptionRu));
+      }
+      }
+    });
+    $('#nova_poshta_number').show();
+    e.preventDefault();
+  }
+});
+
+
+
+$( "#form_address_offer" ).click(function( event ) {
+  if ("<%=I18n.locale %>" == "ru"){
+  localStorage.clear();
+}
+});
+
+});
+</script>

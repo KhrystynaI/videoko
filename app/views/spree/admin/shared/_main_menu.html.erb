@@ -1,0 +1,44 @@
+<nav>
+
+
+  <% if can? :admin, Spree::Offer %>
+    <ul class="nav nav-sidebar border-bottom" >
+      <%= link_to Spree.t(:offers_admin), admin_index_offer_path, class: "w-100 p-3 d-flex align-items-center icon-link with-tip offer_admin"  %>
+    </ul>
+  <% end %>
+
+
+    <ul class="nav nav-sidebar border-bottom" >
+      <%= link_to "Взаєморозрахунки", admin_mutual_settlements_path, class: "w-100 p-3 d-flex align-items-center icon-link with-tip offer_admin"  %>
+    </ul>
+
+    <ul class="nav nav-sidebar border-bottom" >
+      <%= link_to "Ремонт", admin_index_repairs_path, class: "w-100 p-3 d-flex align-items-center icon-link with-tip offer_admin"  %>
+    </ul>
+
+
+  <% if can? :admin, Spree::Order %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarOrder">
+      <%= tab *Spree::BackendConfiguration::ORDER_TABS, icon: 'list.svg' %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarProduct">
+      <%= main_menu_tree Spree.t(:products), icon: "products.svg", sub_menu: "product", url: "#sidebar-product" %>
+    </ul>
+  <% end %>
+
+
+  <% if Spree.user_class && can?(:admin, Spree.user_class) %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarUser">
+      <%= tab *Spree::BackendConfiguration::USER_TABS, url: spree.admin_users_path, icon: 'users.svg' %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, current_store %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarConfiguration">
+      <%= main_menu_tree Spree.t(:configurations), icon: "settings.svg", sub_menu: "configuration", url: "#sidebar-configuration" %>
+    </ul>
+  <% end %>
+</nav>

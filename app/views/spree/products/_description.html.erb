@@ -1,16 +1,31 @@
+<%product = !@product.translations.find_by(locale: I18n.locale).nil? ? @product.translations.find_by(locale: I18n.locale) : @product%>
 <div class="tab">
-  <button class="tablinks col-6 col-md-6 col-lg-6"  id="des" ><h3 class="product_d product-details-subtitle"><%= Spree.t(:description) %></h3></button>
-  <button class="tablinks col-6 col-md-6 col-lg-6"  id="short_des"><h3 class="product_d product-details-subtitle"><%= Spree.t(:short_description) %></h3></button>
+  <button class="tablinks col-4 col-md-4 col-lg-4 first_button"  id="iframe"><h3 class="product_d product-details-subtitle"><%= Spree.t(:volume_image) %></h3></button>
+  <button class="tablinks col-4 col-md-4 col-lg-4"  id="des" ><h3 class="product_d product-details-subtitle"><%= Spree.t(:description) %></h3></button>
+  <button class="tablinks col-4 col-md-4 col-lg-4"  id="short_des"><h3 class="product_d product-details-subtitle"><%= Spree.t(:short_description) %></h3></button>
+</div>
+
+<div id="Lviv" class="tabcontent">
+  <div class="m-0 text-break product-description " data-hook="description">
+    <%if !@product.volume.nil?%>
+    <p id="overley" class="product_d"><%=Spree.t(:explanation)%></p>
+    <div id="rotation">
+    <%@product_3D.each do |image|%>
+      <%=image_tag(main_app.url_for(image))%>
+    <%end%>
+    </div>
+    <%end%>
+</div>
 </div>
 
 <div id="London" class="tabcontent">
   <div  class="m-0 text-break product-description " data-hook="description">
-  <%= sanitize product_description(@product) %>
+  <%= raw product_description(product) %>
 </div>
 </div>
 
 <div id="Paris" class="tabcontent">
   <div id="product-description-long" class="m-0 text-break product-description" data-hook="description">
-    <%= sanitize @product.short_description if @product.short_description%>
+    <%= raw product.short_description if product.short_description%>
   </div>
 </div>

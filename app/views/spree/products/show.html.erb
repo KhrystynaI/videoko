@@ -3,15 +3,14 @@
 <div class="container">
   <%= spree_breadcrumbs(@taxon, '', @product) %>
 </div>
-
-
+<% product_name = !@product.translations.find_by(locale: I18n.locale).nil? && !@product.translations.find_by(locale: I18n.locale).name.empty?%>
   <div class="container pt-4 product-details">
     <div class="row" data-hook="product_show">
       <%= render partial: 'gallery' %>
       <div class="col-12 col-md-5" data-hook="product_right_part">
         <div id="product-description" data-hook="product_right_part_wrap">
           <h1 class="mt-3 mt-md-0 text-center text-md-left product-details-title">
-            <%= @product.name %>
+            <%= product_name ? @product.translations.find_by(locale: I18n.locale).name : @product.translations.find_by(locale: :uk).name%>
           </h1>
           <div id="cart-form" data-hook="cart_form">
             <%= render 'cart_form', variant_change_identifier: 'productCarousel' %>
@@ -20,6 +19,7 @@
       </div>
     </div>
     <div>&nbsp;</div>
+    <div class="text-center"><%=video_tag(main_app.url_for(@product.video),class: "video_news",controls: true, autobuffer: true) if @product.video.present?%></div>
     <div class="pb-4 pt-md-5 row" data-hook="product_description">
       <div class="col-12 col-md-12 col-lg-12">
         <%= render partial: 'description' %>
@@ -29,9 +29,7 @@
       <div class="col-12 col-md-5" data-hook="product_properties">
         <%= render partial: 'properties' %>
       </div>
-      <div class="col-12" data-hook="promotions">
-        <%= render partial: 'promotions' %>
-      </div>
+
     </div>
 
     <div id="no-product-available" class="no-product-available-dropdown">
@@ -42,7 +40,7 @@
   </div>
 
 
-    <% if !@related_products.nil? && @related_products.count > 0 %>
+    <% if !@related_products.blank? %>
 
       <div id="related-products">
         <div class="product-details-related">

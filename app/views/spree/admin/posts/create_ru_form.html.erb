@@ -1,0 +1,25 @@
+<div id="ru">
+<%= javascript_include_tag Ckeditor.cdn_url %>
+<%= javascript_include_tag 'ckeditor/config.js' %>
+
+<%= form_with url: admin_post_translate_path, method: :post, remote: true  do |form| %>
+<%= form.hidden_field :id, :value => id %>
+
+  <p>
+    <%= form.label :title, class: ['form-group'] %><br>
+    <%= form.text_field :title, class: 'form-control' %>
+  </p>
+
+
+  <p>
+    <%= form.label :body, class: ['form-group']%><br>
+    <%= form.cktext_area :body, id: 'sometext', ckeditor: { toolbar: "Full", language: 'ru'} %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>
+<p><%= link_to 'Повернутися', admin_posts_path %></p>
+</div>

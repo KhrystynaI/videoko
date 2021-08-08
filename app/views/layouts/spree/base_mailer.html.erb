@@ -1,0 +1,51 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="x-apple-disable-message-reformatting"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <%= render partial: 'spree/shared/base_mailer_stylesheets' %>
+  </head>
+  <body>
+    <span class="preheader"></span>
+        <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td class="email-masthead">
+                <% store_name = Spree::Store.current.name %>
+                <% attachments.inline['mailer_logo.png'] = File.read("#{Rails.root}/app/assets/images/mailer_logo.png")%>
+                <% if frontend_available? %>
+                  <%= link_to spree.root_url, class: 'template-label' do %>
+                    <%= image_tag attachments.inline["mailer_logo.png"].url, class: 'logo', alt: store_name, title: store_name %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag attachments.inline["mailer_logo.png"].url, class: 'logo', alt: store_name, title: store_name %>
+                <% end %>
+              </td>
+            </tr>
+            <!-- Email Body -->
+            <tr>
+              <td class="email-body" width="570" cellpadding="0" cellspacing="0">
+                <table class="email-body_inner" align="left" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                  <!-- Body content -->
+                  <tbody>
+                  <tr>
+                    <td class="content-cell">
+                      <div class="f-fallback">
+                        <%= yield %>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= render partial: 'spree/shared/base_mailer_footer' %>
+              </td>
+            </tr>
+          </table>
+
+  </body>
+</html>

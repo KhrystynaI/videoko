@@ -5,21 +5,24 @@
 <% content_for :page_actions do %>
   <%= button_link_to Spree.t(:new_product), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_product' } %>
 <% end if can?(:create, Spree::Product) %>
-<div >
-<p>Курс долара</p>
-<div >
-  <h1 id="rate"><%= @rate %></h1>
-  <h2 id="rate_message"><%= @message%></h2>
+
+<% content_for :page_actions do %>
+<div class="form-group col-12">
+<%= form_tag admin_import_path, multipart: true do %>
+<%= file_field_tag 'file', accept: 'csv', class: 'upload' %>
 </div>
-<div class="form-group mb-6">
-<%= form_tag(admin_rate_path, method: 'post', remote: true) do %>
-<%= number_field_tag :rate, nil, step: :any %>
-</div>
-<%= submit_tag("Оновити курс", class: "btn-success", icon: 'add', data: { disable_with: "Зачекайте..." })%>
+<%= submit_tag("Завантажити CSV", class: "btn-success", icon: 'add')%>
+<%end%>
+<% end %>
+
+<% content_for :page_actions do %>
+<p>&nbsp;</p>
+  <div class="form-group col-12">
+    <%= button_link_to "Проіндексувати", admin_reindex_force_path, { class: "btn-success"} %>
+  </div>
 <%end%>
 </div>
 
-<p>&nbsp;</p>
 <% content_for :table_filter do %>
   <div data-hook="admin_products_sidebar">
 
@@ -48,8 +51,25 @@
   </div>
 <% end %>
 
+<div class="col-12">
+<p>Курс долара</p>
+<div >
+  <h1 id="rate"><%= @rate %></h1>
+  <h2 id="rate_message"><%= @message%></h2>
+</div>
+<div id="fill_rate">
+<div class="form-group mb-6">
+<%= form_tag(admin_rate_path, method: 'post', remote: true) do %>
+<%= number_field_tag :rate, nil, step: :any %>
+</div>
+<%= submit_tag("Оновити курс", class: "btn-success", icon: 'add', data: { disable_with: "Зачекайте..." })%>
+<%end%>
+</div>
+</div>
 
+<p>&nbsp;</p>
 
+<div class="col-12">
 <nav class="navbar-expand-lg">
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
 
@@ -80,10 +100,8 @@
 </div>
 <div>&nbsp;</div>
 </nav>
-
-
-
-
+</div>
+</div>
 
 <div id="collection">
 <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>

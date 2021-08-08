@@ -1,0 +1,74 @@
+<p>&nbsp;</p>
+<div class="container">
+  <div class="row center_span"><%=Spree.t("tables_mutual")%></div>
+  <div class="row">
+    <%@mutual_settlements.each do |mutual_settlement| %>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <%=link_to "#{mutual_settlement.date_from.strftime('%d.%m.%Y')} - #{mutual_settlement.date_to.strftime('%d.%m.%Y')}", show_user_mutual_settlement_path(id: mutual_settlement.id), class: 'date_btn'%>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <%=link_to Spree.t("print"), show_user_mutual_settlement_path(id: mutual_settlement.id, format: :pdf), class: 'btn index_btn btn-block font-weight-bold'%>
+      <p>&nbsp;</p>
+    </div>
+    <%end%>
+    <div class="row pl-md-4 pl-sm-4">
+      <div class="col-12">
+        <div class="plp-pagination d-none d-lg-flex">
+          <%= paginate @mutual_settlements, window: 2, theme: 'twitter-bootstrap-4' %>
+        </div>
+
+        <div class="plp-pagination d-lg-none">
+          <%= paginate @mutual_settlements, window: 1, theme: 'twitter-bootstrap-4'%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>&nbsp;</p>
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-block index_btn font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
+        <%= Spree.t("require_to_change")%>
+      </button>
+      <p>&nbsp;</p>
+      <p><%=link_to Spree.t(:back), "/account", class:"date_btn"%></p>
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle"><%=Spree.t("additional_information")%></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <%= form_tag message_mutual_settlement_path, remote: true do %>
+                <%= hidden_field_tag :user, spree_current_user.id%>
+                <%= text_area_tag(:message, nil, rows: 10, cols: 25, class: "form-control") %>
+                <p>&nbsp;</p>
+                <%= submit_tag Spree.t("send"), class: "btn btn-block index_btn font-weight-bold"%>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="exampleModalCentersecond" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                <%=Spree.t("message_send")%>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

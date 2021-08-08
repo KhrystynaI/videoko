@@ -1,0 +1,18 @@
+<div class="row">
+  <div data-hook="bill_address_wrapper" class="col-12 col-lg-12">
+    <div class="card mb-3">
+      <div class="card-header">
+        <h1 class="card-title mb-0 h5">
+          <%= Spree.t(:billing_address) %>
+        </h1>
+      </div>
+
+      <div class="card-body">
+        <%= f.fields_for :bill_address, (@user.bill_address || Spree::Address.default(@user, "bill")) do |ba_form| %>
+          <% ba_form.object ||= Spree::Address.new(country: Spree::Country.new) %>
+          <%= render partial: 'spree/admin/shared/address_form', locals: { f: ba_form, type: "billing" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

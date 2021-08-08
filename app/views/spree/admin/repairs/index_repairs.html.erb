@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+ <h6>Шукати по квитанції</h6>
+<%= form_tag admin_find_repair_number_path do %>
+  <%=text_field_tag :number %>
+  <%= submit_tag 'Знайти' %>
+<% end %>
+</div>
+<div class="col-6">
+  <h6>Шукати по номеру телефона</h6>
+ <%= form_tag admin_find_repair_phone_path do %>
+   <%=text_field_tag :phone_show, "", id: "phone_code"%>
+   <%=hidden_field_tag :phone, params[:phone], id: "real_phone"%>
+   <%= submit_tag 'Знайти' %>
+ <% end %>
+</div>
+</div>
+<p>&nbsp;</p>
+<%=link_to "Додати новий запис", admin_new_repair_path, class: "btn btn-primary btn-lg btn-block"%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Номер квитанції</th>
+        <th scope="col">Номер тел.</th>
+        <th scope="col">Користувач</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@repairs.each do |repair|%>
+      <tr>
+        <td><%=link_to repair.number, admin_show_repair_path(repair.id)%></td>
+        <td><%= repair.phone%></td>
+        <td><%= repair.user.full_name%></td>
+        <td><%=link_to Spree.t("delete"), admin_delete_repair_path(id: repair.id), method: :delete%></td>
+      </tr>
+      <%end%>
+    </tbody>
+    <div class="row pl-md-4 pl-sm-4">
+      <div class="col-12">
+        <div class="plp-pagination d-none d-lg-flex">
+          <%= paginate @repairs, window: 2, theme: 'twitter-bootstrap-4' %>
+        </div>
+
+        <div class="plp-pagination d-lg-none">
+          <%= paginate @repairs, window: 1, theme: 'twitter-bootstrap-4'%>
+        </div>
+      </div>
+    </div>
+    </table>
+</div>
+<script>
+$( document ).ready(function() {
+  $("#phone_code").intlTelInput({
+    allowDropdown: false,
+    autoHideDialCode: false,
+    separateDialCode: true,
+    onlyCountries: ["ua"]
+  });
+
+  $( "#phone_code" ).keyup(function(e) {
+    e.preventDefault();
+    if ($(this).val().length > 8) {
+
+   var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var intlNumber = $("#phone_code").intlTelInput("getSelectedCountryData");
+    var final_phone = `+${intlNumber.dialCode+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+  }
+  });
+
+  $( "#phone_code" ).on('countrychange', function(e, countryData){
+    var intlNumber = countryData.dialCode;
+    var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var final_phone = `+${intlNumber+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+})
+});
+</script>

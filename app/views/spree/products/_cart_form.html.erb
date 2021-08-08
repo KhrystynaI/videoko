@@ -2,7 +2,6 @@
 <% is_product_available_in_currency = product_available_in_currency? %>
 <% product_variants_matrix(is_product_available_in_currency, @role_id)%>
 <% default_variant = default_variant(@variants, @product) %>
-<%= @other_price.join(", ") if @other_price%>
 <%= form_for :order, html: {
     id: 'add-to-cart-form',
     class: 'add-to-cart-form',
@@ -12,29 +11,55 @@
   } do |f| %>
 
   <div id="inside-product-cart-form" data-hook="inside_product_cart_form">
-    <% if is_product_available_in_currency %>
+    <% if @product.empty_price%>
+    <div class="product-variants-variant-title text-center text-md-left"><%= Spree.t(:empty_price)%></div>
+    <%else%>
+  <%@product.variants.each do |var|%>
+  <div class="product-variants-variant-title text-center text-md-left" id="<%=var.id%>">
+  <%var.prices_range(@role_id).each do |price|%>
+  <span class="other_price" data-id="<%=var.id%>"><%= number_to_currency(price, unit: "грн.", separator: ".", delimiter: "") %></span>
+  <%end%>
+  </div>
+  <%end%>
+  <%end%>
+    <%# if is_product_available_in_currency %>
       <div id="product-price" class="mb-2 text-center text-md-left add-to-cart-form-price" data-hook="product_price">
         <span class="price selling" content="<%= @product_price.to_d %>">
-          <%= number_to_currency(@product_price, unit: "₴", separator: ".", delimiter: "", format: "%u %n") %>
+          <%= number_to_currency(@product_price, unit: "грн.", separator: ".", delimiter: "") %>
           </span>
         <span content="<%= current_currency %>"></span>
       </div>
-    <% end %>
+    <%# end %>
 
-    <% if @product.variants.count > 1%>
     <hr>
       <ul id="product-variants" class="product-variants">
-        <% used_variants_options(@variants, @product).each_with_index do |option_type, index| %>
+
+        <% used_variants_options(@variants, @product).select{|c|c[:option_values].map{|v|v[:presentation]}.count > 1}.take(1).each_with_index do |option_type, index| %>
           <li>
 
               <%= render "option_type", option_type: option_type, index: index %>
-            
+
           </li>
         <% end %>
-      </ul>
-    <% end %>
+        <div class="row">
 
-    <% if is_product_available_in_currency && @product.can_supply? %>
+
+          <%@product.variants.reverse.each do |var|%>
+          <div class="col-6 about_variant">
+          <ul class="about_ul">
+          <%var.option_values.each do |opt|%>
+          <li class="product-variants-variant-title"><%="#{opt.option_type.presentation}: #{opt.presentation}"%></li>
+          <%end%>
+          </ul>
+        </div>
+          <%end%>
+
+
+
+        </div>
+      </ul>
+    
+    <% if @product.can_supply? %>
       <%= hidden_field_tag "variant_id", default_variant.id %>
 
 

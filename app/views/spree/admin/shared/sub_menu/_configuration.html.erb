@@ -1,0 +1,13 @@
+<ul data-hook="admin_configurations_sidebar_menu" class="border-top bg-white collapse nav nav-pills nav-stacked" id="sidebar-configuration">
+  <%= configurations_sidebar_menu_item(Spree.t(:general_settings), spree.edit_admin_general_settings_path) if can? :manage, Spree::Config %>
+  <%= configurations_sidebar_menu_item(Spree.t(:stores), spree.admin_stores_path) if can? :manage, Spree::Store %>
+  <%= configurations_sidebar_menu_item(Spree.t(:zones), spree.admin_zones_path) if can? :manage, Spree::Zone %>
+  <%= configurations_sidebar_menu_item(Spree.t(:countries), spree.admin_countries_path) if can? :manage, Spree::Country %>
+
+  <% if country = Spree::Country.find_by(id: Spree::Config[:default_country_id]) || Spree::Country.first %>
+    <%= configurations_sidebar_menu_item(Spree.t(:states), spree.admin_country_states_path(country)) if can? :manage, Spree::Country %>
+  <% end %>
+  <%= configurations_sidebar_menu_item("Контакти", spree.admin_settings_path) %>
+  <%= configurations_sidebar_menu_item(Spree.t(:roles), spree.admin_roles_path) if can? :manage, Spree::Role %>
+  <%= configurations_sidebar_menu_item("Новини", spree.admin_posts_path) if can? :manage, Spree::Post%>
+</ul>

@@ -5,8 +5,9 @@ ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# Use pg as the database for Active Record
+#gem 'sqlite3', '~> 1.4'
+gem 'pg', '> 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -31,6 +32,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-activejob'
 end
 
 group :development do
@@ -63,3 +68,16 @@ gem 'searchkick'
 gem 'whenever', require: false
 gem 'mina-whenever', require: false
 gem 'spree_contact_us', github: 'spree-contrib/spree_contact_us'
+gem "coffee-rails"
+gem 'spree_editor', github: 'spree-contrib/spree_editor'
+gem 'mini_magick', '>= 4.9.5'
+gem 'tinymce-rails-langs'
+gem 'yaml_db'
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
+gem 'aws-sdk-sns', '~> 1.1'
+gem 'image_optimizer'
+gem 'prawn'
+gem 'prawn-table'
+gem "cocoon"
+gem 'intl-tel-input-rails'

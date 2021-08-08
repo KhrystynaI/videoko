@@ -1,0 +1,23 @@
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Номер квитанції</th>
+      <th scope="col">Користувач</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=@repair.number%></td>
+      <td><%=@repair.user.full_name%></td>
+      <td><%=@repair.phone%></td>
+      <td><%=Spree.t(@repair.status)%></td>
+    </tr>
+  </tbody>
+</table>
+<div><%=@repair.comment%></div>
+<p><%=link_to "Змінити", admin_edit_repair_path(@repair.id)%></p>
+<p><%=link_to "Повернутися", admin_index_repairs_path%></p>
+</div>

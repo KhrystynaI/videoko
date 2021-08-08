@@ -1,0 +1,15 @@
+#rotation{
+  max-width: 50rem;
+  min-width: auto;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+}
+#rotation img{
+  width: 100%;
+  cursor: move;
+}
+#overley{
+  padding-top: 0.5rem;
+  text-align: center;
+}

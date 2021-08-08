@@ -52,13 +52,22 @@
               <% end %>
             </div>
           </div>
-          <div class="row justify-content-center">
+          <div class="row pb-4 justify-content-center">
             <div class="col-12 col-lg-8">
               <%= link_to spree.cart_path, class: 'btn btn-outline index_btn w-100 font-weight-bold text-uppercase product-added-modal-button' do %>
                 <%= Spree.t('pdp.view_cart') %>
               <% end %>
             </div>
           </div>
+
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+              <%= link_to "#", class: 'btn btn-outline index_btn w-100 font-weight-bold text-uppercase product-added-modal-button' do %>
+                <%= Spree.t('pdp.continue_buy') %>
+              <% end %>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

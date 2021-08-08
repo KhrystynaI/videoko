@@ -7,9 +7,9 @@ module Spree
                     checkout_zone.country_list
                   else
                     country = [
-                    Spree::Country.find(230),
-                    Spree::Country.find(191),
-                    Spree::Country.find(179)
+                    Spree::Country.find(230)
+                    #Spree::Country.find(191),
+                    #Spree::Country.find(179)
                   ]
                   end
 

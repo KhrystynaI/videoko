@@ -3,11 +3,16 @@ module Spree
     class ImagesController < ResourceController
       before_action :load_edit_data, except: :index
       before_action :load_index_data, only: :index
+      before_action :resize_image, only: [:create, :update]
 
       create.before :set_viewable
       update.before :set_viewable
 
       private
+
+      def resize_image
+        ImageOptimizer.new(params[:image][:attachment].tempfile.path).optimize
+      end
 
       def location_after_destroy
         admin_product_images_url(@product)

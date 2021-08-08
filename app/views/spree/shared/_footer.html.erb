@@ -36,14 +36,14 @@
           <% end %>
 
 
-        <div class="col-6">
+        <div class="col-6 for_small_dev">
           <div class="footer-spree-label">
             <span class= "account_title"><%= Spree.t(:contact_us) %></span>
           </div>
 
-            <span class="address_info"><%= "#{Spree.t(:call_us)}:" %></span><span class="address_info"> (032)295-1-295</span>
+            <span class="address_info"><%= "#{Spree.t(:call_us)}:" %></span><span class="address_info"> <%= Spree::Config.first_phone%></span>
             <br>
-              <span class="address_info"><%= "#{Spree.t(:email)}:" %></span><span class="address_info"> videoko@ukr.net</span>
+              <span class="address_info"><%= "#{Spree.t(:email)}:" %></span><span class="address_info"> <%=Spree::Config.email%></span>
 
           </div>
 

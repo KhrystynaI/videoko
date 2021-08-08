@@ -63,14 +63,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'videoko-test.devarena.lviv.ua' }
+  config.action_mailer.default_url_options = { :host => '3.17.155.122', protocol: 'http' }
+  config.action_mailer.asset_host = 'http://3.17.155.122/:3000'
 
   config.action_mailer.smtp_settings = {
   :address => Rails.application.credentials[:aws][:address],
-  :port => 25,
+  :port => 587,
   :user_name => Rails.application.credentials[:aws][:user_name],
-  :password => Rails.application.credentials[:aws][:password], 
-  :authentication => :login,
+  :password => Rails.application.credentials[:aws][:password],
+  :authentication => :plain,
   :enable_starttls_auto => true
 }
 

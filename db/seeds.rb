@@ -3,12 +3,68 @@ require 'csv'
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Vinnyts'ka Oblast'").translation.update!(locale: "uk",name: "Вінницька")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Vinnyts'ka Oblast'").translation.update!(locale: "ru",name: "Винницкая")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Volyns'ka Oblast'").translation.update!(locale: "uk",name: "Волинська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Volyns'ka Oblast'").translation.update!(locale: "ru",name: "Волынская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Luhans'ka Oblast'").translation.update!(locale: "uk",name: "Луганська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Luhans'ka Oblast'").translation.update!(locale: "ru",name: "Луганская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Dnipropetrovs'ka Oblast'").translation.update!(locale: "uk",name: "Дніпропетровська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Dnipropetrovs'ka Oblast'").translation.update!(locale: "ru",name: "Днепропетровская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Donets'ka Oblast'").translation.update!(locale: "uk",name: "Донецька")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Donets'ka Oblast'").translation.update!(locale: "ru",name: "Донецкая")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Zhytomyrs'ka Oblast'").translation.update!(locale: "uk",name: "Житомирська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Zhytomyrs'ka Oblast'").translation.update!(locale: "ru",name: "Житомирская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Zakarpats'ka Oblast'").translation.update!(locale: "uk",name: "Закарпатська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Zakarpats'ka Oblast'").translation.update!(locale: "ru",name: "Закарпатская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Zaporiz'ka Oblast'").translation.update!(locale: "uk",name: "Запорізька")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Zaporiz'ka Oblast'").translation.update!(locale: "ru",name: "Запорожская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Ivano-Frankivs'ka Oblast'").translation.update!(locale: "uk",name: "Івано-Франківська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Ivano-Frankivs'ka Oblast'").translation.update!(locale: "ru",name: "Ивано-Франковская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kyïvs'ka mis'ka rada").translation.update!(locale: "uk",name: "м.Київ")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kyïvs'ka mis'ka rada").translation.update!(locale: "ru",name: "г.Киев")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kyïvs'ka Oblast'").translation.update!(locale: "uk",name: "Київська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kyïvs'ka Oblast'").translation.update!(locale: "ru",name: "Киевская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kirovohrads'ka Oblast'").translation.update!(locale: "uk",name: "Кіровоградська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kirovohrads'ka Oblast'").translation.update!(locale: "ru",name: "Кировоградская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Sevastopol").translation.update!(locale: "uk",name: "м.Севастополь")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Sevastopol").translation.update!(locale: "ru",name: "г.Севастополь")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Respublika Krym").translation.update!(locale: "uk",name: "Автономна Республіка Крим")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Respublika Krym").translation.update!(locale: "ru",name: "АР Крым")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "L'vivs'ka Oblast'").translation.update!(locale: "uk",name: "Львівська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "L'vivs'ka Oblast'").translation.update!(locale: "ru",name: "Львовская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Mykolaïvs'ka Oblast'").translation.update!(locale: "uk",name: "Миколаївська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Mykolaïvs'ka Oblast'").translation.update!(locale: "ru",name: "Николаевская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Odes'ka Oblast'").translation.update!(locale: "uk",name: "Одеська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Odes'ka Oblast'").translation.update!(locale: "ru",name: "Одесская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Poltavs'ka Oblast'").translation.update!(locale: "uk",name: "Полтавська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Poltavs'ka Oblast'").translation.update!(locale: "ru",name: "Полтавская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Rivnens'ka Oblast'").translation.update!(locale: "uk",name: "Рівненська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Rivnens'ka Oblast'").translation.update!(locale: "ru",name: "Ровенская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Sums 'ka Oblast'").translation.update!(locale: "uk",name: "Сумська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Sums 'ka Oblast'").translation.update!(locale: "ru",name: "Сумская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Ternopil's'ka Oblast'").translation.update!(locale: "uk",name: "Тернопільська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Ternopil's'ka Oblast'").translation.update!(locale: "ru",name: "Тернопольская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kharkivs'ka Oblast'").translation.update!(locale: "uk",name: "Харківська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Kharkivs'ka Oblast'").translation.update!(locale: "ru",name: "Харьковская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Khersons'ka Oblast'").translation.update!(locale: "uk",name: "Херсонська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Khersons'ka Oblast'").translation.update!(locale: "ru",name: "Херсонская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Khmel'nyts'ka Oblast'").translation.update!(locale: "uk",name: "Хмельницька")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Khmel'nyts'ka Oblast'").translation.update!(locale: "ru",name: "Хмельницкая")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Cherkas'ka Oblast'").translation.update!(locale: "uk",name: "Черкаська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Cherkas'ka Oblast'").translation.update!(locale: "ru",name: "Черкасская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Chernihivs'ka Oblast'").translation.update!(locale: "uk",name: "Чернігівська")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Chernihivs'ka Oblast'").translation.update!(locale: "ru",name: "Черниговская")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Chernivets'ka Oblast'").translation.update!(locale: "uk",name: "Чернівецька")
+#Spree::Country.find(Spree::Config[:default_country_id]).states.find_by(name: "Chernivets'ka Oblast'").translation.update!(locale: "ru",name: "Черновицкая")
+
+
 Spree::Store.current.update_attributes(default_currency: "UAH")
 Spree::Store.current.update_attributes(name: "Знак якості")
-Spree::Store.current.update(mail_from_address: "kinzhuvatova@gmail.com")
+Spree::Store.current.update(mail_from_address: "videoko2016@gmail.com")
 Spree::Store.current.update(url: "videoko-test.devarena.lviv.ua")
 Spree::Store.current.update(name: "Знак якості")
-Spree::Country.find(230).translate.update(locale: "ru", name:"Украина")
+Spree::Country.find(230).translation.update(locale: "ru", name:"Украина")
 Spree::Role.create(name: "rozdrib")
 Spree::Role.create(name: "opt")
 Spree::Role.create(name: "gold")
@@ -30,9 +86,10 @@ tax = Spree::Taxon.new(taxon.to_h)
 end
 end
 p "Taxons"
+
 Spree::Config.rate = 26.8
 Spree::Product.search_index.clean_indices
-#Spree::Product.search_index.delete
+Spree::Product.search_index.delete
 CSV.foreach("db/products_test.csv", headers: true) do |product|
 if !product["post_title"].nil?
   Spree::Product.create!(name: ActionController::Base.helpers.sanitize(product["post_title"]), description: ActionController::Base.helpers.sanitize(product["post_content"]), short_description: ActionController::Base.helpers.sanitize(product["post_excerpt"]), available_on: Time.current)
@@ -48,7 +105,7 @@ Spree::Product.all.each do |pr|
   Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:7)
   Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:8)
 end
-Spree::Product.reindex
+
 p "products"
 
 option_types_attributes_camery = [

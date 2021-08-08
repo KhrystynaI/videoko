@@ -25,6 +25,7 @@ function CartForm($, $cartForm) {
     this.withOptionValues = Boolean($cartForm.find(OPTION_VALUE_SELECTOR).length)
     this.$addToCart = $cartForm.find(ADD_TO_CART_SELECTOR)
     this.$price = $cartForm.find('.price.selling')
+    this.$other_price = $cartForm.find('#other_price')
     this.$variantIdInput = $cartForm.find(VARIANT_ID_SELECTOR)
     this.initializeForm()
   }
@@ -44,10 +45,12 @@ function CartForm($, $cartForm) {
 }
 
   this.handleOptionValueClick = function(event) {
+
     this.applyCheckedOptionValue($(event.currentTarget))
   }.bind(this)
 
   this.applyCheckedOptionValue = function($optionValue, initialUpdate) {
+
     this.saveCheckedOptionValue($optionValue)
     this.showAvailableVariants()
     this.updateAddToCart()
@@ -62,6 +65,7 @@ function CartForm($, $cartForm) {
   }
 
   this.saveCheckedOptionValue = function($optionValue) {
+
     var optionTypeIndex = $optionValue.data('option-type-index')
 
     this.selectedOptionValueIds.splice(
@@ -69,6 +73,7 @@ function CartForm($, $cartForm) {
       this.selectedOptionValueIds.length,
       parseInt($optionValue.val())
     )
+
   }
 
   this.showAvailableVariants = function() {
@@ -155,30 +160,16 @@ function CartForm($, $cartForm) {
     }
 
     return this.variants.find(function(variant) {
-      var optionValueIds = variant.option_values.map(function(ov) {
-        return ov.id
-      })
+       return variant.option_values.find(function(v) {
+           return v.id === self.selectedOptionValueIds[0]
+         });
 
-      return self.areArraysEqual(optionValueIds, self.selectedOptionValueIds)
-    })
-  }
 
-  this.areArraysEqual = function(array1, array2) {
-    return this.sortArray(array1).join(',') === this.sortArray(array2).join(',')
-  }
-
-  this.sortArray = function(array) {
-    return array.concat().sort(function(a, b) {
-      if (a < b) return -1
-      if (a > b) return 1
-
-      return 0
-    })
-  }
+  });
+}
 
   this.updateAddToCart = function() {
     var variant = this.selectedVariant()
-
     this.$addToCart.prop('disabled', variant ? !variant.purchasable : true)
   }
 
@@ -216,8 +207,16 @@ function CartForm($, $cartForm) {
     var variant = this.selectedVariant()
 
     if (!variant) return
+      this.$price.html(variant.display_price)
 
-    this.$price.html(variant.display_price)
+      $(".other_price").each(function() {
+        var id = $(this).data("id")
+        if ($(this).data("id") == variant.id) {
+            $(`#${id}`).show();
+      }else{
+        $(`#${id}`).hide();
+      }
+      });
   }
 
   this.updateVariantId = function() {
@@ -281,7 +280,6 @@ Spree.ready(function($) {
 
   $(ADD_TO_CART_FORM_SELECTOR).each(function(_cartFormIndex, cartFormElement) {
     var $cartForm = $(cartFormElement)
-
     CartForm($, $cartForm)
   })
 

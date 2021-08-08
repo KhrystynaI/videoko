@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+<script>
+
+$(document).ready(function () {
+  var categories =JSON.parse('<%= (Spree::Taxonomy.all.map{|c|[c.id, c.name]}).to_json.html_safe%>');
+  categories.forEach(function(element){
+        $(`#${JSON.stringify(element[0])}`).selectpicker({
+          title: JSON.stringify(element[1]),
+          width: "100%"
+        });
+
+      });
+
+
+  });
+
+</script>
+<div class="wrapper">
+<p>Супутні товари</p>
+
+
+<div>
+  <%= form_with url: related_admin_product_path(@product), local: true do |f| %>
+  <%Spree::Product.collection.each do |product|%>
+  <%if product.first%>
+  <%= f.collection_select(:related, product,:id, :name, {include_blank: false},{multiple: true,id:"#{product.first.find_id_taxonomy}"}) %>
+  <p>&nbsp;</p>
+<%end%>
+<%end%>
+
+</div>
+<p>&nbsp;</p>
+
+<%=f.submit("Додати супутні товари", class: "btn-success", icon: 'add')%>
+<%end%>
+
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+<h1>Новини</h1>
+<%= link_to 'Створити новину', spree.new_admin_post_path %>
+<table width="100%" border="1" align="center"
+     cellpadding="4" cellspacing="0">
+  <tr>
+    <th >Заголовок</th>
+    <th >Переклад</th>
+    <th >Переглянути</th>
+    <th >Редагувати</th>
+    <th >Видалити</th>
+  </tr>
+
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= link_to 'Переклад', admin_create_ru_form_path(id: post.id)%></td>
+      <td><%= link_to 'Переглянути', admin_post_path(post.id) %></td>
+      <td><%= link_to 'Редагувати', edit_admin_post_path(post.id) %></td>
+      <td><%= link_to 'Видалити', admin_post_path(post.id),
+              method: :delete,
+              data: { confirm: 'Видалити?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="row pl-md-4 pl-sm-4">
+  <div class="col-12">
+    <div class="plp-pagination d-none d-lg-flex">
+      <%= paginate @posts, window: 2, theme: 'twitter-bootstrap-4' %>
+    </div>
+
+    <div class="plp-pagination d-lg-none">
+      <%= paginate @posts, window: 1, theme: 'twitter-bootstrap-4'%>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,72 @@
+<div class='order-show container d-flex flex-column align-items-center flex-lg-wrap flex-lg-row justify-content-center' id="order_summary" data-hook>
+
+    <%= icon(name: 'check-mark-circle',
+             classes: 'd-block d-lg-none mx-auto order-show-check-mark',
+             width: 56,
+             height: 56) %>
+    <%= icon(name: 'check-mark-circle',
+             classes: 'd-none d-lg-block mx-auto order-show-check-mark',
+             width: 102,
+             height: 102) %>
+    <h5 class="w-100 text-center"><%= Spree.t(:order_success) %></h5>
+    <p class="order-show-explain w-100 text-center"><%= Spree.t(:order_success_explain) %></p>
+
+
+  <p class="order-show-number text-uppercase w-100 text-center">
+    <%= [I18n.l(DateTime.now.to_date, format: :long)].join(' ') %>
+  </p>
+
+    <div class="order-show-line-items d-flex flex-column">
+      <dt class="text-uppercase text-center text-lg-left"><%= Spree.t(:address) %></dt>
+      <dd class="text-center text-lg-left">
+        <%= render 'spree/shared/address', address: @offer.address %>
+      </dd>
+    </div>
+
+
+  </dl>
+  <hr class="w-100 mt-0 mb-4 d-sm-none" />
+  <div class="order-show-line-items d-flex flex-column align-items-center">
+    <% @offer.offer_items.each do |item| %>
+      <div class="order-show-line-items-line-item d-flex w-100">
+        <%= link_to product_image(item.variant), item.variant.product %>
+        <div class="order-show-line-items-line-item-desc w-100">
+          <span class="order-show-line-items-line-item-desc-name">
+            <%= item.variant.product.name %>
+          </span>
+          <span class="order-show-line-items-line-item-desc-subtitle text-break">
+            <ul class="list-unstyled mb-0">
+              <% item.variant.option_values.sort { |ov| ov.option_type.position }.each do |ov| %>
+                <li><%= "#{ov.option_type.presentation}: #{ov.presentation}" %></li>
+              <% end %>
+            </ul>
+          </span>
+          <div class="order-show-line-items-line-item-desc-price">
+            <div class="order-show-line-items-line-item-desc-price-attr-name d-inline d-lg-block">
+              <span><%= Spree.t(:price) %></span>
+            </div>
+            <%if item.variant.product.empty_price%>
+            <span class="font-weight-bold"><%= Spree.t(:empty_price) %></span>
+            <%else%>
+            <span class="font-weight-bold"><%= item.price %></span>
+            <%end%>
+          </div>
+          <div class="order-show-line-items-line-item-desc-quantity">
+            <div class="order-show-line-items-line-item-desc-quantity-attr-name d-inline d-lg-block">
+              <span><%= Spree.t(:quantity) %></span>
+            </div>
+            <span class="order-show-line-items-line-item-desc-quantity-val d-lg-block"><%= item.quantity %></span>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+    <div class="order-show-line-items-line-item-desc-total">
+    <div class="order-show-line-items-line-item-desc-total-attr-name d-inline d-lg-block">
+      <span><%= Spree.t(:total) %></span>
+    </div>
+    <span class="font-weight-bold d-lg-block"><%= @offer.total_price %> <%= Money::Currency.find(@offer.currency).symbol %></span>
+    </div>
+  </div>
+
+</div>

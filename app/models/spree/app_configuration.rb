@@ -3,7 +3,7 @@ require 'spree/core/search/base'
 module Spree
   class AppConfiguration < Preferences::Configuration
     # Alphabetized to more easily lookup particular preferences
-    preference :address_requires_state, :boolean, default: true # should state/state_name be required
+    preference :address_requires_state, :boolean, default: false # should state/state_name be required
     preference :address_requires_phone, :boolean, default: true # Determines whether we require phone in address
     preference :admin_interface_logo, :string, default: 'admin/logo.png'
     preference :admin_path, :string, default: '/admin'
@@ -41,12 +41,24 @@ module Spree
     preference :show_only_complete_orders_by_default, :boolean, default: true
     preference :show_variant_full_price, :boolean, default: false # Displays variant full price or difference with product price. Default false to be compatible with older behavior
     preference :show_products_without_price, :boolean, default: false
-    preference :show_raw_product_description, :boolean, default: false
+    preference :show_raw_product_description, :boolean, default: true
     preference :tax_using_ship_address, :boolean, default: true
     preference :track_inventory_levels, :boolean, default: true # Determines whether to track on_hand values for variants / products.
     preference :rate, :decimal
     preference :last_rate, :decimal
     preference :cache_option_type, :integer, default: 0
+    preference :first_mob, :string, default: '(099) 295-2-295'
+    preference :second_mob, :string, default: '(063) 295-2-295'
+    preference :viber, :string, default: '(097) 295-2-295'
+    preference :telegram, :string, default: '(097) 295-2-295'
+    preference :first_phone, :string, default: '(032) 295-1-295'
+    preference :second_phone, :string, default: '(032) 295-2-295'
+    preference :email, :string, default: 'videoko@ukr.net'
+    preference :street_uk, :string, default: 'Шевченка, 120'
+    preference :street_ru, :string, default: 'Шевченка, 120'
+    preference :hours_week, :string, default: '09.00-18.00'
+    preference :hours_weekend, :string, default: '09.00-15.00'
+    preference :email_admin, :string, default: 'videoko2016@gmail.com'
     # Store credits configurations
     preference :non_expiring_credit_types, :array, default: []
     preference :credit_to_new_allocation, :boolean, default: false

@@ -1,3 +1,9 @@
+<%if spree_current_user.nil? || spree_current_user.spree_roles.last.name == "admin"%>
+<%role = "rozdrib"%>
+<%else%>
+<%role = spree_current_user.spree_roles.last.name%>
+<%end%>
+<% id_role = Spree::Role.find_by(name: role).id%>
 <% cache [common_product_cache_keys, products.each{|pr|pr.class.maximum(:updated_at)&.to_i}, id] do %>
   <div id="<%= id %>-mobile" class="carousel slide d-md-none homepage-carousel" data-interval="false">
     <div class="carousel-inner">
@@ -7,7 +13,7 @@
             <div class="row carousel-items-container">
               <% sliced_items.each_with_index do |item, idx| %>
                 <div class="col-6">
-                  <%= render 'spree/shared/product', product: item, image_class: 'w-100' %>
+                  <%= render 'spree/shared/product', product: item, id: id_role,image_class: 'w-100' %>
                 </div>
               <% end %>
             </div>
@@ -79,7 +85,7 @@
             <div class="row carousel-items-container">
               <% sliced_items.each do |item| %>
                 <div class="col-3">
-                  <%= render 'spree/shared/product', product: item, image_class: 'w-100' %>
+                  <%= render 'spree/shared/product', product: item, id: id_role,image_class: 'w-100' %>
                 </div>
               <% end %>
             </div>

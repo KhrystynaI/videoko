@@ -1,0 +1,26 @@
+<%if @product.volume.nil?%>
+
+<div class="form-group">
+    <%= form_with url: admin_volumes_path(@product), method: :post,local: true do |f| %>
+    <%=f.hidden_field(:name, value: @product.name) %>
+    <%= f.hidden_field(:product_id, value: @product_id)%>
+    </div>
+    <div class="form-group">
+    <%= f.file_field :images, multiple: true, direct_upload: true%>
+  </div>
+  <%= submit_tag("Створити",class: "btn btn-primary")%>
+  <%end%>
+
+<%else%>
+<h3><%= @product.volume.name %></h3>
+<%= link_to "Повернутися", spree.edit_admin_product_url(@product)%>
+<%= link_to "Видалити", admin_volume_path(volume: @product.volume), method: :delete%>
+<ul style="list-style-type: none; display:inline-block;">
+<%@product.volume.images.each do |im|%>
+<li style="margin: 0.5rem; display:inline-block;">
+  <%=image_tag(main_app.url_for(im), size: "100x100")%>
+  <%= im.filename%>
+</li>
+<%end%>
+</ul>
+<%end%>

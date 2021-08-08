@@ -7,12 +7,8 @@ module Spree
       base.translation_class.acts_as_paranoid
       base.translation_class.after_destroy :punch_slug
       base.translation_class.default_scopes = []
+      base.translation_class.define_method(:punch_slug) { update(slug: "#{Time.now.to_i}_#{slug}") }
 
-      if RUBY_VERSION.to_f >= 2.5
-        base.translation_class.define_method(:punch_slug) { update(slug: "#{Time.now.to_i}_#{slug}") }
-      else
-        base.translation_class.send(:define_method, :punch_slug) { update(slug: "#{Time.now.to_i}_#{slug}") }
-      end
 
       def base.like_any(fields, values)
         translations = Spree::Product::Translation.arel_table

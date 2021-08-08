@@ -1,0 +1,61 @@
+<div class="container">
+  <%= form_for [:admin, @repair], url: admin_create_repair_path do |f| %>
+  <div class="form-group">
+    <%= f.label :user_id, Spree.t(:user)%>
+    <br/>
+    <%= f.collection_select :user_id, Spree::User.all.map{|user| [user.id, user.full_name]}, :first, :second, {prompt: true,include_blank: false,allow_blank: false}, {class:'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, "Статус"%>
+    <br/>
+    <%= f.collection_select :status, Spree::Repair.statuses.map{ |a| [a.first,Spree.t(a.first)] }, :first, :second, {prompt: true,include_blank: false,allow_blank: false}, {class:'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :number, "Номер квитанції"%>
+    <br/>
+    <%= f.number_field :number,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone, Spree.t(:phone)%>
+    <br/>
+    <%= text_field_tag :phone_show, "",class: 'form-control', id: "phone_code" %>
+    <%=f.hidden_field :phone, id:"real_phone"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :comment, Spree.t(:comment)%>
+    <br/>
+    <%= f.text_area :comment, class: "form-control" %>
+  </div>
+  <div class='form-group'>
+    <%= f.submit 'Зберегти', class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+  <%end%>
+</div>
+<script>
+$( document ).ready(function() {
+  $("#phone_code").intlTelInput({
+    allowDropdown: false,
+    autoHideDialCode: false,
+    separateDialCode: true,
+    onlyCountries: ["ua"]
+  });
+
+  $( "#phone_code" ).keyup(function(e) {
+    e.preventDefault();
+    if ($(this).val().length > 8) {
+
+   var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var intlNumber = $("#phone_code").intlTelInput("getSelectedCountryData");
+    var final_phone = `+${intlNumber.dialCode+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+  }
+  });
+
+  $( "#phone_code" ).on('countrychange', function(e, countryData){
+    var intlNumber = countryData.dialCode;
+    var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var final_phone = `+${intlNumber+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+})
+});
+</script>

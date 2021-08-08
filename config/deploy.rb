@@ -1,48 +1,49 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/bundler'
-require 'mina/rvm'    # for rvm support. (https://rvm.io)
+#require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/rbenv'
 require 'mina/whenever'
- project_name = 'videoko-test'
+ project_name = 'videoko'
 
  set :project_name, project_name
- set :domain, "#{project_name}.devarena.lviv.ua"
- set :deploy_to, "/home/deploy/#{project_name}"
+ set :domain, "3.17.155.122"
+ set :deploy_to, "/home/ubuntu/#{project_name}"
  set :repository, "git@github.com:KhrystynaInzhuvatova/videoko.git"
- set :bundle_path, "/home/deploy/#{project_name}/shared/bundle"
+ set :bundle_path, "/home/ubuntu/#{project_name}/shared/bundle"
  set :branch, ENV['branch'] || 'master'
 
- set :shared_dirs, fetch(:shared_dirs, []).push('storage')
+ set :shared_dirs, fetch(:shared_dirs, []).push('storage', 'upload')
  set :shared_files, fetch(:shared_files, []).push(
    'config/master.key',
    '.env',
    'db/production.sqlite3'
  )
 
-set :user, 'deploy' # Username in the server to SSH to.
+set :user, 'ubuntu' # Username in the server to SSH to.
 
 task :remote_environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  # invoke :'rbenv:load'
+  invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke 'rvm:use', 'ruby-2.6.3'
+  #invoke 'rvm:use', 'ruby-2.6.3'
 end
 
 # Put any custom commands you need to run at setup
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
-  command %(rvm install 2.6.3)
-  command %(rvm use 2.6.3)
-  command %(gem install bundler)
+  #command %(rvm install 2.6.3)
+  #command %(rvm use 2.6.3)
+  #command %(gem install bundler)
 end
 
 task setup: :remote_environment do
   deploy_to   = fetch(:deploy_to)
   shared_path = fetch(:shared_path)
   command %(sudo mkdir -p "#{deploy_to}")
-  command %(sudo chown -R deploy:deploy "#{deploy_to}")
+  command %(sudo chown -R ubuntu:ubuntu "#{deploy_to}")
 
   command %(mkdir -p "#{shared_path}/log")
   command %(chmod g+rx,u+rwx "#{shared_path}/log")
@@ -78,6 +79,7 @@ task :deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    #invoke :'rails:db_create'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
@@ -87,7 +89,6 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
-      #invoke :'whenever:update'
     end
   end
 

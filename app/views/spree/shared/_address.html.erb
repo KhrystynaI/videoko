@@ -1,25 +1,37 @@
 <div class="address vcard">
   <div class="fn"><%= address.full_name %></div>
-  <% unless address.company.blank? %>
+  <% unless address.phone.blank? %>
     <div class="org">
-      <%= address.company %>
+      <%= address.phone %>
+    </div>
+  <% end %>
+  <% unless address.nova_poshta_address.blank? %>
+    <div class="org">
+      <%= address.nova_poshta_address %>
+    </div>
+  <% end %>
+  <% unless address.nova_poshta_number.blank? %>
+    <div class="org">
+      <%= address.nova_poshta_number %>
     </div>
   <% end %>
   <div class="adr">
+    <% unless address.address1.blank? %>
     <div class="street-address">
       <div class="street-address-line">
         <%= address.address1 %>
       </div>
-      <% unless address.address2.blank? %>
-        <div class="street-address-line">
-          <%= address.address2 %>
-        </div>
-      <% end %>
     </div>
+    <%end%>
     <div class="local">
+      <% unless address.state.blank? %>
+      <span class="locality"><%= address.state %></span>
+        <%end%>
+      </div>
+        <div class="local">
+        <% unless address.city.blank? %>
       <span class="locality"><%= address.city %></span>
-          
-      <div class="country-name"><%= address.country.try(:name) %></div>
+        <%end%>
     </div>
   </div>
 </div>

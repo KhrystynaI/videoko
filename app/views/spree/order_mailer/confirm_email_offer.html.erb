@@ -1,0 +1,67 @@
+<h1>
+  <%= Spree.t('order_mailer.confirm_email.dear_customer', name: @offer.address.firstname) %>
+</h1>
+<p>
+  <%= Spree.t('order_mailer.confirm_email.instructions') %>
+</p>
+<table class="purchase" role="presentation">
+  <tr>
+    <td>
+      <h3><%= Spree.t('order_mailer.confirm_email.order_summary', number: @offer.name) %></h3>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <table class="purchase_content">
+        <%@offer.offer_items.each do |item| %>
+        <% attachments.inline["#{name_attach(item.variant)}"] = variant_image_url(item.variant)%>
+        <tr>
+          <td class="purchase_image">
+            <% if frontend_available? %>
+              <%= link_to(image_tag(attachments.inline["#{name_attach(item.variant)}"].url, size: "90x90"), spree.product_url(item.variant.product)) %>
+            <% else %>
+              <%= image_tag(attachments.inline["#{name_attach(item.variant)}"].url, size: "90x90") %>
+            <% end %>
+          </td>
+          <td class="purchase_item">
+            <strong>
+              <span class="f-fallback">
+                <% if frontend_available? %>
+                  <%= link_to raw(item.variant.product.name), spree.product_url(item.variant.product.name) %>
+                <% else %>
+                  <%= raw(item.variant.product.name) %>
+                <% end %>
+              </span>
+            </strong>
+            <span class="purchase_item--additional"><%= raw(item.variant.options_text) -%></span>
+          </td>
+          <td class="align-right">
+            <span class="f-fallback purchase_item_price">
+             <%= item.quantity %> <span> &nbsp; x  &nbsp;</span> <%= item.price %>
+
+           </span>
+          </td>
+        </tr>
+        <%end%>
+
+        <tr>
+          <td></td>
+          <td>
+            <p class="f-fallback purchase_total purchase_total--label">
+              <strong><%= Spree.t('order_mailer.total') %></strong>
+            </p>
+          </td>
+          <td>
+            <p class="f-fallback purchase_total">
+              <span> &nbsp;&nbsp;</span><strong><%= @offer.total_price %></strong>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+<p>
+  <%= Spree.t('order_mailer.confirm_email.thanks') %>
+</p>

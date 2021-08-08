@@ -1,0 +1,46 @@
+<div class="container-fluid">
+<h5>Видаткова накладна</h5>
+<table class="table table-bordered">
+  <thead>
+      <th scope="col">Номер</th>
+      <th scope="col">Дата</th>
+      <th scope="col">Збільшення у доларах</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=@sales_invoice.name%></td>
+      <td><%=@sales_invoice.date.strftime("%d-%m-%Y")%></td>
+      <td><%=@sales_invoice.debt_usd%></td>
+    </tr>
+  </tbody>
+</table>
+<h6>Товари</h6>
+  <table class="table table-bordered">
+    <thead>
+
+         <th scope="col">Назва</th>
+          <th scope="col">Ціна</th>
+          <th scope="col">Кількість</th>
+
+        </thead>
+        <tbody>
+          <%@sales_invoice.invoice_items.each do |item|%>
+          <tr>
+              <td><%=item.name%></td>
+              <td><%=item.price%></td>
+              <td><%=item.quantity%></td>
+          </tr>
+              <%end%>
+
+    </tbody>
+</table>
+<hr>
+<div class="row">
+  <div class="col-6">
+<%=link_to "Повернутися", admin_show_mutual_settlement_path(id: @sales_invoice.mutual_settlement.id)%>
+</div>
+<div class="col-6">
+<%=link_to "Видалити", admin_delete_sales_invoice_path(id: @sales_invoice.id), method: :delete%>
+</div>
+</div>
+</div>

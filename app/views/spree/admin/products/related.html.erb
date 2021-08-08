@@ -1,0 +1,15 @@
+
+<% content_for :page_actions do %>
+  <%= product_preview_link(@product) %>
+  <%= button_link_to("Повернутися", spree.admin_product_url(@product.id), class: "btn-success")%>
+<% end %>
+
+<% @product.related.tr('["\"]','').split(',').reject { |c| c.empty? }.map(&:to_i).reject { |c| c == 0 }.each do |rel|%>
+<div class="container">
+  <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      <p><%=Spree::Product.find(rel).name%><span>&nbsp;</span><span><%= link_to "Вилучити", admin_remove_related_path(id_product: @product.id, id_related: rel)%></span></p>
+    </div>
+    </div>
+    </div>
+<%end%>

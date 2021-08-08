@@ -171,7 +171,7 @@ module Spree
 
     def plp_and_carousel_image(product, image_class = '')
       image = default_image_for_product_or_variant(product)
-      image_url = image&.plp_url || asset_path('no_img.png')
+      image_url = image&.plp_url || asset_path('empty.png')
       image_style = image&.style(:plp)
 
       lazy_image(

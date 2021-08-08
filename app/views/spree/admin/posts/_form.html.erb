@@ -1,0 +1,38 @@
+
+<%= javascript_include_tag Ckeditor.cdn_url %>
+<%= javascript_include_tag 'ckeditor/config.js' %>
+<%= form_with model: [:admin,@post], remote: true  do |form| %>
+<%= form.hidden_field :locale, :value => :uk %>
+  <p>
+    <%= form.label :title, class: ['form-group'] %><br>
+    <%= form.text_field :title, class: 'form-control' %>
+  </p>
+
+
+  <p>
+    <%= form.label :body, class: ['form-group']%><br>
+    <%= form.cktext_area :body, id: 'sometext', ckeditor: { toolbar: "Full",language: 'uk'} %>
+  </p>
+
+  <p>
+    <% if !form.object.video.attached?%>
+    <div data-hook="admin_product_form_video" >
+        <%= form.field_container :video, class: ['form-group'] do %>
+        <%= form.label :video, Spree.t(:video) %>
+        <%= form.file_field :video, class: 'form-control' %>
+        <%= form.error_message_on :video %>
+      <%end%>
+    </div>
+      <%else%>
+      <div data-hook="admin_product_form_video" >
+      <%=video_tag(main_app.url_for(form.object.video),style: "width:300px; height:150px",controls: true, autobuffer: true)%>
+      <%=link_to(Spree.t(:delete), admin_post_destroy_video_path(id: form.object.id))%>
+    </div>
+      <% end %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>

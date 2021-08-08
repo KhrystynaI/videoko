@@ -40,8 +40,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'localhost' }
-
+  config.action_mailer.default_url_options = { :host => 'localhost', protocol: 'http' }
   config.action_mailer.smtp_settings = {
   :address => Rails.application.credentials[:aws][:address],
   :port => 25,

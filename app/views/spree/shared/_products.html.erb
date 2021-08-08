@@ -1,22 +1,31 @@
-<% cache cache_key_for_products(products) do %>
+
+<%if spree_current_user.nil? || spree_current_user.spree_roles.last.name == "admin"%>
+<%role = "rozdrib"%>
+<%else%>
+<%role = spree_current_user.spree_roles.last.name%>
+<%end%>
+<% id = Spree::Role.find_by(name: role).id%>
+
+<%# cache cache_key_for_products(products, id) do %>
+
 <% content_for :head do %>
 
     <%= rel_next_prev_link_tags products %>
-  
+
 <% end %>
 
 <div class="col-md-12 col-lg-9" data-hook="homepage_products">
   <div class="row">
 
       <% products.each_with_index do |product, index| %>
-        <div id="product_<%= product.id %>" class="col-sm-4 col-6 mb-3 mb-md-4 pr-sm-0 pr-md-0 pl-md-4 pl-sm-4 <%= index&1 == 0 ? 'pl-0 pr-2' : 'pr-0 pl-2' %>">
-          <%= render 'spree/shared/product', product: product, image_class: 'product-component-plp-image' %>
+        <div id="product_<%= product.id %>" class="col-sm-4 col-6 mb-3 mb-md-4 pr-sm-0 pr-md-0 pl-md-4 pl-sm-4 ">
+          <%= render 'spree/shared/product', product: product, id: id, image_class: 'product-component-plp-image' %>
         </div>
       <% end %>
 
   </div>
 
-
+<%#end %>
     <div class="row pl-md-4 pl-sm-4">
       <div class="col-12">
         <div class="plp-pagination d-none d-lg-flex">
@@ -24,10 +33,9 @@
         </div>
 
         <div class="plp-pagination d-lg-none">
-          <%= paginate products, window: 1, theme: 'twitter-bootstrap-4' %>
+          <%= paginate products, window: 1, theme: 'twitter-bootstrap-4'%>
         </div>
       </div>
     </div>
 
 </div>
-<% end %>

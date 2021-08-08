@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+<%@mutual_settlements.each do |mutual_settlement| %>
+<div class="col-6">
+<%=link_to "Таблиця взаєморозрахунків з #{mutual_settlement.date_from.strftime('%d.%m.%Y')} по #{mutual_settlement.date_to.strftime('%d.%m.%Y')}", admin_show_mutual_settlement_path(id: mutual_settlement.id)%>
+</div>
+<div class="col-6">
+<%=link_to "Видалити", admin_delete_mutual_settlement_path(id: mutual_settlement.id), method: :delete%>
+</div>
+<%end%>
+</div>
+<div class="row pl-md-4 pl-sm-4">
+  <div class="col-12">
+    <div class="plp-pagination d-none d-lg-flex">
+      <%= paginate @mutual_settlements, window: 2, theme: 'twitter-bootstrap-4' %>
+    </div>
+
+    <div class="plp-pagination d-lg-none">
+      <%= paginate @mutual_settlements, window: 1, theme: 'twitter-bootstrap-4'%>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+<%=link_to "Додати таблицю", admin_add_new_table_mutual_settlement_path(id: @user.id)%>
+</div>
+</div>
+</div>

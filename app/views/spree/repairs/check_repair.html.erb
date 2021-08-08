@@ -1,0 +1,71 @@
+<p>&nbsp;</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-sm-12">
+ <h6 class="date_btn"><%=Spree.t(:search_number)%></h6>
+<%= form_tag find_repair_number_user_path, remote: true do %>
+  <%=text_field_tag :number,"", class: "form-control" %>
+  <br/>
+  <%= submit_tag Spree.t(:quick_search), class: 'btn index_btn btn-block font-weight-bold' %>
+<% end %>
+<br/>
+</div>
+<div class="col-md-6 col-lg-6 col-sm-12">
+  <h6 class="date_btn"><%=Spree.t(:search_phone)%></h6>
+ <%= form_tag find_repair_phone_user_path, remote: true do %>
+ <%=text_field_tag :phone_show, "", id: "phone_code_rep", class: "form-control"%>
+ <%=hidden_field_tag :phone, params[:phone], id: "real_phone_rep"%>
+   <br/>
+   <%= submit_tag Spree.t(:quick_search), class: 'btn index_btn btn-block font-weight-bold' %>
+ <% end %>
+</div>
+</div>
+<div class="row">
+<div class="col-12" id="repair">
+</div>
+<div class="modal fade" id="exampleModalCentersecond" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+          <%=Spree.t(:dont_found)%>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><%=link_to Spree.t(:back), "/account", class:"date_btn"%></p>
+</div>
+<script>
+document.addEventListener('turbolinks:load', function () {
+  
+  $("#phone_code_rep").intlTelInput({
+    allowDropdown: false,
+    autoHideDialCode: false,
+    separateDialCode: true,
+    onlyCountries: ["ua"]
+  });
+
+  $( "#phone_code_rep" ).keyup(function(e) {
+    e.preventDefault();
+    if ($(this).val().length > 8) {
+
+   var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var intlNumber = $("#phone_code_rep").intlTelInput("getSelectedCountryData");
+    var final_phone = `+${intlNumber.dialCode+input_value}`
+    $("#real_phone_rep").val(final_phone).trigger('change');
+  }
+  });
+
+  $( "#phone_code_rep" ).on('countrychange', function(e, countryData){
+    var intlNumber = countryData.dialCode;
+    var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var final_phone = `+${intlNumber+input_value}`
+    $("#real_phone_rep").val(final_phone).trigger('change');
+})
+});
+
+</script>

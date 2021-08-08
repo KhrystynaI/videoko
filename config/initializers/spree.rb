@@ -1,17 +1,13 @@
-# Configure Spree Preferences
-#
-# Note: Initializing preferences available within the Admin will overwrite any changes that were made through the user interface when you restart.
-#       If you would like users to be able to update a setting with the Admin it should NOT be set here.
-#
-# Note: If a preference is set here it will be stored within the cache & database upon initialization.
-#       Just removing an entry from this initializer will not make the preference value go away.
-#       Instead you must either set a new value or remove entry, clear cache, and remove database entry.
-#
-# In order to initialize a setting do:
-# config.setting_name = 'new value'
+SpreeEditor::Config.tap do |config|
+  config.ids = 'product_description product_short_description post_body page_body event_body'
+
+  # change the editor to CKEditor
+  config.current_editor = 'CKEditor'
+end
 Spree.config do |config|
-  Spree::PermittedAttributes.product_attributes << [:short_description,:related]
+  Spree::PermittedAttributes.product_attributes << [:short_description,:related, :empty_price]
   Spree::PermittedAttributes.line_item_attributes << [:role_id_price]
+  Spree::PermittedAttributes.address_attributes << [:nova_poshta_address,:nova_poshta_number]
   SpreeI18n::Config.available_locales = [:uk, :ru] # displayed on frontend select box
   Spree::Frontend::Config[:locale] = :uk
   Spree::Backend::Config[:locale] =:uk

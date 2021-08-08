@@ -96,6 +96,7 @@ module Spree
     has_many :variants, through: :line_items
     has_many :products, through: :variants
     has_many :refunds, through: :payments
+    has_many :offers, class_name: 'Spree::Offer'
     has_many :all_adjustments,
              class_name: 'Spree::Adjustment',
              foreign_key: :order_id,

@@ -1,0 +1,17 @@
+<%= render 'order_actions', order: @order, events: @order_events %>
+<%= render 'spree/admin/shared/order_tabs', current: :shipments %>
+<% content_for :page_title do %>
+  / <%= plural_resource_name(Spree::Shipment) %>
+<% end %>
+
+<div data-hook="admin_order_edit_header">
+  <%= render 'spree/admin/shared/error_messages', target: @order %>
+</div>
+
+<div data-hook="admin_order_edit_form">
+  <div id="order-form-wrapper">
+    <%= render partial: 'form', locals: { order: @order } %>
+  </div>
+</div>
+
+<%= render 'spree/admin/shared/order_summary' %>

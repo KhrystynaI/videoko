@@ -1,21 +1,22 @@
-<ul id="nav-bar" class="nav align-items-center d-flex justify-content-end navbar-right">
+<ul id="nav-bar" class="nav bar_li_small align-items-center d-flex justify-content-end navbar-right">
 
   <% if !spree_user_signed_in? %>
     <li class="login_out">
       <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "main_nav main-nav-bar-item main-nav-bar-button header_title_category"  %>
     </li>
     <%else%>
-    <li class="login_out"><%= link_to Spree.t('nav_bar.log_out'), spree_logout_path, class: "main_nav main-nav-bar-item main-nav-bar-button header_title_category", method: :get  %></li>
+    <li class="login_out"><%= link_to spree_current_user.full_name_header, spree_logout_path, class: "main_nav full_name main-nav-bar-button header_title_category", method: :get  %></li>
   <% end %>
   <li id="link-to-cart">
     <%= render 'spree/shared/cart', class: 'display d-xl-inline-block cart-icon--xl', size: 36, item_count: 0 %>
 
   </li>
 
+<%if false%>
   <li >
     <div class="btn-group language">
           <button type="button" class="btn btn-default dropdown-toggle btn_lang" data-toggle="dropdown">
-            <%=image_tag("#{Spree::Frontend::Config[:locale]}.png", class: "locale_size")%>
+            <%=image_tag("#{I18n.locale}.png", class: "locale_size")%>
           <span class="caret"></span>
           </button>
           <div class="dropdown-menu lang" role="menu">
@@ -25,5 +26,5 @@
         </div>
 
   </li>
-
+<%end%>
 </ul>

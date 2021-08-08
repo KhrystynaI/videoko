@@ -1,0 +1,52 @@
+<h1>Контакти</h1>
+<ul class="list-group">
+  <li class="list-group-item">
+    <span>Перший мобільний телефон</span>
+  <%=Spree::Config.first_mob%>
+</li>
+  <li class="list-group-item">
+    <span>Другий мобільний телефон</span>
+  <%=Spree::Config.second_mob%>
+</li>
+  <li class="list-group-item">
+    <span>viber</span>
+  <%=Spree::Config.viber%>
+</li>
+  <li class="list-group-item">
+    <span>telegram</span>
+  <%=Spree::Config.telegram%>
+</li>
+  <li class="list-group-item">
+    <span>Перший стаціонарний телефон</span>
+  <%=Spree::Config.first_phone%>
+</li>
+  <li class="list-group-item">
+    <span>Другий стаціонарний телефон</span>
+  <%=Spree::Config.second_phone%>
+</li>
+  <li class="list-group-item">
+    <span>email</span>
+  <%=Spree::Config.email%>
+</li>
+  <li class="list-group-item">
+    <span>Вулиця українською</span>
+  <%=Spree::Config.street_uk%>
+</li>
+  <li class="list-group-item">
+    <span>Вулиця російською</span>
+  <%=Spree::Config.street_ru%>
+</li>
+  <li class="list-group-item">
+    <span>Години роботи від понеділка по п'ятницю</span>
+  <%=Spree::Config.hours_week%>
+</li>
+  <li class="list-group-item">
+    <span>Години роботи в суботу</span>
+  <%=Spree::Config.hours_weekend%>
+</li>
+<li class="list-group-item">
+  <span>Електронна скринька на яку приходять повідомлення про замовлення</span>
+<%=Spree::Config.email_admin%>
+</li>
+</ul>
+<%= link_to 'Повернутися', admin_settings_path %>

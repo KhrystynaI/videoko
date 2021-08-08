@@ -1,0 +1,28 @@
+<div class="container-fluid">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Номер квитанції</th>
+      <th scope="col">Користувач</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Коментар</th>
+      <th scope="col">Оновити</th>
+    </tr>
+  </thead>
+  <%repairs.each do |repair|%>
+  <tbody>
+    <tr>
+      <td><%=repair.number%></td>
+      <td><%=repair.user.full_name%></td>
+      <td><%=repair.phone%></td>
+      <td><%=Spree.t(repair.status)%></td>
+      <td><%=repair.comment%></td>
+      <td><%=link_to "Змінити", admin_edit_repair_path(repair.id)%></td>
+    </tr>
+  </tbody>
+  <%end%>
+</table>
+
+<p><%=link_to "Повернутися", admin_index_repairs_path%></p>
+</div>

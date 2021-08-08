@@ -2,6 +2,7 @@ require 'uri'
 require 'net/http'
 require 'net/https'
 require 'json'
+require 'csv'
 module Spree
   module Admin
     class ProductsController < ResourceController
@@ -11,7 +12,8 @@ module Spree
       create.before :create_before
       update.before :update_before
       helper_method :clone_object_url
-      before_action :related, only: [:create, :update]
+      before_action :permit_params, only: [:update]
+      before_action :permit_related, only: [:related]
       after_action :update_prices, only: :rate
 
 
@@ -42,6 +44,7 @@ module Spree
         if params[:product][:option_type_ids].present?
           params[:product][:option_type_ids] = params[:product][:option_type_ids].split(',')
         end
+
         invoke_callbacks(:update, :before)
         if @object.update(permitted_resource_params)
           invoke_callbacks(:update, :after)
@@ -60,7 +63,6 @@ module Spree
         if !params[:product][:video].nil?
           @product.video.attach(params[:product][:video])
         end
-
       end
 
       def destroy_video
@@ -92,13 +94,70 @@ module Spree
         end
     end
 
+    def reindex_force
+      ReindexProductJob.perform_later()
+      redirect_to admin_products_url, notice: "Товари оновлюються.Зачекайте"
+    end
+
+      def import
+        user_file = params[:file]
+          File.open(Rails.root.join('upload',user_file.original_filename), 'wb') do |file|
+            file.write(user_file.read)
+        end
+        file = user_file.original_filename
+        UpdatePriceCsvJob.perform_later(file)
+        redirect_to admin_products_url, notice: "Ціни оновлюються.Зачекайте"
+      end
+
+      def related
+        if !params[:related].nil? && !params[:related].empty?
+        related_product = params[:related].reject { |c| c.empty? }
+        @product.update!(related: related_product)
+      end
+      end
+
+      def related_first
+        if !Spree::Product.searchkick_index.exists?
+        InformDeveloperMailer.problem_email.deliver_later
+        ReindexProductJob.perform_later()
+        redirect_to admin_products_url, notice: "Товари оновлюються.Зачекайте"
+      end
+      end
+
+      def remove_related
+        @product = Product.find(params[:id_product].to_i)
+        related = @product.related.tr('["\"]','').split(',').reject { |c| c.empty? }.map(&:to_i).reject { |c| c == 0 }.delete_if{|c| c == params[:id_related].to_i}
+        @product.update(related: related)
+        redirect_back fallback_location: related_admin_product_path(@product)
+      end
 
       def destroy
         @product = Product.friendly.find(params[:id])
 
         begin
           # TODO: why is @product.destroy raising ActiveRecord::RecordNotDestroyed instead of failing with false result
-          if @product.destroy
+          if @product.offer_items.blank? && @product.line_items.blank?
+          @product.variants.each{|variant| variant.prices.delete_all}
+          @product.variants.delete_all
+
+          translated = @product.translations.map{|c|c.id}
+          Spree::Product::Translation.unscoped do
+            translated.each do |tr|
+            Spree::Product::Translation.where(id: tr).delete_all
+          end
+          end
+          @product.video.purge if @product.video
+          if !@product.volume.blank?
+          @product.volume.images.each{|c|c.purge}
+          @product.volume.delete
+          end
+          if !@product.images.blank?
+          @product.images.each{|c|c.attachment.purge}
+          @product.images.delete_all
+          end
+          @product.destroy
+        end
+          if !@product.deleted_at.blank?
             flash[:success] = Spree.t('notice_messages.product_deleted')
           else
             flash[:error] = Spree.t('notice_messages.product_not_deleted', error: @product.errors.full_messages.to_sentence)
@@ -204,8 +263,14 @@ module Spree
         clone_admin_product_url resource
       end
 
-      def related
-        params.require(:product).permit(:show, :video, related:[],prices_attributes:[:id,:role_id, :variant_id, :amount_usd])
+      def permit_params
+        params.require(:product).permit(:show, :video, :empty_price, :iframe, :related,prices_attributes:[:id,:role_id, :variant_id, :amount_usd])
+      end
+
+      def permit_related
+        if params[:related].present?
+          params[:related].reject! { |c| c.empty? }
+        end
       end
 
 

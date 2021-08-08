@@ -57,11 +57,14 @@ module Spree
       end
     end
 
-    def cache_key_for_products(products = @products, additional_cache_key = nil)
-      count = @products.count
-      hash = Digest::SHA1.hexdigest(params.to_json)
-      max_updated_at = @products.map(&:updated_at).max || Date.today
-      "#{I18n.locale}/spree/products/all-#{params[:page]}-#{hash}-#{count}-#{max_updated_at.to_s(:number)}"
+    def cache_key_for_products(products = @products, id)
+      max_updated_at = @products.map(&:updated_at)
+      prices = @products.map do |prod|
+        prod.prices.map{|pr| pr.amount}
+    end
+      transaction = @products.map{|prod|prod.translations.map{|tr|tr.name}}
+      empty = @products.map{|c|c.empty_price}
+      "#{I18n.locale}/spree/products/all-#{params[:page]}-#{empty}-#{max_updated_at.to_s(:number)}-#{transaction}-#{id}-#{prices}"
     end
 
     def cache_key_for_product(product = @product)
@@ -72,6 +75,10 @@ module Spree
       ]
 
       cache_key_elements.compact.join('/')
+    end
+
+    def product_cache(product,id)
+      [id, I18n.locale, product.name, product.empty_price, product.prices.map{|pr| pr.amount}.split(",")]
     end
 
     def limit_descritpion(string)

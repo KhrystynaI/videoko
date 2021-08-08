@@ -1,0 +1,77 @@
+<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: :variants } %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @variant } %>
+
+<%= form_for [:admin, @product, @variant] do |f| %>
+  <fieldset>
+    <div data-hook="admin_variant_edit_form">
+      <div class="row">
+        <div data-hook="admin_variant_form_fields" class="col-12 col-md-6">
+          <div data-hook="variants">
+            <% @product.option_types.each do |option_type| %>
+              <div class="form-group" data-hook="presentation">
+                <%= label :new_variant, option_type.presentation %>
+                  <%= f.collection_select 'option_value_ids', option_type.option_values, :id, :presentation,
+                    { include_blank: true }, { name: 'variant[option_value_ids][]', class: 'select2' } %>
+              </div>
+            <% end %>
+
+            <%if f.object.product.default_variant.id != f.object.id%>
+            <div class="form-group" data-hook="sku">
+              <%= f.label :sku, Spree.t(:sku) %>
+              <%= f.text_field :sku, class: 'form-control' %>
+            </div>
+            <%end%>
+            <%if f.object.prices.count > 1 && !f.object.product.empty_price%>
+            <div data-hook="new_product_price" class="row">
+            <div class="col-12">
+              <%= f.label :prices_rozdrib, "Роздріб" %>
+              <%=f.fields_for :prices, @variant.prices.find_by(role_id: Spree::Role.find_by(name: :rozdrib).id) do |price| %>
+              <%=price.text_field :amount_usd,class: 'form-control'%>
+              <%end%>
+            </div>
+
+            <div class="col-12">
+              <%= f.label :prices_opt, "Опт" %>
+              <%=f.fields_for :prices, @variant.prices.find_by(role_id: Spree::Role.find_by(name: :opt).id) do |price| %>
+              <%=price.text_field :amount_usd,class: 'form-control'%>
+              <%end%>
+            </div>
+
+            <div class="col-12">
+              <%= f.label :prices_gold, "Голд" %>
+              <%=f.fields_for :prices, @variant.prices.find_by(role_id: Spree::Role.find_by(name: :gold).id) do |price| %>
+              <%=price.text_field :amount_usd,class: 'form-control'%>
+              <%end%>
+            </div>
+
+            <div class="col-12">
+              <%= f.label :prices_vip, "Віп" %>
+              <%=f.fields_for :prices, @variant.prices.find_by(role_id: Spree::Role.find_by(name: :vip).id) do |price| %>
+              <%=price.text_field :amount_usd,class: 'form-control'%>
+              <%end%>
+            </div>
+
+            <div class="col-12">
+              <%= f.label :prices_vip2, "Віп2" %>
+              <%=f.fields_for :prices, @variant.prices.find_by(role_id: Spree::Role.find_by(name: :vip2).id) do |price| %>
+              <%=price.text_field :amount_usd,class: 'form-control'%>
+              <%end%>
+            </div>
+
+            <div class="col-12">
+              <%= f.label :prices_vip1, "Віп1" %>
+              <%=f.fields_for :prices, @variant.prices.find_by(role_id: Spree::Role.find_by(name: :vip1).id) do |price| %>
+              <%=price.text_field :amount_usd,class: 'form-control'%>
+              <%end%>
+            </div>
+          </div>
+            <%end%>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

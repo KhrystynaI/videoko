@@ -19,6 +19,14 @@ module Spree
       taxons
     end
 
+    def cache_posts(posts)
+      posts.map do |post|
+        post.translations.map do |tr|
+          tr.updated_at
+        end
+      end
+    end
+
     def for_index_last
       taxons = []
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 2))
@@ -27,11 +35,11 @@ module Spree
       taxons  end
 
     def spree_nav_cache_key(section = 'header')
-      base_cache_key + [current_store, spree_navigation_data_cache_key, try_spree_current_user, Spree::Config[:logo], section]
+      base_cache_key + [current_store, spree_navigation_data_cache_key, try_spree_current_user,I18n.locale, Spree::Config[:logo], section]
     end
 
     def main_nav_image(image_path, title = '')
-      image_url = asset_path(asset_exists?(image_path) ? image_path : 'noimage/plp.png')
+      image_url = asset_path(asset_exists?(image_path) ? image_path : Spree::Config[:logo])
 
       lazy_image(
         src: image_url,

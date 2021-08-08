@@ -1,0 +1,40 @@
+<div class="address vcard">
+  <div class="country-name"><%= address.country.try(:name) %></div>
+  <div class="fn"><%= address.full_name %></div>
+  <% unless address.nova_poshta_address.blank? %>
+  <div class="street-address">
+    <div class="street-address-line">
+      <%= address.nova_poshta_address %>
+    </div>
+    </div>
+    <div class="street-address">
+      <div class="street-address-line">
+        <%= address.nova_poshta_number %>
+      </div>
+      </div>
+    <%end%>
+  <div class="adr">
+    <% unless address.address1.blank? %>
+    <div class="street-address">
+      <div class="street-address-line">
+        <%= address.address1 %>
+      </div>
+      </div>
+      <%end%>
+    <div class="local">
+      <% unless address.city.blank? %>
+      <span class="locality"><%= address.city %></span>
+      <%end%>
+      <% unless address.state.blank? %>
+      <span class="region"><%= address.state_text %></span>
+      <%end%>
+
+    </div>
+  </div>
+  <% unless address.phone.blank? %>
+    <div class="tel">
+      <span class="type"><%= Spree.t(:phone) %></span>
+      <%= address.phone %>
+    </div>
+  <% end %>
+  </div>
