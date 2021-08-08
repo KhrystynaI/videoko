@@ -27,7 +27,7 @@ module Spree
       taxons  end
 
     def spree_nav_cache_key(section = 'header')
-      base_cache_key + [current_store, spree_navigation_data_cache_key, Spree::Config[:logo], section]
+      base_cache_key + [current_store, spree_navigation_data_cache_key, try_spree_current_user, Spree::Config[:logo], section]
     end
 
     def main_nav_image(image_path, title = '')

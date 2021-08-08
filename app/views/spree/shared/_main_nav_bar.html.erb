@@ -1,7 +1,7 @@
 <% cache spree_nav_cache_key('header') do %>
 
 <ul class="nav title_main">
-    <li ><%= link_to Spree.t('homepage.main_page'), spree.root_path, class: "white padding_main main-nav-bar-item" %></li>
+    <li ><%= link_to Spree.t('homepage.main_page'), spree.root_path, class: " padding_main main-nav-bar-item main_nav" %></li>
 <li>
 
     <nav class="navbar-expand-lg">
@@ -12,15 +12,15 @@
 
   <ul class="navbar-nav">
   <li class="nav-item dropdown">
-      <span class="white padding_main main-nav-bar-item" data-toggle="dropdown" id="catalog" >
+      <span class=" white padding_main main-nav-bar-item" data-toggle="dropdown" id="catalog" >
         <%= Spree.t('homepage.shop_now')%></span>
       <ul class="dropdown-menu catalog_inside">
         <% spree_navigation_data.each do |root| %>
-  	  <li><%= link_to root[:title], spree.nested_taxons_path(root[:url]),class:"dropdown-item white  list_catalog" %>
+  	  <li><%= link_to root[:title], spree.nested_taxons_path(root[:url]),class:"dropdown-item  main_nav list_catalog" %>
 
   		 <ul class="submenu dropdown-menu catalog_inside">
          <% root[:items].each do |item| %>
-  		    <li> <%= link_to item[:title], spree.nested_taxons_path(item[:url]),class:"dropdown-item white  list_catalog"%>
+  		    <li> <%= link_to item[:title], spree.nested_taxons_path(item[:url]),class:"dropdown-item  main_nav list_catalog"%>
   			  </li>
           <%end%>
   		     </ul>
@@ -34,7 +34,7 @@
   </nav>
 
 </li>
-<li ><%= link_to Spree.t('homepage.news'), spree.root_path, class: "white padding_main main-nav-bar-item" %></li>
-<li ><%= link_to Spree.t('homepage.contact'), spree.contact_path, class: "white padding_main main-nav-bar-item" %></li>
+<li ><%= link_to Spree.t('homepage.news'), spree.root_path, class: " padding_main main-nav-bar-item main_nav" %></li>
+<li ><%= link_to Spree.t('homepage.contact'), spree.contact_us_path, class: " padding_main main-nav-bar-item main_nav" %></li>
   </ul>
 <% end %>

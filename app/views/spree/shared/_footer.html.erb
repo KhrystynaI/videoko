@@ -25,7 +25,7 @@
       </div>
       <div class="row d-xl-flex py-5 text-uppercase footer-spree-menu-links ">
           <% if spree.respond_to?(:account_path) %>
-            <div class="col-6">
+            <div class="col-6 ">
               <div class="footer-spree-label">
                 <span class= "account_title"><%= Spree.t('nav_bar.my_account')  %></span>
               </div>
@@ -41,15 +41,21 @@
             <span class= "account_title"><%= Spree.t(:contact_us) %></span>
           </div>
 
-            <div class="address_info"><%= Spree.t(:call_us) %>: (032)295-1-295</div>
-
-              <div class="address_info"><%= Spree.t(:email) %>: videoko@ukr.net</div>
+            <span class="address_info"><%= "#{Spree.t(:call_us)}:" %></span><span class="address_info"> (032)295-1-295</span>
+            <br>
+              <span class="address_info"><%= "#{Spree.t(:email)}:" %></span><span class="address_info"> videoko@ukr.net</span>
 
           </div>
 
       </div>
 
-    </div>
+<div class="col-12 text-center">
+<%=link_to image_tag("facebook_footer.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
+<%=link_to image_tag("twit_footer.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
+<%=link_to image_tag("inst_footer.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
+</div>
 
+    </div>
+<div>&nbsp;</div>
   </footer>
 <% end %>

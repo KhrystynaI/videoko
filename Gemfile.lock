@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/spree-contrib/spree_contact_us.git
+  revision: 9bacb32536eb1d78bd287e7725030463faed97c1
+  specs:
+    spree_contact_us (4.0.0.alpha2)
+      deface (~> 1.0)
+      spree_core (>= 3.7.0, < 4.2)
+
+GIT
   remote: https://github.com/spree-contrib/spree_globalize.git
   revision: 1b5036fa9f52da30c20b3fba5c9de1a8324affb9
   branch: master
@@ -483,6 +491,7 @@ DEPENDENCIES
   skylight
   spree (~> 4.1)
   spree_auth_devise (~> 4.1)
+  spree_contact_us!
   spree_gateway (~> 3.7)
   spree_globalize!
   spree_i18n!

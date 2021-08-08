@@ -73,7 +73,7 @@ module Spree
         curr_page = params[:page] || 1
         per_page = params[:per_page] || 25
 
-        @collection_category = Spree::Product.search("*",where:{taxonomy_ids: params[:taxonomy_id][:id]}, page: curr_page, per_page: per_page )
+        @collection_category = Spree::Product.search("*",where:{taxon_ids: params[:id]}, page: curr_page, per_page: per_page )
         respond_to do |format|
           format.html {}
           format.js

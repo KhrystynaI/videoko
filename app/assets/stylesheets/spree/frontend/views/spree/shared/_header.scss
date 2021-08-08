@@ -1,7 +1,14 @@
 .header-spree {
   background: #00336E;
 }
-
+.spree-btn{
+  font-size: 0.9rem !important;
+}
+.header_icon{
+  font-size: 16px;
+  line-height: 20px;
+  color: #6F6354;
+}
 #sidenav{
   overflow-x: hidden;
   height: 100%;
@@ -28,7 +35,7 @@
   border-bottom: 0.1rem solid transparent;
 }
 #sidenav_blue{
-  margin-left: 35%;
+  margin-left: 45%;
   overflow-x: hidden;
   height: 100%;
   width: 0;
@@ -42,7 +49,28 @@
   transition: 0.5s;
 
 }
-
+.index_car_pointer{
+  position: absolute;
+  width: 80% ;
+  margin-right: 10%;
+  margin-top: 2%;
+  top: auto;
+    bottom: auto;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+}
+.right{
+  right: 0;
+}
+.index_car {
+  background: transparent !important;
+  border: 3px solid white;
+}
 #search-drop{
   overflow-x: hidden;
   height: 100%;
@@ -68,7 +96,7 @@
 }
 .closebtn, .closebtn:visited, .closebtn:link, .closebtn:hover, .closebtn:active{
   color: #00336E;
-  font-size: 3rem;
+  font-size: 2rem;
   margin-left: 1rem;
   text-decoration: none;
 }
@@ -76,7 +104,12 @@
   margin-left: 2rem;
   list-style-type: none;
 }
-
+.header_ul_sidenav_li{
+  margin-bottom: 1%;
+}
+.header_icon_img{
+  filter: grayscale(100%);
+}
 .blue:hover {
   text-decoration: none;
   padding-bottom: 0.2rem;
@@ -117,21 +150,26 @@ ul.header_ul li{
   font-size: 16px;
   color: white;
 }
-.white:active{
+.main_nav{
+  font-size: 16px;
   color: white;
-  padding-bottom: 0.2rem;
-  border-bottom: 0.1rem solid #E1BE64;
-  text-decoration: none;
+  &:active{
+    color: white;
+    padding-bottom: 0.2rem;
+    border-bottom: 0.1rem solid #E1BE64;
+    text-decoration: none;
+  }
+  &:hover{
+    color: white;
+    padding-bottom: 0.2rem;
+    border-bottom: 0.1rem solid #E1BE64;
+    text-decoration: none;
+  }
 }
 .display{
   display: block;
 }
-.white:hover{
-  color: white;
-  padding-bottom: 0.2rem;
-  border-bottom: 0.1rem solid #E1BE64;
-  text-decoration: none;
-}
+
 .logo_head{
   //margin-top: 1.5rem;
 }
@@ -410,10 +448,25 @@ ul.header_ul li{
   .header_ul{
     padding-inline-start: 0px;
   }
+  .header_ul_sidenav{
+    margin-left: 0;
+    padding-left: 0.5rem;
+  }
+  .header_icon{
+    font-size: 0.8rem;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  .closebtn{
+    font-size: 1rem;
+  }
+  .blue{
+    font-size: 0.8rem;
+  }
 }
 @media (min-width: 992px){
 
-	.dropdown-menu .dropdown-menu{
+	.dropdown-menu{
 		margin-left:0; margin-right: 0;
 	}
 	.dropdown-menu li{
@@ -428,9 +481,7 @@ ul.header_ul li{
 		right:100%; left:auto;
 	}
 
-	.dropdown-menu > li:hover > .submenu{
-		display: block;
-	}
+
   .list_catalog{
     font-size: 18px;
     color: white;
@@ -439,7 +490,43 @@ ul.header_ul li{
     background: #00336E;
     border-color: #00336E;
   }
+#main_nav{
+  cursor: pointer;
+  .dropdown-menu{ display: none; }
+  &:hover{
+  .dropdown-menu {
+    display: block;
+    .submenu{ display: none;}
+     li{
+      &:hover{
+      .submenu{	display: block;}
+  	}
+  }
+}
+}
+}
   .burger_drop{
     transform: translate3d(0px, 50px, 0px) !important;
+  }
+}
+@media (max-width: 400px){
+  .header_icon_img{
+    width: 6vw;
+  }
+  .spree-btn{
+    font-size: 0.6rem !important;
+  }
+  .account_title {
+    font-size: 0.6rem;
+  }
+  .tax_footer{
+    font-size: 0.6rem;
+  }
+  .address_footer{
+    font-size: 0.6rem;
+  }
+  .address_info{
+    font-size: 0.6rem;
+    text-transform: lowercase;
   }
 }

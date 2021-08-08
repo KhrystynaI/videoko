@@ -139,7 +139,7 @@ module Spree
     end
 
     def base_cache_key
-      [I18n.locale, current_currency]
+      [I18n.locale, Spree::Config.cache_option_type, Spree::Config[:rate]]
     end
 
     def maximum_quantity
@@ -161,7 +161,7 @@ module Spree
         if image_path.present?
           create_product_image_tag image_path, product, options, style
         else
-          image_tag "noimage/#{style}.png", options
+          image_tag "no_img.png", options
         end
       end
     end

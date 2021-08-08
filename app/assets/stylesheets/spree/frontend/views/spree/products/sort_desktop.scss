@@ -1,0 +1,32 @@
+
+.sort {
+  min-width: 8rem !important;
+  background: #00336E;
+  text-align: center;
+
+  .plp-sort-dropdown-ul-li {
+    &:hover{
+      background: white;
+      padding-bottom: 0.2rem;
+      border-bottom: 0.1rem solid #E1BE64;
+    }
+    a{
+    text-transform: capitalize;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 10px;
+    color:white;
+   &:hover{
+     color: black;
+     text-decoration: none;
+   }
+}
+}
+}
+.plp-overlay-ul-li--active{
+  a{
+  color: black;
+  text-decoration: none;
+}
+}

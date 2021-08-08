@@ -8,40 +8,33 @@
     <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.main_page'), spree.root_path, class: "blue" %></li>
 
     <% spree_navigation_data.each do |root| %>
-    <nav class="navbar-expand-lg">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<%=root[:id]%>">
+    <li class="header_ul_sidenav_li"><%= link_to Spree.t(root[:title]), spree.nested_taxons_path(root[:url]),class:"blue" %></li>
+    <%end%>
 
-  </button>
-  <div class="collapse navbar-collapse" id="<%=root[:id]%>">
-
-  <ul class="navbar-nav">
-  <li class="nav-item dropdown">
-      <span class="blue_for_cat" data-toggle="dropdown" >
-        <%= link_to root[:title], spree.nested_taxons_path(root[:url]),class:"dropdown-item blue_for_cat" %>
-        </span>
-      <ul class="dropdown-menu burger_drop">
-       <% root[:items].each do |item| %>
-          <li> <%= link_to item[:title], spree.nested_taxons_path(item[:url]),class:"dropdown-item blue_for_cat"%>
-          </li>
-          <%end%>
-
-      </ul>
-  </li>
-    </ul>
-
-  </div>
-  </nav>
-<%end%>
-
-  <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.contact'), spree.contact_path, class: "blue" %></li>
-
-
-  <% if spree_current_user.nil? %>
+  <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.contact'), spree.contact_us_path, class: "blue" %></li>
+  <% if !spree_user_signed_in? %>
     <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "blue"  %>
         <%else%>
-    <%= link_to Spree.t('nav_bar.log_out'), spree_logout_path, class: "blue"  %>
+    <%= link_to Spree.t('nav_bar.log_out'), spree_logout_path, class: "blue", method: :get  %>
   <% end %>
   </ul>
+  <div class="col-12 text-center">
+  <%=link_to image_tag("facebook_header.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
+  <%=link_to image_tag("twit_header.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
+  <%=link_to image_tag("inst_header.png" , class: "footer_icon"), "https://uk-ua.facebook.com/login/", target: :_blank %>
+  </div>
+  <div class="col-12 text-center">
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= @mob_tel%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%=image_tag "viber_header.png", class: "header_icon_img"%></div><div class="col-9"><span class="header_icon"><%= @viber%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%=image_tag "teleg_header.png", class: "header_icon_img"%></div><div class="col-9"><span class="header_icon"><%= @telegram%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= @tel%></span></div></div></p>
+  <p><div class="row"><div class="col-2"><%= image_tag("phone_header.png" , class: "header_icon_img")%></div><div class="col-9"><span class="header_icon"><%= @tel_second%></span></div></div></p>
+</div>
+  <div class="col-12 text-center">
+  <%= image_tag("mail_header.png", class: "footer_icon")%>
+  <span class="header_icon"><%=@email%></span>
+</div>
+
   </div>
   <div id="sidenav_blue"></div>
 

@@ -27,6 +27,88 @@ padding-left: 20%;
     background: #00336E;
     display: table-caption;
 }
+.blue_form{
+  background: #00336E;
+  padding: 2.5%;
+}
+.first_form{
+  position: relative;
+}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.form_input{
+  background: transparent;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 45px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  outline: none;
+  width: 100%;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.5);
+  &::placeholder{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 45px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+}
+.form_input:focus{
+  background: transparent;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 45px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+
+
+.form_input_mess{
+  width: 100%;
+  background: transparent;
+  border: 0.1rem solid rgba(255, 255, 255, 0.5);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 45px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  &::placeholder{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 45px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+}
+.form_input_mess:focus{
+  background: transparent;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 45px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  outline: none;
+
+}
 .our_contact{
   text-transform: uppercase;
   color: #E1BE64;
@@ -44,14 +126,289 @@ padding-left: 20%;
   text-align: center;
 }
 .address_inside{
-  text-transform: uppercase;
+  //text-transform: uppercase;
   display: grid;
   padding-top: 15%;
 }
 .address_contact{
-  padding-top: 25%;
+  padding-top: 5%;
   align-items: center;
   text-align: center;
   display: grid;
   justify-content: center;
+}
+
+.product_card{
+  border: 2px solid #655352;
+  a:link {
+    text-decoration: none;
+  }
+  &:hover{
+    .name_product{
+    color:white;
+
+  }
+}
+&:hover{
+  .money_product{
+  color:white;
+}
+}
+}
+.name_product{
+  text-align: center;
+  height: 7vw;
+  display: grid;
+    align-content: center;
+  text-overflow: ellipsis;
+    font-size: 15px;
+    line-height: 15px;
+    color: #655352;
+    //white-space: nowrap;
+    overflow: hidden;
+
+}
+.money_product{
+  background: none !important;
+  border-top: none !important;
+  font-family: Roboto Condensed;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 23px;
+text-align: center;
+align-items: center;
+color: #000000;
+
+}
+
+.shopping-cart-buttons {
+    flex-basis: 100% !important;
+  }
+
+  .tab {
+      overflow: hidden;
+      border: none;
+      border-bottom: none;
+      background-color: rgba(196, 196, 196, 0.19);
+  }
+
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+      background-color: white;
+      float: left;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+  }
+
+  /* Change background color of buttons on hover */
+
+#des{
+  border-top: 1px solid #00336E;
+  border-bottom: 1px solid #00336E;
+  border-left: 1px solid #00336E;
+  border-right: none;
+}
+#short_des{
+  border-top: 1px solid #00336E;
+  border-bottom: 1px solid #00336E;
+  border-left: 1px solid #00336E;
+  border-right: 1px solid #00336E;
+
+}
+.tab button.active{
+  border-bottom: none !important;
+  border-top: 20px solid #00336E!important;
+  background-color: rgba(196, 196, 196, 0);
+  padding-bottom: 0px !important;
+  padding-top: 0.6rem;
+
+}
+
+
+  /* Style the tab content */
+  .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #00336E;
+      border-top: none;
+      background-color: rgba(196, 196, 196, 0.19);
+      font-family: Roboto Condensed;
+  }
+.product-description{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 19px;
+  align-items: center;
+  color: #000000;
+}
+
+.product_d{
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 30px;
+  color: #00336E;
+}
+.pagination{
+  .page-item.active .page-link{
+    background-color: #E1BE64 !important;
+  }
+
+}
+.carousel-icon-control-rounded{
+  background: #00336E;
+  mix-blend-mode: normal;
+  box-shadow: -6px 0px 6px #070707;
+  width: 4rem;
+  height: 4rem;
+}
+.arrow{
+  overflow: hidden;
+  vertical-align: middle;
+}
+.related_text{
+  text-transform: capitalize;
+font-family: Roboto Condensed;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+color: #000000;
+}
+.right{
+  float: right !important;
+}
+.left{
+  float: left;
+}
+.white{
+  color: white;
+  &:hover{
+    text-decoration: none;
+    border-bottom: none !important;
+  }
+}
+.checkout-content-summary-header {
+    font-size: 1.625rem;
+    line-height: 1;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+}
+.checkout-content-summary-table-order-total{
+  border-top: none !important;
+}
+
+.order-show-line-items-line-item-desc-name {
+      font-size: 1.5rem;
+  }
+
+@media (max-width: 1000px){
+  .im_big{
+    display: none !important;
+  }
+  #map{
+    overflow: scroll !important;
+    height: 60vw !important;
+  }
+  .address_contact{
+    padding-top: 15%;
+  }
+  .map{
+    padding-top: 2%;
+  }
+}
+@media (max-width: 800px){
+  #map{
+    overflow: scroll !important;
+    height: 60vw !important;
+  }
+  .address_contact{
+    padding-top: 15%;
+  }
+  .map{
+    padding-top: 2%;
+  }
+  .desk{
+  display: none;
+}
+  .go_us_first{
+    font-size: 2rem;
+  }
+  .go_us_second{
+    font-size: 1.3rem;
+  }
+
+
+  .name_product{
+    font-size: 0.8rem;
+  }
+  .money_product{
+    font-size: 1rem;
+    line-height: normal;
+  }
+  .product_d{
+    font-size: 1.5rem;
+    line-height: normal;
+  }
+  .product-description{
+    font-size: 0.9rem;
+    line-height: normal;
+  }
+
+}
+@media (max-width: 576px) {
+  #map{
+    overflow: scroll !important;
+    height: 60vw !important;
+  }
+  .map{
+    padding-top: 2%;
+  }
+  .address_contact{
+    padding-top: 20%;
+  }
+  .im_big{
+    display: none !important;
+  }
+
+  .go_us_first{
+    font-size: 1.5rem;
+    line-height: normal;
+  }
+  .go_us_second{
+    font-size: 1rem;
+    line-height: normal;
+  }
+  .span_img{
+    display: block;
+  }
+  .big_address{
+    font-size: 0.8rem;
+  }
+  .our_contact{
+    font-size: 0.9rem;
+  }
+  .tel{
+    font-size: 0.9rem;
+  }
+  .name_product{
+    font-size: 0.8rem;
+  }
+  .money_product{
+    font-size: 1rem;
+    line-height: normal;
+  }
+  .product_d{
+    font-size: 1rem;
+    line-height: normal;
+  }
+  .product-description{
+    font-size: 0.9rem;
+    line-height: normal;
+  }
 }

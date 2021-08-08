@@ -1,14 +1,24 @@
 <% url = spree.product_path(product, taxon_id: @taxon&.id) %>
 <% role = (!spree_current_user.nil? && spree_current_user.spree_roles.last.name == :admin)  ? spree_current_user.spree_roles.last.name : :rozdrib%>
 <% id = Spree::Role.find_by(name: role).id%>
-<%= link_to url, class: 'h-100 d-flex flex-column justify-content-between' do %>
-  <% cache [common_product_cache_keys, product] do %>
-    <%= plp_and_carousel_image(product, image_class) %>
-    <div>
-      <div class="product-component-name" title="<%= product.name %>">
-        <%= product.name %>
-      </div>
-      <div class="product-component-price"><%= number_to_currency(product.price_for_index(role_id: id), unit: "₴", separator: ".", delimiter: "") %></div>
-    </div>
-  <% end %>
+
+
+<% cache [common_product_cache_keys, product] do %>
+<div class="card card_index product_card" >
+  <%= link_to url, class: 'h-100 flex-column justify-content-between' do %>
+  <%= plp_and_carousel_image(product, image_class="default_choose img_from_blob_index") %>
+<div class="card-body name_product" title="<%= product.name %>">
+  <%= product.name %>
+</div>
+<div class="card-footer money_product">
+  <%if !product.price_for_index(role_id: id).nil?%>
+  <%product.price_for_index(role_id: id).each do |price|%>
+  <%= number_to_currency(price, unit: "₴", separator: ".", delimiter: "", format: "%u %n") %>
+<%end%>
+<%else%>
+<%= number_to_currency(0, unit: "₴", separator: ".", delimiter: "", format: "%u %n") %>
+<%end%>
+</div>
+</div>
+<% end %>
 <% end %>

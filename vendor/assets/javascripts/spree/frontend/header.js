@@ -8,7 +8,7 @@ $(document).ready(function(){
      elem2.style.width = "0";
      });
    $("#openNav").click(function(){
-     elem.style.width = "35%";
+     elem.style.width = "45%";
      elem2.style.width = "100%";
      });
      $(".blue").click(function(){
@@ -24,9 +24,9 @@ $(document).ready(function(){
 
            });
 
-           $(document).on('click', '.dropdown-menu', function (e) {
-             e.stopPropagation();
-           });
+           //$(document).on('click', '.dropdown-menu', function (e) {
+             //e.stopPropagation();
+           //});
 
            // make it as accordion for smaller screens
            if ($(window).width() < 992) {
@@ -40,6 +40,4 @@ $(document).ready(function(){
              })
              });
            }
-  $('.index_img').last().addClass('last_img_index');
-
 });

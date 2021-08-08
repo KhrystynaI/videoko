@@ -1,22 +1,3 @@
-
-<template class="availability-template availability-template-not-available-in-currency">
-  <%= render 'cart_form_availability_templates', type: 'not-available-in-currency' %>
-</template>
-
-<template class="availability-template availability-template-in-stock">
-  <%= render 'cart_form_availability_templates', type: 'in-stock' %>
-</template>
-
-<template class="availability-template availability-template-backorderable">
-  <%= render 'cart_form_availability_templates', type: 'backorderable' %>
-</template>
-
-<template class="availability-template availability-template-out-of-stock">
-  <%= render 'cart_form_availability_templates', type: 'out-of-stock' %>
-</template>
-
-
-
 <%= hidden_field_tag :role_id_price, @role_id, "data-id"=> "role_id_price" %>
 <% is_product_available_in_currency = product_available_in_currency? %>
 <% product_variants_matrix(is_product_available_in_currency, @role_id)%>
@@ -34,35 +15,20 @@
     <% if is_product_available_in_currency %>
       <div id="product-price" class="mb-2 text-center text-md-left add-to-cart-form-price" data-hook="product_price">
         <span class="price selling" content="<%= @product_price.to_d %>">
-          <%= number_to_currency(@product_price, unit: "₴", separator: ".", delimiter: "") %>
+          <%= number_to_currency(@product_price, unit: "₴", separator: ".", delimiter: "", format: "%u %n") %>
           </span>
         <span content="<%= current_currency %>"></span>
       </div>
     <% end %>
 
-    <div class="text-center text-md-left add-to-cart-form-general-availability text-uppercase">
-      <%= Spree.t(:availability) %>:
-      <% if !is_product_available_in_currency %>
-        <%= render 'cart_form_availability_templates', type: 'not-available-in-currency' %>
-      <% elsif default_variant.in_stock? %>
-        <%= render 'cart_form_availability_templates', type: 'in-stock' %>
-      <% elsif default_variant.backorderable? %>
-        <%= render 'cart_form_availability_templates', type: 'backorderable' %>
-      <% else %>
-        <%= render 'cart_form_availability_templates', type: 'out-of-stock' %>
-      <% end %>
-    </div>
-
-    <% if @product.variants_and_option_values(current_currency).any? %>
+    <% if @product.variants.count > 1%>
     <hr>
       <ul id="product-variants" class="product-variants">
         <% used_variants_options(@variants, @product).each_with_index do |option_type, index| %>
           <li>
-            <% if option_type[:name] == "color" %>
-              <%= render "color_option_type", option_type: option_type, index: index %>
-            <% else %>
-              <%= render "option_type", option_type: option_type, index: index, a: @role_id %>
-            <% end %>
+
+              <%= render "option_type", option_type: option_type, index: index %>
+            
           </li>
         <% end %>
       </ul>
@@ -78,7 +44,7 @@
           <%= render 'spree/shared/quantity_select', input_name: :quantity %>
         </div>
 
-        <%= button_tag class: 'btn btn-primary w-100 text-uppercase font-weight-bold add-to-cart-button', id: 'add-to-cart-button', type: :submit, disabled: true do %>
+        <%= button_tag class: 'btn index_btn w-100 text-uppercase font-weight-bold add-to-cart-button', id: 'add-to-cart-button', type: :submit, disabled: true do %>
           <%= Spree.t(:add_to_cart) %>
         <% end %>
       </div>

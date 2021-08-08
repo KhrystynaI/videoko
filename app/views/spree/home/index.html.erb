@@ -1,6 +1,18 @@
 <% @body_id = 'home' %>
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
+    <a class="index_car_pointer" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="d-flex justify-content-center align-items-center carousel-icon-control-rounded index_car" aria-hidden="true">
+      <%=image_tag("index_left.png")%>
+    </span>
+    </a>
+    <a class="right index_car_pointer" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="d-flex justify-content-center align-items-center carousel-icon-control-rounded index_car" aria-hidden="true">
+      <%=image_tag("index_right.png")%>
+    </span>
+    </a>
+
     <div class="carousel-inner">
       <div class="carousel-item active">
 
@@ -22,40 +34,51 @@
         </div>
       </div>
       </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </a>
+
   </div>
 
 <div>&nbsp;</div>
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
       <%for_index_first.each do |tax|%>
-      <div class="homepage-taxon-box mb-3">
-        <div class="card card_index">
-        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 im") %>
+      <%= link_to spree.nested_taxons_path(tax.permalink), class:"link_btn" do %>
+      <div class="homepage-taxon mb-3">
+        <div class="card card_index" >
+          <%if !tax.icon.nil?%>
+          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob") %>
+          <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
+        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob last_img_index") %>
+        <%else%>
+        <%=image_tag("no_img.png", class: "d-block w-100 default_choose img_from_blob")%>
+        <%end%>
         <div class="card-body">
-          <%= link_to Spree.t("#{tax.name}"), spree.nested_taxons_path(tax.permalink), class: "btn btn-block index_btn"  %>
+          <button class="btn btn-block spree-btn index_btn"><%= Spree.t(tax.name)%></button>
         </div>
       </div>
       </div>
       <%end%>
+      <%end%>
     </div>
 
-    <div class="col-6">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
       <%for_index_last.each do |tax|%>
-      <div class="homepage-taxon-box mb-3">
-        <div class="card card_index">
-        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 im index_img") %>
+      <%= link_to spree.nested_taxons_path(tax.permalink), class:"link_btn" do %>
+      <div class="homepage-taxon mb-3">
+        <div class="card card_index" >
+          <%if !tax.icon.nil?%>
+          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob") %>
+          <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
+        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob last_img_index") %>
+        <%else%>
+        <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob")%>
+        <%end%>
         <div class="card-body">
-          <%= link_to Spree.t("#{tax.name}"), spree.nested_taxons_path(tax.permalink), class: " btn btn-block index_btn"  %>
+          <button class="btn btn-block spree-btn index_btn"><%= Spree.t(tax.name)%></button>
         </div>
       </div>
       </div>
+      <%end%>
       <%end%>
     </div>
   </div>

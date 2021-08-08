@@ -13,10 +13,10 @@
   <% end %>
 
   <p class="order-show-number text-uppercase w-100 text-center">
-    <%= accurate_title %> / <%= @order.completed_at.to_date.to_s(:long) %>
+    <%= accurate_title %> / <%= [I18n.l(@order.completed_at.to_date, format: :long)].join(' ') %>
   </p>
 
-    <div class="order-show-line-items d-flex flex-column align-items-center">
+    <div class="order-show-line-items d-flex flex-column">
       <dt class="text-uppercase text-center text-lg-left"><%= Spree.t(:address) %></dt>
       <dd class="text-center text-lg-left">
         <%= render 'spree/shared/address', address: @order.bill_address %>
@@ -34,7 +34,7 @@
           <span class="order-show-line-items-line-item-desc-name">
             <%= item.name %>
           </span>
-          <span class="order-show-line-items-line-item-desc-subtitle text-break text-uppercase">
+          <span class="order-show-line-items-line-item-desc-subtitle text-break">
             <ul class="list-unstyled mb-0">
               <% item.variant.option_values.sort { |ov| ov.option_type.position }.each do |ov| %>
                 <li><%= "#{ov.option_type.presentation}: #{ov.presentation}" %></li>

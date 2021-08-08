@@ -19,10 +19,12 @@
         </div>
       </div>
     </div>
+    <div>&nbsp;</div>
     <div class="pb-4 pt-md-5 row" data-hook="product_description">
-      <div class="col-12 col-md-7 col-lg-6">
+      <div class="col-12 col-md-12 col-lg-12">
         <%= render partial: 'description' %>
       </div>
+
       <div class="d-none d-lg-block col-lg-1"></div>
       <div class="col-12 col-md-5" data-hook="product_properties">
         <%= render partial: 'properties' %>
@@ -38,18 +40,17 @@
 
     <%= render partial: 'gallery_modal' %>
   </div>
-  <div id="related-products">
 
-    <% if !@related_products.nil? %>
+
+    <% if !@related_products.nil? && @related_products.count > 0 %>
+
       <div id="related-products">
         <div class="product-details-related">
-          <p class="font-weight-bold text-center text-uppercase product-details-carousel-text"><%= Spree.t('pdp.you_may_also_like') %></p>
           <%= render 'spree/shared/carousel_4_products', id: 'related-products-carousel', products: @related_products %>
         </div>
       </div>
     <% end %>
 
-  </div>
 
   <%= products_structured_data([@product], @role_id) %>
 

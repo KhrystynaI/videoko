@@ -30,33 +30,13 @@
           </div>
         <% end %>
 
-        <div class="card plp-overlay-card">
-          <div class="card-header text-uppercase <%= 'collapsed' if params[:price].blank? %> plp-overlay-card-header" id="headingFour" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" role="heading" aria-level="3">
-            <%= Spree.t('plp.price') %>
-            <%= icon(name: 'arrow-right',
-                    classes: 'spree-icon-arrow spree-icon-arrow-right mt-1 float-right arrow plp-overlay-card-header-arrow',
-                    width: 16,
-                    height: 16) %>
-          </div>
-          <div id="collapseFour" class="collapse <%= 'show' unless params[:price].blank? %>" aria-labelledby="headingFour" data-parent="#filters-accordion">
-            <div class="card-body pt-1">
-              <% price_filter_values.each do |name| %>
-                <% price_param = params[:price] == name ? '' : name %>
-                <%= link_to permitted_params.merge(price: price_param, menu_open: 1) do %>
-                  <div class="d-inline-block py-1 px-2 m-1 text-uppercase plp-overlay-card-item <%= 'plp-overlay-card-item--selected' if params[:price] == name %>">
-                    <%= name %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+      
       </div>
     </div>
   <% end %>
 
   <div class="container position-absolute text-center mb-2 plp-overlay-buttons pt-3">
-    <%= link_to Spree.t('plp.clear_all'), permitted_params.select { |key, value| key == "sort_by"}, class: 'btn spree-btn btn-outline-primary w-100 mb-4' %>
-    <%= link_to Spree.t('plp.done'), permitted_params, class: 'btn btn-primary spree-btn w-100' %>
+    <%= link_to Spree.t('plp.clear_all'), permitted_params.select { |key, value| key == "sort_by"}, class: 'btn spree-btn index_btn w-100 mb-4' %>
+    <%= link_to Spree.t('plp.done'), permitted_params, class: 'btn index_btn spree-btn w-100' %>
   </div>
 </div>

@@ -173,6 +173,8 @@ ru:
         tax_category: Категория налогов
         weight: Вес
         width: Ширина
+        less_than: меньше
+        more_than: больше
       spree/product_property:
         value: Значение
       spree/promotion:
@@ -736,6 +738,34 @@ ru:
         one: Пользователь
         other: Пользователи
   spree:
+    subject: Знак качества
+    send: Отправить
+    spree_contact_us:
+      left_title: Свяжитесь с нами
+      message_placeholder: Сообщение
+      name: Ваше Имя
+      email: Ваш E-mail
+      notices:
+        success: сообщение отправлено
+    cart_page:
+      title: знак качества
+      empty_info: Корзина пустая
+      quantity: количество
+      checkout: Купить
+      product: товар
+      header: Корзина
+    checkout_page:
+      header: формирование заказа
+      back_to_cart: Вернуться в корзину
+    all_rights_reserved: Все права защищены
+    already_have_account: Уже есть аккаунт
+    call_us: Звоните
+    contact_us: Наши контакты
+    address: Адрес
+    short_description: Характеристики
+    order_success: заказ сформирован
+    order_success_explain: детали заказа
+    added_to_cart: Добавлен в корзину
     abbreviation: Аббревиатура
     accept: Принять
     acceptance_errors: Ошибки приёмки
@@ -1278,6 +1308,61 @@ ru:
         deleted_explanation_with_replacement: Этот вариант был удален %{date}. После он был заменен на другой, но с тем же артикулом.
         tax_category: Указывает налогообложение применяемое для данного варианта продукта
     home: Домой
+    go_to_category: в категориию
+    pdp:
+      view_cart: Корзина
+      checkout: сформировать
+      you_may_also_like: сопутствующие товары
+    plp:
+      no_results: Товаров не найдено
+      results_for: результат поиска
+      no_results_found: Товаров не найдено
+      price: Цена
+      filter_by: фильтровать
+      sort_by: Сортировать
+      home: Главная
+      title: страница
+      price_sort: по цене
+      created_at: по дате
+      clear_all: Очистить
+      done: Поиск
+    contact:
+      our_contact: Наши контакты
+      go_to_us: ПРИЕЗЖАЙТЕ К НАМ
+      go_to_us_second: Не можете приехать к нам? Тогда мы приедем к вам.
+      go_to_us_three: Доставка по всей стране!
+      shop_address: Адрес магазина
+      street: улица Шевченка, 120
+      city: Львов, Львовская область
+      hours_work: часы работы
+      nd: ВС
+      vuhidnuy: выходной
+      tel_to_us: Звоните
+      mail_us: E-mail
+    homepage:
+      news: Новости
+      znak: знак качества
+      main_page: Главная
+      shop_now: Каталог
+      contact: Контакты
+      main_title_first: Вы контролируете все,
+      main_title_second: оставаясь незамеченным
+    nav_bar:
+      log_out: выйти
+      log_in: Войти
+      show_locale: Язык
+      show_menu: Меню
+      close_menu: Закрыть
+      go_to_previous_menu: вернуться
+      sign_up: Зарегистрироваться
+      my_account: Мой аккаунт
+      show_search: показать поиск
+      show_user_menu: Меню
+      show_user_name: имя пользователя
+      my_orders: Мои заказы
+    log_in_to_continue: Войти для продолжения
+    sign_up: Регистрация
+    log_in: Войти
     i18n:
       available_locales: Доступные языки
       fields: Поля

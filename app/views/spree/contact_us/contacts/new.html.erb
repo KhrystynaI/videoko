@@ -1,0 +1,87 @@
+<%= render partial: 'spree/shared/error_messages', locals: { target: @contact } %>
+<div class="container-fluid">
+  <div class="row">
+<div class="col-9 go_us">
+<p class="go_us_first"><%= Spree.t("contact.go_to_us")%></p>
+<p class="go_us_second"><%= Spree.t("contact.go_to_us_second")%></p>
+<p class="go_us_second"><%= Spree.t("contact.go_to_us_three")%></p>
+</div>
+<div class="col-3">
+<%= image_tag("contact_img.png",class:"d-block w-100 im")%>
+</div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+<div class="col-lg-4 col-md-12 col-sm-12 blue_contact">
+<div class="row">
+<div class="col-6 address_inside">
+<p class="big_address"><%= Spree.t("contact.shop_address")%></p>
+<div class="big_address">
+  <p><span><%= Spree.t("contact.street")%></span></p>
+  <p><span><%= Spree.t("contact.city")%></span></p></p>
+  <p><span>79000</span></p></div>
+</div>
+<div class="col-6 address_inside ">
+<p class="big_address"><%= Spree.t("contact.hours_work")%></p>
+<div class="big_address">
+<p><span>ПН-ПТ: </span><span>09.00-18.00</span></p>
+<p><span>СБ: </span><span>09.00-15.00</span></p>
+<p><span><%= Spree.t("contact.nd")%>:</span><span>&nbsp;</span><span><%= Spree.t("contact.vuhidnuy")%></span></p>
+</div>
+</div>
+</div>
+<div class="row address_contact">
+<p class="our_contact"><%= Spree.t("contact.our_contact")%></p>
+<div class="tel">
+
+  <div class="row"><div class="col-1">&nbsp;</div><div class="col-11"><%= @mob_tel%></div></div>
+  <p><div class="row"><div class="col-2"><%=image_tag "vibe.png"%></div><div class="col-9"><%= @viber%></div></div></p>
+  <p><div class="row"><div class="col-2"><%=image_tag "teleg.png"%></div><div class="col-9"><%= @telegram%></div></div></p>
+  <p><div class="row"><div class="col-1">&nbsp;</div><div class="col-11"><%= @tel%></div></div></p>
+  <p><div class="row"><div class="col-1">&nbsp;</div><div class="col-11"><%= @tel_second%></div></div></p>
+  </div>
+<div class="tel"><%= Spree.t("contact.mail_us")%>: <span>&nbsp</span><%= @email%></div>
+</div>
+</div>
+<div class="col-lg-4 col-md-12 col-sm-12 map" >
+
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2572.6541392515014!2d23.995477851292918!3d49.848955838301244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add971257e953%3A0x606a03e658ee7384!2z0LLRg9C70LjRhtGPINCo0LXQstGH0LXQvdC60LAsIDEyMCwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGMLCA3OTAwMA!5e0!3m2!1suk!2sua!4v1596230363178!5m2!1suk!2sua"
+          width="100%" height="100%" id="map" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+</div>
+<div class="col-lg-4 col-md-12 col-sm-12">
+<%=image_tag("contact_inner.png", size:"400x500",class:"d-block w-100 im im_big")%>
+</div>
+
+</div>
+<div>&nbsp;</div>
+<div class="mt-4 mt-lg-2 mb-1 mb-lg-2 go_us_first">
+  <%= Spree.t('spree_contact_us.left_title') %>
+</div>
+  <div class="col-12 col-lg-12 mt-5 mt-lg-0 blue_form">
+
+        <%= form_for @contact, url: contact_us_path, html: { novalidate: '' } do |f| %>
+        <div class="row">
+            <div class=" col-lg-6 col-md-6 col-sm-12 first_form">
+              <div class="vertical-center col-12" id="remove_center">
+          <% if SpreeContactUs.require_name %>
+            <%= f.text_field :name, class: 'required col-12  mb-1 mb-lg-2 form_input', placeholder: Spree.t('spree_contact_us.name') %>
+          <% end %>
+
+          <%= f.email_field :email, class: 'required col-12 mt-3 mb-1 mb-lg-2 form_input', placeholder: Spree.t('spree_contact_us.email') %>
+        </div>
+        </div>
+        <div class=" col-lg-6 col-md-6 col-sm-12">
+            <%= f.text_area :message, class: 'required col-12 mt-3 mb-3 form_input_mess', rows: 6, placeholder: Spree.t('spree_contact_us.message_placeholder') %>
+            </div>
+          <div class="col-12 text-center mt-lg-1">
+            <%= f.submit Spree.t(:send), alt: Spree.t(:send), id: 'contact_us_contact_submit', title: Spree.t(:send),
+                class: 'col-7 col-lg-4 mb-4 mb-lg-0 btn index_btn spree-btn'
+            %>
+          </div>
+          </div>
+        <% end %>
+
+      </div>
+<div>&nbsp;</div>

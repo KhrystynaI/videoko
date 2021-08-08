@@ -18,8 +18,9 @@ module Spree
         {
           display_price: display_price(variant, @role_id),
           is_product_available_in_currency: @is_product_available_in_currency,
-          backorderable: backorderable?(variant),
-          in_stock: in_stock?(variant),
+          short: variant.product.variants.count > 2,
+          #backorderable: backorderable?(variant),
+          #in_stock: in_stock?(variant),
           images: images(variant),
           option_values: option_values(variant),
         }.merge(

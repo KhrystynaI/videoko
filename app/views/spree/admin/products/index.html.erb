@@ -48,15 +48,43 @@
   </div>
 <% end %>
 
-<div class="form-inline">
-  <div class="form-group mb-6">
-<%= form_tag(admin_search_taxonomy_path, method: 'get', remote: true) do %>
-<%= collection_select :taxonomy_id, :id, Spree::Taxonomy.all, :id, :name, {include_blank: true},class: "form-control" %>
+
+
+<nav class="navbar-expand-lg">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
+
+</button>
+<div class="collapse navbar-collapse" id="main_nav">
+
+<ul class="navbar-nav">
+<li class="nav-item dropdown">
+
+  <button class="btn btn-primary" data-toggle="dropdown" id="button_products" >
+    Пошук по категоріях</button>
+  <ul class="dropdown-menu" id="first_root">
+    <% Spree::Taxon.roots.each do |root| %>
+  <li><%= link_to root.name, admin_search_taxonomy_path(root.id), method: 'get', remote: true,class:"dropdown-item item_catalog", data: { disable_with: "Зачекайте..." } %>
+
+   <ul class="submenu dropdown-menu ">
+     <% root.children.each do |item| %>
+      <li> <%= link_to item.name, admin_search_taxonomy_path(item.id), method: 'get', remote: true,class:"dropdown-item item_catalog", data: { disable_with: "Зачекайте..." }%>
+      </li>
+      <%end%>
+       </ul>
+       </li>
+  <%end%>
+  </ul>
+</li>
+</ul>
+
 </div>
-<div class="form-group mb-6">&nbsp;</div>
-<%= submit_tag(Spree.t(:search), class: "btn btn-primary mb-6", data: { disable_with: "Зачекайте..." })%>
-<%end%>
-</div>
+<div>&nbsp;</div>
+</nav>
+
+
+
+
+
 <div id="collection">
 <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
 

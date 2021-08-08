@@ -1,5 +1,11 @@
 ---
 uk:
+  devise:
+    failure:
+      already_authenticated: Вже увійшли в систему
+    user_sessions:
+      spree_user:
+        already_signed_out: Покинули систему
   number:
     currency:
       format:
@@ -103,7 +109,7 @@ uk:
         approver:
         canceled_at:
         canceler:
-        checkout_complete: Оформлення замовлення завершено
+        checkout_complete: Формування замовлення завершено
         completed_at: Завершено в
         considered_risky: Вважається ризикованим
         coupon_code: Код купона
@@ -175,12 +181,13 @@ uk:
         promotionable: Акційний
         related: Супутні товари
         shipping_category: Категорія доставки
-        short_description: Короткий опис
+        short_description: Характеристики
         slug: Посилання
         tax_category: Податкова категорія
         weight: Вага
         width: Ширина
         less_than: Менше
+        more_than: Більше
       spree/product_property:
         value: Назва
       spree/promotion:
@@ -818,18 +825,33 @@ uk:
         one:
         other:
   spree:
+    subject: Знак якості
+    send: Відправити
+    spree_contact_us:
+      left_title: Зв'яжіться з нами
+      message_placeholder: Повідомлення
+      name: Ваше Ім'я
+      email: Ваш E-mail
+      notices:
+        success: Повідомлення відправлено
+    all_rights_reserved: Всі права захищені
+    already_have_account: Вже є акаунт
     call_us: Телефонуйте
     contact_us: Наші контакти
     address: Адреса
+    short_description: Характеристики
     order_success: Замовлення сформовано
     order_success_explain: Деталі замовлення
     added_to_cart: Додано до кошика
     required: "*"
     checkout_page:
+      header: Формування замовлення
       back_to_cart: Повернутися до кошика
     cart_page:
+      title: Знак якості
+      empty_info: Корзина порожня
       quantity: Кількість
-      checkout: Оформити
+      checkout: Купити
       product: Товар
       header: Корзина
     plp:
@@ -841,6 +863,10 @@ uk:
       sort_by: Сортувати
       home: Головна
       title: сторінка
+      price_sort: По ціні
+      created_at: По даті
+      clear_all: Очистити
+      done: Пошук
     18n:
       available_locales: Доступні переклади
       fields: Поля
@@ -1175,7 +1201,7 @@ uk:
     check:
     check_for_spree_alerts: Перевіряти сповіщення Spree
     check_stock_on_transfer:
-    checkout: Оформлення замовлення
+    checkout: Сформувати замовлення
     choose_a_customer: Виберіть клієнта
     choose_a_taxon_to_sort_products_for: Виберіть таксон для сортування товарів
     choose_currency: Виберіть валюту
@@ -1450,11 +1476,21 @@ uk:
     home: Додому
     pdp:
       view_cart: Корзина
-      checkout: Оформити
+      checkout: Сформувати
       you_may_also_like: Супутні товари
     contact:
       our_contact: Наші контакти
       go_to_us: ПРИЇЖДЖАЙТЕ ДО НАС
+      go_to_us_second: Чи не можете приїхати до нас? Тоді ми приїдемо до вас.
+      go_to_us_three: Доставка по всій країні!
+      shop_address: Адреса магазину
+      street: вулиця Шевченка, 120
+      city: Львів, Львівська область
+      hours_work: Години роботи
+      nd: НД
+      vuhidnuy: вихідний
+      tel_to_us: Телефонуйте
+      mail_us: Електронна адреса
     homepage:
       news: Новини
       znak: Знак якості
@@ -1580,10 +1616,7 @@ uk:
     no_available_date_set: Не встановлена дата
     available: Доступно
     sign_up: Зареєструватись
-    devise:
-      user_sessions:
-        spree_user:
-          already_signed_out: Покинули систему
+
     nav_bar:
       log_out: Вийти
       log_in: Увійти
@@ -1607,7 +1640,7 @@ uk:
     new_image: Нове зображення
     new_option_type: Нова характеристика
     new_order: Нове замовлення
-    new_order_completed: Оформлення замовлення завершено
+    new_order_completed: Формування замовлення завершено
     new_payment: Новий платіж
     new_payment_method: Новий спосіб оплати
     new_product: Новий товар
@@ -1705,15 +1738,17 @@ uk:
     order_email_resent: Лист з описом замовлення надіслано повторно
     order_information: Інформація стосовно замовлення
     order_mailer:
+      subtotal: Проміжний підсумок
+      total: Разом
       cancel_email:
-        dear_customer: Шановний покупцю,\n
+        dear_customer: Шановний покупцю,
         instructions: Ваше замовлення СКАСОВАНО. Збережіть цю інформацію в історії.
         order_summary_canceled: Коротко про замовлення [СКАСОВАНО]
         subject: Скасування замовлення
         subtotal: Проміжний підсумок
         total: Разом
       confirm_email:
-        dear_customer: Шановний покупцю,\n
+        dear_customer: Шановний покупцю,
         instructions: Перегляньте інформацію про ваше замовлення.
         order_summary: Коротко про замовлення
         subject: Підтвердження замовлення

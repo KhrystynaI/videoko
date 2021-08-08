@@ -1,0 +1,16 @@
+<% @body_id = 'login' %>
+<div class="container user-sessions user-sessions-new">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="mb-3">
+        <div id="existing-customer" data-hook="login">
+          <%= render partial: 'spree/shared/login' %>
+          <div data-hook="login_extras"></div>
+        </div>
+        <div class="col-lg-11 mx-auto" data-hook="registration">
+          <%= render partial: 'spree/shared/registration', locals: { registration_button: 'index_btn' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

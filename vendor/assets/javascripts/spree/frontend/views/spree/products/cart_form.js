@@ -23,11 +23,9 @@ function CartForm($, $cartForm) {
     this.selectedOptionValueIds = []
     this.variants = JSON.parse($cartForm.attr('data-variants'))
     this.withOptionValues = Boolean($cartForm.find(OPTION_VALUE_SELECTOR).length)
-
     this.$addToCart = $cartForm.find(ADD_TO_CART_SELECTOR)
     this.$price = $cartForm.find('.price.selling')
     this.$variantIdInput = $cartForm.find(VARIANT_ID_SELECTOR)
-
     this.initializeForm()
   }
 
@@ -43,7 +41,7 @@ function CartForm($, $cartForm) {
 
   this.bindEventHandlers = function() {
     $cartForm.on('click', OPTION_VALUE_SELECTOR, this.handleOptionValueClick)
-  }
+}
 
   this.handleOptionValueClick = function(event) {
     this.applyCheckedOptionValue($(event.currentTarget))
@@ -85,8 +83,7 @@ function CartForm($, $cartForm) {
         .each(function(_index, ov) {
           var $ov = $(ov)
           var id = parseInt($ov.val())
-
-          $ov.prop('checked', false)
+          $ov.prop('checked', false);
           $ov.prop('disabled', !availableOptionValueIds.includes(id))
         })
     })

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_02_152011) do
+ActiveRecord::Schema.define(version: 2020_07_15_122855) do
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -157,6 +157,16 @@ ActiveRecord::Schema.define(version: 2020_06_02_152011) do
     t.index "(lower(name))", name: "index_spree_countries_on_lower_name", unique: true
     t.index ["iso"], name: "index_spree_countries_on_iso", unique: true
     t.index ["iso3"], name: "index_spree_countries_on_iso3", unique: true
+  end
+
+  create_table "spree_country_translations", force: :cascade do |t|
+    t.integer "spree_country_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.index ["locale"], name: "index_spree_country_translations_on_locale"
+    t.index ["spree_country_id"], name: "index_spree_country_translations_on_spree_country_id"
   end
 
   create_table "spree_credit_cards", force: :cascade do |t|
@@ -918,6 +928,16 @@ ActiveRecord::Schema.define(version: 2020_06_02_152011) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stateful_id", "stateful_type"], name: "index_spree_state_changes_on_stateful_id_and_stateful_type"
+  end
+
+  create_table "spree_state_translations", force: :cascade do |t|
+    t.integer "spree_state_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.index ["locale"], name: "index_spree_state_translations_on_locale"
+    t.index ["spree_state_id"], name: "index_spree_state_translations_on_spree_state_id"
   end
 
   create_table "spree_states", force: :cascade do |t|

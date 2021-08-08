@@ -3,6 +3,7 @@ module Spree
     class OptionTypesController < ResourceController
       before_action :setup_new_option_value, only: :edit
       before_action :permit_taxon_id, only:[:create]
+      after_action :set_cache, only: :edit
 
       def update_values_positions
         ApplicationRecord.transaction do
@@ -29,6 +30,10 @@ module Spree
       end
 
       private
+
+      def set_cache
+        Spree::Config.cache_option_type = rand(1..2000)
+      end
 
       def permit_taxon_id
         params.require(:option_type).permit(:name, :presentation, :taxon_id)

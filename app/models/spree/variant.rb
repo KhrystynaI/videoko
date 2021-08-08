@@ -55,6 +55,7 @@ module Spree
     after_create :create_stock_items
     after_create :set_master_out_of_stock, unless: :is_master?
     after_create :set_prices
+    after_commit :product_reindex
 
     after_touch :clear_in_stock_cache
 
@@ -105,6 +106,10 @@ module Spree
 
     self.whitelisted_ransackable_associations = %w[option_values product prices default_price]
     self.whitelisted_ransackable_attributes = %w[weight sku]
+
+    def product_reindex
+      self.product.reindex
+    end
 
     def available?
       !discontinued? && product.available?

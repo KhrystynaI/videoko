@@ -27,19 +27,28 @@
         </div>
       </div>
     <% end %>
-<div>&nbsp;</div>
-    <%= render 'spree/products/filter_and_sort_mobile_buttons', id: @taxon_id %>
-
-    <div class="container mb-3 d-md-flex">
-      <%= render 'spree/products/filters_desktop', permitted_params: permitted_params, id: @taxon_id %>
-      <%= render 'spree/shared/products', products: @products, id: @taxon_id %>
+    <div>&nbsp;</div>
+    <div class="container-fluid plp-filter-and-sort-horizontal-border d-lg-none mb-3">
+    <div id="sort-by-overlay-show-button" class="col-12">
+      <div class="plp-filter-and-sort-buttons">
+        <%= Spree.t("plp.#{ params[:sort_by].blank? ? 'sort_by': params[:sort_by].gsub('-', '_') }") %>
+        <%= inline_svg_tag 'arrow-right.svg', class: "plp-icon" %>
+      </div>
     </div>
+  </div>
+        <%= render 'spree/products/sort_desktop', permitted_params: permitted_params %>
+        <div class="container mb-3 d-md-flex">
+
+          <%= render 'spree/shared/products', products: @products, id: @taxon_id %>
+        </div>
+      <% end %>
+    </div>
+
+    <%#= render 'spree/products/filters_mobile', permitted_params: permitted_params, id: @taxon_id %>
+    <%= render 'spree/products/sort_mobile', permitted_params: permitted_params, id: @taxon_id  %>
+
+<% unless @products.empty? %>
+  <% cache cache_key_for_products(@products, 'json-ld') do %>
+    <%= products_structured_data(@products, Spree::Role.find_by(name: :rozdrib).id) %>
   <% end %>
-</div>
-
-<%= render 'spree/products/filters_mobile', permitted_params: permitted_params, id: @taxon_id %>
-
-
-<% cache cache_key_for_products(@products, 'json-ld') do %>
-  <%= products_structured_data(@products, Spree::Role.find_by(name: :rozdrib).id) %>
 <% end %>

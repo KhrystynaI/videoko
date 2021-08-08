@@ -29,13 +29,14 @@ module Spree
           ) << content_tag(:span, nil, itemprop: 'item', itemscope: 'itemscope', itemtype: 'https://schema.org/Thing', itemid: seo_url(ancestor, params: permitted_product_params(id))), itemscope: 'itemscope', itemtype: 'https://schema.org/ListItem', itemprop: 'itemListElement', class: 'breadcrumb-item')
         end
 
+        if !taxon.parent.nil?
         # breadcrumbs for current taxon
         crumbs << content_tag(:li, content_tag(
           :a, content_tag(
-            :span, taxon.name, itemprop: 'name'
-          ) << content_tag(:meta, nil, itemprop: 'position', content: ancestors.size + 1), itemprop: 'url', href: seo_url(taxon, params: permitted_product_params(id))
-        ) << content_tag(:span, nil, itemprop: 'item', itemscope: 'itemscope', itemtype: 'https://schema.org/Thing', itemid: seo_url(taxon, params: permitted_product_params(id))), itemscope: 'itemscope', itemtype: 'https://schema.org/ListItem', itemprop: 'itemListElement', class: 'breadcrumb-item')
-
+            :span, taxon.parent.name, itemprop: 'name'
+          ) << content_tag(:meta, nil, itemprop: 'position', content: ancestors.size + 1), itemprop: 'url', href: seo_url(taxon.parent, params: permitted_product_params(taxon.parent.id))
+        ) << content_tag(:span, nil, itemprop: 'item', itemscope: 'itemscope', itemtype: 'https://schema.org/Thing', itemid: seo_url(taxon.parent, params: permitted_product_params(taxon.parent.id))), itemscope: 'itemscope', itemtype: 'https://schema.org/ListItem', itemprop: 'itemListElement', class: 'breadcrumb-item')
+      end
         # breadcrumbs for product
         if product
           crumbs << content_tag(:li, content_tag(
@@ -53,6 +54,31 @@ module Spree
       crumb_list = content_tag(:ol, raw(crumbs.flatten.map(&:mb_chars).join), class: 'breadcrumb', itemscope: 'itemscope', itemtype: 'https://schema.org/BreadcrumbList')
       content_tag(:nav, crumb_list, id: 'breadcrumbs', class: 'col-12 mt-1 mt-sm-3 mt-lg-4', aria: { label: 'breadcrumb' })
     end
+
+    def breadcrumbs(taxon, separator="&nbsp;&#8725;&nbsp;")
+      return "" if current_page?("/") || taxon.nil?
+
+      crumbs = [[Spree.t(:home), spree.root_path]]
+
+      if !taxon.parent.nil?
+        crumbs << [taxon.parent.name, spree.nested_taxons_path(taxon.parent.permalink)]
+      else
+        crumbs = [[Spree.t(:home), spree.root_path]]
+      end
+
+      separator="&nbsp;&#8725;&nbsp;"
+      crumbs.map! do |crumb|
+        content_tag(:li, itemscope:"itemscope", itemtype:"http://data-vocabulary.org/Breadcrumb") do
+          link_to(crumb.last, itemprop: "url") do
+            content_tag(:span, crumb.first, itemprop: "title", class: 'breadcrumb-item')
+          end + (crumb == crumbs.last ? '' : raw(separator))
+        end
+      end
+
+      crumb_list = content_tag(:ol, raw(crumbs.flatten.map(&:mb_chars).join), class: 'breadcrumb', itemscope: 'itemscope', itemtype: 'https://schema.org/BreadcrumbList')
+      content_tag(:nav, crumb_list, id: 'breadcrumbs', class: 'col-12 mt-1 mt-sm-3 mt-lg-4', aria: { label: 'breadcrumb' })
+    end
+
 
     def class_for(flash_type)
       {
@@ -223,10 +249,11 @@ module Spree
     def price_filter_values
       [
         "#{I18n.t('activerecord.attributes.spree/product.less_than')} #{formatted_price(50)}",
-        "#{formatted_price(50)} - #{formatted_price(100)}",
-        "#{formatted_price(101)} - #{formatted_price(150)}",
-        "#{formatted_price(151)} - #{formatted_price(200)}",
-        "#{formatted_price(201)} - #{formatted_price(300)}"
+        "#{formatted_price(51)} - #{formatted_price(500)}",
+        "#{formatted_price(501)} - #{formatted_price(1500)}",
+        "#{formatted_price(1501)} - #{formatted_price(3000)}",
+        "#{formatted_price(3001)} - #{formatted_price(6000)}",
+        "#{I18n.t('activerecord.attributes.spree/product.more_than')} #{formatted_price(6001)}"
       ]
     end
 
@@ -234,14 +261,18 @@ module Spree
       return if price_param.blank?
 
       less_than_string = I18n.t('activerecord.attributes.spree/product.less_than')
+      more_than_string = I18n.t('activerecord.attributes.spree/product.more_than')
 
       if price_param.include? less_than_string
         low_price = 0
         high_price = Monetize.parse(price_param.remove("#{less_than_string} ")).to_i
+      elsif price_param.include? more_than_string
+        low_price = Monetize.parse(price_param.remove("#{more_than_string} ")).to_i
+        high_price = 2000000
       else
+
         low_price, high_price = Monetize.parse_collection(price_param).map(&:to_i)
       end
-
       {price: {gte:"#{low_price}",lte:"#{high_price}"}}
     end
 
@@ -259,8 +290,12 @@ module Spree
       @available_option_types_cache_key = Spree::OptionType.where(taxon_id: id).maximum(:updated_at)&.utc&.to_i
     end
 
+    def cache_count(id)
+      Spree::OptionType.where(taxon_id: id).map{|c|c.option_values.pluck(:updated_at)}
+    end
+
     def available_option_types(id)
-      #@available_option_types = Rails.cache.fetch("available-option-types/#{available_option_types_cache_key(id)}") do
+      #@available_option_types ||= Rails.cache.fetch("available-option-types/#{available_option_types_cache_key(id)}") do
         @available_option_types = Spree::OptionType.where(taxon_id: id).includes(:translations).includes(:option_values).to_a
       #end
       @available_option_types
@@ -279,7 +314,7 @@ module Spree
     private
 
     def formatted_price(value)
-      Spree::Money.new(value, currency: current_currency, no_cents_if_whole: true).to_s
+      Spree::Money.new(value, currency: current_currency, no_cents_if_whole: false,thousands_separator: "").to_s
     end
 
     def credit_card_icon(type)

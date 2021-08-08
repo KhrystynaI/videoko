@@ -30,7 +30,7 @@ module Spree
     preference :expedited_exchanges, :boolean, default: false # NOTE this requires payment profiles to be supported on your gateway of choice as well as a delayed job handler to be configured with activejob. kicks off an exchange shipment upon return authorization save. charge customer if they do not return items within timely manner.
     preference :expedited_exchanges_days_window, :integer, default: 14 # the amount of days the customer has to return their item after the expedited exchange is shipped in order to avoid being charged
     preference :layout, :string, default: 'spree/layouts/spree_application'
-    preference :logo, :string, default: 'logo.png'
+    preference :logo, :string, default: 'homepage/logo.png'
     preference :max_level_in_taxons_menu, :integer, default: 1 # maximum nesting level in taxons menu
     preference :products_per_page, :integer, default: 12
     preference :require_master_price, :boolean, default: false
@@ -46,6 +46,7 @@ module Spree
     preference :track_inventory_levels, :boolean, default: true # Determines whether to track on_hand values for variants / products.
     preference :rate, :decimal
     preference :last_rate, :decimal
+    preference :cache_option_type, :integer, default: 0
     # Store credits configurations
     preference :non_expiring_credit_types, :array, default: []
     preference :credit_to_new_allocation, :boolean, default: false

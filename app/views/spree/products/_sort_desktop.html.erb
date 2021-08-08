@@ -1,3 +1,4 @@
+
 <div class="container dropdown d-none d-lg-flex justify-content-end mt-5 pr-4 pb-3 plp-sort">
   <div data-toggle="dropdown" class="plp-sort-header">
     <%= Spree.t("plp.#{ params[:sort_by].blank? ? 'sort_by': params[:sort_by].gsub('-', '_') }") %>
@@ -11,19 +12,13 @@
              height: 18) %>
   </div>
 
-  <div class="dropdown-menu text-right plp-sort-dropdown">
+  <div class="dropdown-menu sort">
     <ul class="pt-1 plp-sort-dropdown-ul">
-      <li class="p-3 plp-sort-dropdown-ul-li<%= '--active' if params[:sort_by].blank? %>">
-        <%= link_to Spree.t('plp.default'), url_for(permitted_params.merge(sort_by: nil)) %>
+      <li class="p-3 plp-sort-dropdown-ul-li">
+        <%= link_to Spree.t('plp.created_at'), url_for(permitted_params.merge(sort_by: 'created_at')) %>
       </li>
-      <li class="p-3 plp-sort-dropdown-ul-li<%= '--active' if params[:sort_by] == 'newest-first' %>">
-        <%= link_to Spree.t('plp.newest_first'), url_for(permitted_params.merge(sort_by: 'newest-first')) %>
-      </li>
-      <li class="p-3 plp-sort-dropdown-ul-li<%= '--active' if params[:sort_by] == 'price-high-to-low' %>">
-        <%= link_to Spree.t('plp.price_high_to_low'), url_for(permitted_params.merge(sort_by: 'price-high-to-low')) %>
-      </li>
-      <li class="p-3 plp-sort-dropdown-ul-li<%= '--active' if params[:sort_by] == 'price-low-to-high' %>">
-        <%= link_to Spree.t('plp.price_low_to_high'), url_for(permitted_params.merge(sort_by: 'price-low-to-high')) %>
+      <li class="p-3 plp-sort-dropdown-ul-li">
+        <%= link_to Spree.t('plp.price_sort'), url_for(permitted_params.merge(sort_by: 'price')) %>
       </li>
     </ul>
   </div>

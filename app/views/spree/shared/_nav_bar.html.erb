@@ -1,15 +1,15 @@
 <ul id="nav-bar" class="nav align-items-center d-flex justify-content-end navbar-right">
 
-  <% if spree_current_user.nil? %>
+  <% if !spree_user_signed_in? %>
     <li class="login_out">
-      <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "white main-nav-bar-item main-nav-bar-button header_title_category"  %>
+      <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "main_nav main-nav-bar-item main-nav-bar-button header_title_category"  %>
     </li>
     <%else%>
-    <li class="login_out"><%= link_to Spree.t('nav_bar.log_out'), spree_logout_path, class: "white main-nav-bar-item main-nav-bar-button header_title_category"  %></li>
+    <li class="login_out"><%= link_to Spree.t('nav_bar.log_out'), spree_logout_path, class: "main_nav main-nav-bar-item main-nav-bar-button header_title_category", method: :get  %></li>
   <% end %>
   <li id="link-to-cart">
     <%= render 'spree/shared/cart', class: 'display d-xl-inline-block cart-icon--xl', size: 36, item_count: 0 %>
-    <%= render 'spree/shared/cart', class: 'display', size: 24, item_count: 0 %>
+
   </li>
 
   <li >

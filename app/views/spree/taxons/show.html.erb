@@ -1,10 +1,98 @@
 <div class="taxon">
   <div class="container">
-    <%= spree_breadcrumbs(@taxon, @taxon.id) %>
+    <%= breadcrumbs(@taxon, @taxon.id) %>
     <%= render 'header', taxon: @taxon %>
   </div>
-  <%= render 'subcategories', taxon: @taxon, id: @taxon.id %>
+
+    <% subcategories = [@taxon] %>
+    <% unless @taxon.children.any? %>
+      <% subcategories.unshift(@taxon.parent) %>
+    <% end %>
+    <%if @taxon.depth == 0%>
+    <% subcategories.compact.each do |current_taxon| %>
+      <% child_taxons = [ *current_taxon.children.where(hide_from_nav: false)] %>
+
+      <% if child_taxons.size > 1 %>
+      <div class="container">
+        <div class="row">
+
+            <% child_taxons.each_with_index.map do |subcategory, index| %>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+              <%= link_to spree.nested_taxons_path(subcategory, params: permitted_product_params(@taxon.id)), class: "link_btn" do%>
+              <div class="homepage-taxon mb-3">
+                <div class="card card_index">
+                    <%if !subcategory.icon.nil?%>
+                    <%= image_tag(main_app.url_for(subcategory.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_tax") %>
+                    <%elsif File.exist?("app/assets/images/#{subcategory.parent.name}/#{subcategory.name}.png")%>
+                  <%= image_tag("#{subcategory.parent.name}/#{subcategory.name}.png", class: "d-block w-100 img_from_blob_tax index_img") %>
+                  <%else%>
+                  <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob_tax")%>
+                  <%end%>
+                  <div class="card-body">
+                    <button class="btn btn-block spree-btn index_btn"> <%=subcategory.name%></button>
+                  </div>
+                </div>
+                </div>
+                <% end %>
+              </div>
+              <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <%else%>
+
   <div data-hook="taxon_products">
-    <%= render template: 'spree/products/index', id: @taxon.id %>
-  </div>
+    <% permitted_params = params.permit(filtering_params(@taxon_id)) %>
+
+    <div data-hook="search_results">
+      <% if @products.empty? %>
+        <% if permitted_params[:keywords].present? && permitted_params.to_h.one? %>
+          <%= render 'spree/products/no_results' %>
+        <% else %>
+          <%= render 'spree/products/no_results_with_filters', permitted_params: permitted_params %>
+        <% end %>
+      <% else %>
+        <% if params[:keywords] %>
+          <div class="container d-md-flex pt-md-5">
+            <div class="plp-results-text text-uppercase mx-md-auto py-md-5">
+              <%= "#{@products.total_count} #{Spree.t('plp.results_for')} '#{params[:keywords].upcase}'" %>
+            </div>
+          </div>
+        <% elsif not @taxon %>
+          <div id="no-taxon-banner">
+            <div class="container">
+              <%= image_tag(
+                'homepage/products.png',
+                alt: 'products-banner',
+                width: 1110,
+                height: 300,
+                class: 'w-100 d-none d-md-block im'
+              ) %>
+            </div>
+          </div>
+        <% end %>
+        <div>&nbsp;</div>
+            <%= render 'spree/products/filter_and_sort_mobile_buttons', id: @taxon.id %>
+            <%= render 'spree/products/sort_desktop', permitted_params: permitted_params %>
+            <div class="container mb-3 d-md-flex">
+              <%= render 'spree/products/filters_desktop', permitted_params: permitted_params, id: @taxon.id %>
+              <%= render 'spree/shared/products', products: @products, id: @taxon.id %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= render 'spree/products/filters_mobile', permitted_params: permitted_params, id: @taxon.id %>
+        <%= render 'spree/products/sort_mobile', permitted_params: permitted_params, id: @taxon.id  %>
+
+    <% unless @products.empty? %>
+      <% cache cache_key_for_products(@products, 'json-ld') do %>
+        <%= products_structured_data(@products, Spree::Role.find_by(name: :rozdrib).id) %>
+      <% end %>
+    <% end %>
+
+</div>
+<%end%>
 </div>

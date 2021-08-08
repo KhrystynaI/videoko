@@ -51,12 +51,20 @@ module Spree
       else
         query_params = query.select{|key,value| key > "menu_open"}
         clean_query = query_params.reject{|key,value| value.blank?}.transform_values{|value| value.split(",")}
-      end
-
+    end
+      price = clean_query[:price]
+      variant_price ={price_variant: price}
+      variant_price.merge!(clean_query)
+      variant_price.merge!(show: true, active: true, taxon_ids: @taxon.id).delete_if {|key, value| key == "sort_by" }.delete("page")
       curr_page = params[:page] || 1
-      clean_query.merge!(show: true, active: true, taxon_ids: @taxon.id).delete("page")
-      @products = Spree::Product.search("*",where: clean_query, page: curr_page, per_page: 9)
+      clean_query.merge!(show: true, active: true, taxon_ids: @taxon.id).delete_if {|key, value| key == "sort_by" }.delete("page")
+      if params[:sort_by].present?
+        params[:sort_by] == "price"? sort = :asc : sort = :desc
+        @products = Spree::Product.search("*",where:{or:[ [ clean_query, variant_price]]},order:{params[:sort_by]=> sort}, page: curr_page, per_page: 9)
 
+      else
+      @products = Spree::Product.search("*",where:{or:[ [ clean_query, variant_price]]},page: curr_page, per_page: 9)
+    end
     end
 
 

@@ -12,7 +12,7 @@ module Spree
 
     # we're not freezing this on purpose so developers can extend and manage
     # those attributes depending of the logic of their applications
-    ADDRESS_FIELDS = %w(firstname lastname address1 city state zipcode country phone)
+    ADDRESS_FIELDS = %w(firstname lastname address1 city state country phone)
     EXCLUDED_KEYS_FOR_COMPARISION = %w(id updated_at created_at deleted_at user_id)
 
     belongs_to :country, class_name: 'Spree::Country'
@@ -75,7 +75,7 @@ module Spree
         company,
         address1,
         #address2,
-        "#{city}, #{state_text} #{zipcode}",
+        "#{city}, #{state_text}",
         country.to_s
       ].reject(&:blank?).map { |attribute| ERB::Util.html_escape(attribute) }.join('<br/>')
     end
@@ -106,7 +106,7 @@ module Spree
         #address2: address2,
         city: city,
         state: state_text,
-        zip: zipcode,
+        #zip: zipcode,
         country: country.try(:iso),
         phone: phone
       }
@@ -117,7 +117,8 @@ module Spree
     end
 
     def require_zipcode?
-      country ? country.zipcode_required? : true
+      false
+      #country ? country.zipcode_required? : true
     end
 
     def editable?
