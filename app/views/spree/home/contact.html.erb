@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+<div class="col-9 go_us">
+<p class="go_us_first"><%= Spree.t("contact.go_to_us")%></p>
+<p class="go_us_second">Чи не можете приїхати до нас? Тоді ми приїдемо до вас.</p>
+<p class="go_us_second"> Доставка по всій країні!</p>
+</div>
+<div class="col-3">
+<%= image_tag("contact_img.png",class:"d-block w-100 im")%>
+</div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+<div class="col-6 blue_contact">
+<div class="row">
+<div class="col-6 address_inside">
+<p class="big_address">Адреса магазину</p>
+<div class="big_address">
+  <p><span>вулиця Шевченка, 120 </span></p>
+  <p><span>Львів, Львівська область</span></p></p>
+  <p><span>79000</span></p></div>
+</div>
+<div class="col-6 address_inside ">
+<p class="big_address">Години роботи</p>
+<div class="big_address">
+<p><span>ПН-ПТ: </span><span>09.00-18.00</span></p>
+<p><span>СБ: </span><span>09.00-15.00</span></p>
+<p><span>НД: </span><span>вихідний</span></p>
+</div>
+</div>
+</div>
+<div class="row address_contact">
+<p class="our_contact"><%= Spree.t("contact.our_contact")%></p>
+<div class="tel">Телефонуйте: <%= @tel%></div>
+<div class="tel">Електронна адреса: <%= @email%></div>
+</div>
+</div>
+<div class="col-6">
+<%=image_tag("contact_inner.png", size:"400x500",class:"d-block w-100 im")%>
+</div>
+</div>
+</div>
+<div>&nbsp;</div>

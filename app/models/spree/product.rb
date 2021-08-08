@@ -7,11 +7,58 @@ module Spree
 
     mappings: {
       properties:{
-        taxonomy_ids: {type: "keyword"}
-                        }},
-     word_start: [:name]
+        taxonomy_ids: {type: "keyword"},
+        name:{
+          type: "keyword",
+          fields:{
+            analyzed:{
+              type: "text",
+              analyzer:"custom_analyzer"
+            }
+          }
+        }
+                        }
 
-     scope :search_import, ->{includes(:translations).includes(:prices).includes(:taxons).includes(:variants)}
+      },
+    settings: {
+      analysis:{
+        analyzer:{
+          custom_analyzer:{
+            filter:[
+              "lowercase",
+              "asciifolding"
+            ],
+            char_filter: [
+              "my_char_filter"
+            ],
+          tokenizer: "custom_tokenizer",
+          type: "custom"
+        }
+      },
+      tokenizer:{
+        custom_tokenizer:{
+          type: "ngram",
+          min_gram: 2,
+          max_gram: 50,
+          token_chars:[
+            "letter",
+            "digit"
+          ]
+        }
+      },
+      char_filter: {
+      my_char_filter: {
+        type: "mapping",
+        mappings: [
+          "' => "
+        ]
+       }
+      }
+    }
+    },
+     word_middle: [:name]
+
+     scope :search_import, ->{includes(:translations).includes(:prices).includes(:taxons).includes(:option_types).includes(:variants)}
     def search_data
     json = {
       name: name,
@@ -26,7 +73,7 @@ module Spree
       taxonomy_ids: taxonomy_ids
     }
     if self.variants.count > 0 && self.option_types.count > 0
-    keys = self.option_types.map{|opt| opt.presentation.downcase!.gsub(/\s+/, "").gsub('-', '')}
+    keys = self.variants.map{|var| var.option_values.map{|c|c.option_type.presentation.downcase!.gsub(/\s+/, "").gsub('-', '')}}.flatten!
     values =  self.variants.map{|var| var.option_values.map{|c|c.id}}.flatten!
     hash = Hash[keys.zip values]
 

@@ -1,57 +1,62 @@
-<%= link_to "admin", admin_url%>
 <% @body_id = 'home' %>
 
-<div class="homepage-hero-image mb-3 position-relative">
-  <img class="lazyload hero-image position-absolute"
-    data-src="<%= asset_path('homepage/main_banner.jpg') %>"
-    data-srcset="<%= image_source_set('homepage/main_banner') %>"
-    alt="<%= Spree.t('homepage.summer_collection')%>" />
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
 
-  <div class="hero-content">
-    <div class="homepage-hero-image-text mb-2 mx-auto pb-3 pb-md-4">
-      <%= Spree.t('homepage.summer_collection') %>
-    </div>
-    <div>
-      <%= link_to Spree.t('homepage.shop_now'), spree.products_path, class: 'btn btn-primary spree-btn px-5' %>
-    </div>
+          <%= image_tag('homepage/carousel_first.png', class: "d-block w-100 im") %>
+        <div class="carousel-caption d-none d-md-block">
+          <div class="col-6"><%= link_to Spree.t('homepage.shop_now'), spree.products_path, class: 'btn btn_catalog spree-btn px-5' %></div>
+          <p></p>
+          <h1><%= Spree.t("homepage.main_title_first") %></h1>
+          <h1><%= Spree.t("homepage.main_title_second") %></h1>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag('homepage/carousel_second.png', class: "d-block w-100 im") %>
+        <div class="carousel-caption d-none d-md-block">
+          <div class="col-6"><%= link_to Spree.t('homepage.shop_now'), spree.products_path, class: 'btn btn_catalog spree-btn px-5' %></div>
+          <p></p>
+          <h1><%= Spree.t("homepage.main_title_first") %></h1>
+          <h1><%= Spree.t("homepage.main_title_second") %></h1>
+        </div>
+      </div>
+      </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
   </div>
-</div>
 
+<div>&nbsp;</div>
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <%Spree::Taxon.where(depth:0).first(3).each do |tax|%>
+      <%for_index_first.each do |tax|%>
       <div class="homepage-taxon-box mb-3">
-        <%= link_to spree.nested_taxons_path(tax.permalink) do %>
-        <img class="w-100 lazyload"
-            data-src="<%= asset_path('homepage/category_banner_upper.jpg') %>"
-            data-srcset="<%= image_source_set('homepage/category_banner_upper') %>"
-            alt="<%= Spree.t('homepage.men')%>" />
-
-          <div class="homepage-taxon-box-text">
-            <h3><%= Spree.t("#{tax.name}") %></h3>
-          </div>
-          <%end%>
+        <div class="card card_index">
+        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 im") %>
+        <div class="card-body">
+          <%= link_to Spree.t("#{tax.name}"), spree.nested_taxons_path(tax.permalink), class: "btn btn-block index_btn"  %>
+        </div>
+      </div>
       </div>
       <%end%>
-
     </div>
 
     <div class="col-6">
-      <%Spree::Taxon.where(depth:0).last(3).each do |tax|%>
+      <%for_index_last.each do |tax|%>
       <div class="homepage-taxon-box mb-3">
-        <%= link_to spree.nested_taxons_path(tax.permalink) do%>
-        <img class="w-100 lazyload"
-            data-src="<%= asset_path('homepage/category_banner_upper.jpg') %>"
-            data-srcset="<%= image_source_set('homepage/category_banner_upper') %>"
-            alt="<%= Spree.t('homepage.men')%>" />
-
-          <div class="homepage-taxon-box-text">
-            <h3><%= Spree.t("#{tax.name}") %></h3>
-          </div>
-          <%end%>
+        <div class="card card_index">
+        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 im index_img") %>
+        <div class="card-body">
+          <%= link_to Spree.t("#{tax.name}"), spree.nested_taxons_path(tax.permalink), class: " btn btn-block index_btn"  %>
+        </div>
       </div>
-<%end%>
+      </div>
+      <%end%>
     </div>
   </div>
 </div>

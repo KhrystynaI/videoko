@@ -81,7 +81,10 @@ module Spree
       end
 
       def rate
-        Spree::GetSetRate.rate_import
+        last_rate = Spree::Config[:rate]
+        Spree::Config[:last_rate] = last_rate
+        @rate = Spree::Config[:rate]
+        Spree::Config[:rate] = params[:rate]
           @rate = Spree::Config[:rate]
           @message = "Ціни оновлені"
           respond_to do |format|

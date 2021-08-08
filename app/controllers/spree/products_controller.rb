@@ -12,8 +12,16 @@ module Spree
       @taxon_id = params[:taxon_id]
       curr_page = params[:page] || 1
       if params[:keywords].present?
-        @products = Spree::Product.search(params[:keywords],fields:[:name],misspellings: {edit_distance: 2, below: 1},where:{show:true}, page: curr_page, per_page: 9)
+        query = params[:keywords].gsub("'", '')
+        if params[:price].present?
+        price = get_price_range(params[:price])
+        price.merge!(show: true, active: true)
 
+        @products = Spree::Product.search(query,fields:[:name],misspellings:false, where:price, page: curr_page, per_page: 9)
+          else
+        @products = Spree::Product.search(query,fields:[:name],misspellings:false, where:{show:true, active:true}, page: curr_page, per_page: 9)
+
+      end
       elsif params[:price].present?
         first_query = params.permit!.to_h.reject{|key,value| key < "price"}.reject{|key,value| value.blank?}
         if !first_query.blank?
@@ -28,6 +36,7 @@ module Spree
         @products = Spree::Product.search("*",where:{show: true, active: true}, page: curr_page, per_page: 9)
       end
       etag = [
+        Spree::Config[:rate],
         store_etag,
         available_option_types_cache_key(@taxon_id),
         filtering_params_cache_key(@taxon_id)
@@ -192,6 +201,7 @@ module Spree
 
     def product_etag
       [
+        Spree::Config[:rate],
         store_etag,
         @product,
         @product.variants,

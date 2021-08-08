@@ -11,8 +11,14 @@
   <h1 id="rate"><%= @rate %></h1>
   <h2 id="rate_message"><%= @message%></h2>
 </div>
-  <%= button_link_to "Оновити курс", admin_rate_url, { remote: true, class: "btn-success", icon: 'add', data: { disable_with: "Зачекайте..." } } %>
+<div class="form-group mb-6">
+<%= form_tag(admin_rate_path, method: 'post', remote: true) do %>
+<%= number_field_tag :rate, nil, step: :any %>
 </div>
+<%= submit_tag("Оновити курс", class: "btn-success", icon: 'add', data: { disable_with: "Зачекайте..." })%>
+<%end%>
+</div>
+
 <p>&nbsp;</p>
 <% content_for :table_filter do %>
   <div data-hook="admin_products_sidebar">

@@ -12,7 +12,7 @@
 Spree.config do |config|
   Spree::PermittedAttributes.product_attributes << [:short_description,:related]
   Spree::PermittedAttributes.line_item_attributes << [:role_id_price]
-  SpreeI18n::Config.available_locales = [:en, :ru, :uk] # displayed on frontend select box
+  SpreeI18n::Config.available_locales = [:uk, :ru] # displayed on frontend select box
   Spree::Frontend::Config[:locale] = :uk
   Spree::Backend::Config[:locale] =:uk
   SpreeGlobalize::Config.supported_locales = [:ru, :uk] # displayed on translation forms

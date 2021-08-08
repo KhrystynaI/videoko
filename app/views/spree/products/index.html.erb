@@ -17,19 +17,19 @@
     <% elsif not @taxon %>
       <div id="no-taxon-banner">
         <div class="container">
-          <%= lazy_image(
-            src: asset_path('homepage/products.jpg'),
+          <%= image_tag(
+            'homepage/products.png',
             alt: 'products-banner',
             width: 1110,
             height: 300,
-            class: 'w-100 d-none d-md-block'
+            class: 'w-100 d-none d-md-block im'
           ) %>
         </div>
       </div>
     <% end %>
-
+<div>&nbsp;</div>
     <%= render 'spree/products/filter_and_sort_mobile_buttons', id: @taxon_id %>
-    <%= render 'spree/products/sort_desktop', permitted_params: permitted_params, id: @taxon_id %>
+
     <div class="container mb-3 d-md-flex">
       <%= render 'spree/products/filters_desktop', permitted_params: permitted_params, id: @taxon_id %>
       <%= render 'spree/shared/products', products: @products, id: @taxon_id %>
@@ -38,7 +38,7 @@
 </div>
 
 <%= render 'spree/products/filters_mobile', permitted_params: permitted_params, id: @taxon_id %>
-<%= render 'spree/products/sort_mobile', permitted_params: permitted_params, id: @taxon_id %>
+
 
 <% cache cache_key_for_products(@products, 'json-ld') do %>
   <%= products_structured_data(@products, Spree::Role.find_by(name: :rozdrib).id) %>

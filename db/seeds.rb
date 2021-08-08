@@ -2,7 +2,9 @@ require 'csv'
 
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+
 Spree::Store.last.update_attributes(default_currency: "UAH")
+Spree::Store.last.update_attributes(name: "Знак якості")
 Spree::Role.create(name: "rozdrib")
 Spree::Role.create(name: "opt")
 Spree::Role.create(name: "gold")
@@ -24,9 +26,10 @@ tax = Spree::Taxon.new(taxon.to_h)
 end
 end
 p "Taxons"
+Spree::Config.rate = 26.8
 Spree::Product.search_index.clean_indices
 #Spree::Product.search_index.delete
-CSV.foreach("db/products_test.csv", headers: true) do |product|
+CSV.foreach("db/db.csv", headers: true) do |product|
 if !product["post_title"].nil?
   Spree::Product.create!(name: ActionController::Base.helpers.sanitize(product["post_title"]), description: ActionController::Base.helpers.sanitize(product["post_content"]), short_description: ActionController::Base.helpers.sanitize(product["post_excerpt"]), available_on: Time.current)
 else
@@ -34,12 +37,12 @@ else
 end
 end
 Spree::Product.all.each do |pr|
-  Spree::Price.create(product_id: pr.id, amount: "d", variant_id: pr.id, role_id:3)
-  Spree::Price.create(product_id: pr.id, amount: "d", variant_id: pr.id, role_id:4)
-  Spree::Price.create(product_id: pr.id, amount: "d", variant_id: pr.id, role_id:5)
-  Spree::Price.create(product_id: pr.id, amount: "d", variant_id: pr.id, role_id:6)
-  Spree::Price.create(product_id: pr.id, amount: "d", variant_id: pr.id, role_id:7)
-  Spree::Price.create(product_id: pr.id, amount: "d", variant_id: pr.id, role_id:8)
+  Spree::Price.create!(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:3)
+  Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:4)
+  Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:5)
+  Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:6)
+  Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:7)
+  Spree::Price.create(product_id: pr.id, amount_usd: 1, variant_id: pr.id, role_id:8)
 end
 Spree::Product.reindex
 p "products"
@@ -2210,3 +2213,11 @@ Spree::Product.all.each do |prod|
   prod.classifications.create!(taxon_id: Spree::Taxon.find(1).id, product_id: prod.id)
     end
 p "product"
+Spree::Taxonomy.find_by(name: "Відеоспостереження").update!(position: 1)
+Spree::Taxonomy.find_by(name: "Охоронна сигналізація").update!(position:2)
+Spree::Taxonomy.find_by(name: "Домофони").update!(position:3)
+Spree::Taxonomy.find_by(name: "Контроль доступу").update!(position:4)
+Spree::Taxonomy.find_by(name: "Мережеве обладнання").update!(position:5)
+Spree::Taxonomy.find_by(name: "Додаткове обладнання").update!(position:6)
+Spree::Taxonomy.all.each{|c|c.root.update!(position: c.position)}
+p "position"

@@ -818,16 +818,29 @@ uk:
         one:
         other:
   spree:
+    call_us: Телефонуйте
+    contact_us: Наші контакти
+    address: Адреса
     order_success: Замовлення сформовано
     order_success_explain: Деталі замовлення
     added_to_cart: Додано до кошика
     required: "*"
     checkout_page:
       back_to_cart: Повернутися до кошика
+    cart_page:
+      quantity: Кількість
+      checkout: Оформити
+      product: Товар
+      header: Корзина
     plp:
+      no_results: Товарів не знайдено
+      results_for: Результат пошуку
+      no_results_found: Товарів не знайдено
       price: Ціна
       filter_by: Фільтрувати
       sort_by: Сортувати
+      home: Головна
+      title: сторінка
     18n:
       available_locales: Доступні переклади
       fields: Поля
@@ -1436,12 +1449,20 @@ uk:
     go_to_category: До категорії
     home: Додому
     pdp:
+      view_cart: Корзина
+      checkout: Оформити
       you_may_also_like: Супутні товари
+    contact:
+      our_contact: Наші контакти
+      go_to_us: ПРИЇЖДЖАЙТЕ ДО НАС
     homepage:
+      news: Новини
       znak: Знак якості
       main_page: Головна
       shop_now: Каталог
       contact: Контакти
+      main_title_first: Ви контролюєте все,
+      main_title_second: залишаючись непоміченим
     icon: Іконка
     id:
     identifier: Ідентифікатор

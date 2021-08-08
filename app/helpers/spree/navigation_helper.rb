@@ -3,12 +3,28 @@ require 'digest'
 module Spree
   module NavigationHelper
     def spree_navigation_data
-      Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).first(3).map do |t|
-        {title: t.name, url: t.permalink, items: t.children.includes(:translations).map{|tax| {title: tax.name, url: tax.permalink}}}
+    taxons =  Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).sort_by{|c|c.position}
+    taxons.map do |t|
+        {id: t.id, title: t.name, url: t.permalink, items: t.children.includes(:translations).map{|tax| {title: tax.name, url: tax.permalink}}}
       end
     rescue
       []
     end
+
+    def for_index_first
+      taxons = []
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 1))
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 3))
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 5))
+      taxons
+    end
+
+    def for_index_last
+      taxons = []
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 2))
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 4))
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 6))
+      taxons  end
 
     def spree_nav_cache_key(section = 'header')
       base_cache_key + [current_store, spree_navigation_data_cache_key, Spree::Config[:logo], section]

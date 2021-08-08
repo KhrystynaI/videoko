@@ -1,0 +1,65 @@
+#footer{
+  background: linear-gradient(#FAF9F8 60%, #00336E 40%);
+}
+.tax_footer{
+  color: black;
+  &:hover{
+    text-decoration: none;
+    color: black;
+    border-bottom: 0.1rem solid black;
+    padding-bottom: 0.5rem;
+  }
+}
+.address_footer{
+  color: white;
+  &:hover{
+    text-decoration: none;
+    color: white;
+    border-bottom: 0.1rem solid white;
+    padding-bottom: 0.5rem;
+  }
+}
+.account_title{
+  color: #E1BE64;
+}
+.space_footer{
+  margin-bottom: 3%;
+}
+.address_info{
+  color: white;
+}
+.im{
+  object-fit: fill;
+}
+.btn_catalog{
+  border-radius: 5px;
+  color: white;
+  background: #E1BE64;
+  &:hover{
+    color: white;
+  }
+}
+.card_index{
+  border: 1px solid black;
+  padding: 0.5rem;
+  &:hover{
+    background: #00336E;
+  }
+}
+.last_img_index {
+  border: 1px solid black;
+}
+.index_btn{
+  color:white;
+  font-size: 25px;
+  background: #E1BE64;
+  border-radius: 5px;
+  &:hover{
+    color:white;
+  }
+}
+@media (max-width: 1200px) {
+  #footer{
+    background: linear-gradient(#FAF9F8 50%, #00336E 50%);
+  }
+}

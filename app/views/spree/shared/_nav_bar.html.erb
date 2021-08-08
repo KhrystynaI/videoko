@@ -1,53 +1,29 @@
 <ul id="nav-bar" class="nav align-items-center d-flex justify-content-end navbar-right">
-  <li>
-    <div class="navbar-right-search-menu">
-      <button type="button" class="navbar-right-dropdown-toggle search-icons" aria-label="<%= Spree.t('nav_bar.show_search')%>">
-        <%= icon(name: 'magnifying-glass',
-                 classes: 'd-none d-xl-inline-block',
-                 width: 36,
-                 height: 36)  %>
 
-        <%= icon(name: 'magnifying-glass',
-                 classes: 'd-xl-none',
-                 width: 24,
-                 height: 24)  %>
-      </button>
-
-      <div id="search-dropdown" class="p-0 px-md-4 py-md-2 w-100 shadow navbar-right-search-menu-dropdown hide-on-esc">
-        <%= render partial: 'spree/shared/search' %>
-      </div>
-    </div>
-  </li>
-  <% if defined?(spree.account_link_path) %>
-    <li>
-      <div class="dropdown navbar-right-dropdown">
-        <button id="account-button" type="button" data-toggle="dropdown" class="navbar-right-dropdown-toggle" aria-label="<%= Spree.t('nav_bar.show_user_menu')%>">
-          <%= icon(name: 'person',
-                  classes: 'd-none d-xl-inline-block',
-                  width: 41.4,
-                  height: 36)  %>
-
-          <%= icon(name: 'person',
-                  classes: 'd-xl-none',
-                  width: 27.6,
-                  height: 24)  %>
-        </button>
-
-        <div id="link-to-account" class="dropdown-menu dropdown-menu-right text-right">
-        </div>
-      </div>
+  <% if spree_current_user.nil? %>
+    <li class="login_out">
+      <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "white main-nav-bar-item main-nav-bar-button header_title_category"  %>
     </li>
+    <%else%>
+    <li class="login_out"><%= link_to Spree.t('nav_bar.log_out'), spree_logout_path, class: "white main-nav-bar-item main-nav-bar-button header_title_category"  %></li>
   <% end %>
   <li id="link-to-cart">
-    <%= render 'spree/shared/cart', class: 'd-none d-xl-inline-block cart-icon--xl', size: 36, item_count: 0 %>
-    <%= render 'spree/shared/cart', class: 'd-xl-none', size: 24, item_count: 0 %>
+    <%= render 'spree/shared/cart', class: 'display d-xl-inline-block cart-icon--xl', size: 36, item_count: 0 %>
+    <%= render 'spree/shared/cart', class: 'display', size: 24, item_count: 0 %>
   </li>
-  <li>
-    <% if I18n.locale.to_s == 'uk' %>
-         <%= link_to image_tag('icons/ru.svg', size:"50x100"), spree.set_locale_path(switch_to_locale: 'ru'), method: :post %>
-         <%else%>
-         <%= link_to image_tag('icons/uk.svg', size:"50x100"),spree.set_locale_path(switch_to_locale: 'uk'), method: :post %>
-       <% end %>
+
+  <li >
+    <div class="btn-group language">
+          <button type="button" class="btn btn-default dropdown-toggle btn_lang" data-toggle="dropdown">
+            <%=image_tag("#{Spree::Frontend::Config[:locale]}.png", class: "locale_size")%>
+          <span class="caret"></span>
+          </button>
+          <div class="dropdown-menu lang" role="menu">
+            <div class="choose_lang"><%= link_to "<div class='inside_lang'><span class='text_lang'>RU</span>#{image_tag('ru.png', class: "locale_size")}</div>".html_safe, spree.set_locale_path(switch_to_locale: 'ru'), method: :post %></div>
+            <div class="choose_lang"><%= link_to "<div class='inside_lang'><span class='text_lang'>UK</span>#{image_tag('uk.png', class: "locale_size")}</div>".html_safe, spree.set_locale_path(switch_to_locale: 'uk'), method: :post %></div>
+          </div>
+        </div>
 
   </li>
+
 </ul>
