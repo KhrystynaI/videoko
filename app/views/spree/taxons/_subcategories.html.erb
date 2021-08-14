@@ -1,4 +1,4 @@
-<% cache([base_cache_key, taxon, 'subcategories', permitted_product_params(@taxon.id)]) do %>
+<%# cache([base_cache_key, taxon, 'subcategories', permitted_product_params(@taxon.id)]) do %>
   <% subcategories = [taxon] %>
   <% unless taxon.children.any? %>
     <% subcategories.unshift(taxon.parent) %>
@@ -23,4 +23,4 @@
     <% end %>
 
   <% end %>
-<% end %>
+<%# end %>

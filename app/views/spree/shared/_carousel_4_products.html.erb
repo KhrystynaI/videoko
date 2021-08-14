@@ -4,7 +4,7 @@
 <%role = spree_current_user.spree_roles.last.name%>
 <%end%>
 <% id_role = Spree::Role.find_by(name: role).id%>
-<% cache [common_product_cache_keys, products.each{|pr|pr.class.maximum(:updated_at)&.to_i}, id] do %>
+<%# cache [common_product_cache_keys, products.each{|pr|pr.class.maximum(:updated_at)&.to_i}, id] do %>
   <div id="<%= id %>-mobile" class="carousel slide d-md-none homepage-carousel" data-interval="false">
     <div class="carousel-inner">
       <% products.each_slice(2).with_index do |sliced_items, index| %>
@@ -96,4 +96,4 @@
       <% end %>
     </div>
   </div>
-<% end %>
+<%# end %>

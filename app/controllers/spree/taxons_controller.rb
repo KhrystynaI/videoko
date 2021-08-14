@@ -72,7 +72,7 @@ module Spree
     def etag
       @taxon_id = @taxon.id
       [
-        store_etag,
+        #store_etag,
         @taxon,
         available_option_types_cache_key(@taxon_id),
         filtering_params_cache_key(@taxon_id)
@@ -81,7 +81,7 @@ module Spree
 
     def carousel_etag
       [
-        store_etag,
+        #store_etag,
         @taxon
       ]
     end
