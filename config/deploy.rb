@@ -9,7 +9,7 @@ require 'mina/whenever'
  set :project_name, project_name
  set :domain, "3.144.96.175"
  set :deploy_to, "/home/ubuntu/#{project_name}"
- set :repository, "git@github.com:KhrystynaInzhuvatova/videoko.git"
+ set :repository, "git@github.com:KhrystynaI/videoko.git" 
  set :bundle_path, "/home/ubuntu/#{project_name}/shared/bundle"
  set :branch, ENV['branch'] || 'master'
 
