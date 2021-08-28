@@ -41,9 +41,19 @@
             <span class= "account_title"><%= Spree.t(:contact_us) %></span>
           </div>
 
-            <span class="address_info"><%= "#{Spree.t(:call_us)}:" %></span><span class="address_info"> <%= Spree::Config.first_phone%></span>
+            <span class="address_info"><%= Spree::Config.first_phone%></span>
             <br>
-              <span class="address_info"><%= "#{Spree.t(:email)}:" %></span><span class="address_info"> <%=Spree::Config.email%></span>
+            <span class="address_info"><%= Spree::Config.second_mob%></span>
+            <br>
+            <span class="address_info"><%= Spree::Config.viber%></span>
+            <br>
+            <span class="address_info"><%= Spree::Config.telegram%></span>
+            <br>
+            <span class="address_info"><%= Spree::Config.first_mob%></span>
+            <br>
+            <span class="address_info"><%= Spree::Config.second_mob%></span>
+            <br>
+            <span class="address_info"><%=Spree::Config.email%></span>
 
           </div>
 

@@ -24,10 +24,12 @@ Spree.config do |config|
     :subunit_to_unit => 100,
     :iso_code        => 'UAH',
     :name            => "Ukrainian Hryvnia",
-    :symbol          => "₴",
+    #:symbol          => "₴",
+    :symbol          => "грн.",
     :subunit         => "Kopiyka",
     :iso_numeric     => 230,
-    :html_entity     => "&#x20B4;",
+    #:html_entity     => "&#x20B4;",
+    :html_entity     => "грн.",
     :delimiter       => '.',
     :separator       => "."
   })
