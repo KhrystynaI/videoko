@@ -1,5 +1,5 @@
 SpreeEditor::Config.tap do |config|
-  config.ids = 'product_description product_short_description post_body page_body event_body'
+  config.ids = 'product_description product_short_description post_body about_body technical_support_body page_body event_body'
 
   # change the editor to CKEditor
   config.current_editor = 'CKEditor'

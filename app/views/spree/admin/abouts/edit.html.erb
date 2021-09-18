@@ -1,0 +1,18 @@
+
+<%= javascript_include_tag Ckeditor.cdn_url %>
+<%= javascript_include_tag 'ckeditor/config.js' %>
+<h3>Редагування "Про нас" </h3>
+<%= form_with model: [:admin,@about],local: true do |form| %>
+<%= form.hidden_field :locale, :value => :uk %>
+
+  <p>
+    <%= form.label :body, class: ['form-group']%><br>
+    <%= form.cktext_area :body, ckeditor: { toolbar: "Full",language: 'uk'} %>
+  </p>
+
+  <p>
+    <%= form.submit "Зберегти"%>
+  </p>
+
+<% end %>
+<%= link_to 'Повернутися', admin_about_path(@about.id) %>

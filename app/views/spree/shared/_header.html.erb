@@ -17,6 +17,9 @@
     <li class="header_ul_sidenav_li"><%= link_to Spree.t(root[:title]), spree.nested_taxons_path(root[:url]),class:"blue" %></li>
     <%end%>
 
+  <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.about_us'), spree.about_us_path, class: "blue" %></li>
+  <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.technical_support'), spree.technical_support_path, class: "blue" %></li>
+
   <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.contact'), spree.contact_us_path, class: "blue" %></li>
   <li class="header_ul_sidenav_li"><%= link_to Spree.t('homepage.news'), spree.posts_path, class: "blue" %></li>
   <% if !spree_user_signed_in? %>

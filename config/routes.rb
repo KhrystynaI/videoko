@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
     get "posts", controller: "posts", action: "index"
     get "post/:id", controller: "posts", action: "show", as: :post
+
+    get "about_us", controller: "abouts", action: "about_us",  as: :about_us
+    get "technical_support", controller: "technical_supports", action: "technical_support",  as: :technical_support  
+
     get "new/:order", controller: "offers", action: "new", as: :new_offer
     post "create", controller: "offers", action: "create"
     get "show/:id", controller: "offers", action: "show", as: :show_offer
@@ -77,6 +81,8 @@ Rails.application.routes.draw do
       get "post/destroy_video/:id", controller: "posts", action: "destroy_video",  as: :post_destroy_video
       get "post/create_ru_form", controller: "posts", action: "create_ru_form",  as: :create_ru_form
       post "post/create_ru", controller: "posts", action: "create_ru",  as: :post_translate
+      resources :abouts
+      resources :technical_supports
     end
 end
 end

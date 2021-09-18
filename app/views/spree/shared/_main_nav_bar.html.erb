@@ -36,6 +36,38 @@
 
 </li>
 <li ><%= link_to Spree.t('homepage.news'), spree.posts_path, class: " padding_main main-nav-bar-item main_nav" %></li>
-<li ><%= link_to Spree.t('homepage.contact'), spree.contact_us_path, class: " padding_main main-nav-bar-item main_nav" %></li>
-  </ul>
+
+
+<li>
+
+    <nav class="navbar-expand-lg">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav">
+
+  </button>
+  <div class="collapse navbar-collapse" id="main_nav">
+
+  <ul class="navbar-nav">
+  <li class="nav-item dropdown">
+      <span>
+        <%=  link_to Spree.t('homepage.about_us'), spree.about_us_path, class: "white padding_main main-nav-bar-item dis_link", data_toggle:"dropdown", id:"catalog"%>
+      </span>
+      <ul class="dropdown-menu catalog_inside">
+
+  	  <li>
+        <%= link_to Spree.t('homepage.technical_support'), spree.technical_support_path,class:"dropdown-item  main_nav list_catalog" %>
+         </li>
+
+         <li>
+           <%= link_to Spree.t('homepage.contact'), spree.contact_us_path,class:"dropdown-item  main_nav list_catalog" %>
+            </li>
+
+      </ul>
+     </li>
+    </ul>
+
+  </div>
+  </nav>
+
+ </li>
+ </ul>
 <% end %>
