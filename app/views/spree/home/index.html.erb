@@ -88,7 +88,7 @@
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
     <div class="homepage-taxon mb-3">
       <div class="card card_index" >
-        <%if !last_taxon.last.icon.nil?%>
+        <%if !last_taxon.icon.nil?%>
         <%= image_tag(main_app.url_for(last_taxon.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob") %>
         <%elsif File.exist?("app/assets/images/homepage/#{last_taxon.name}.png")%>
       <%= image_tag("homepage/#{last_taxon.name}.png", class: "d-block w-100 img_from_blob") %>
