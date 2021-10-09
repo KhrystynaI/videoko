@@ -16,6 +16,7 @@ module Spree
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 1))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 3))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 5))
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 7))
       taxons
     end
 
@@ -32,7 +33,13 @@ module Spree
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 2))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 4))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 6))
-      taxons  end
+      taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 8))
+      taxons
+     end
+
+    def last_taxon
+      Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 9)
+    end
 
     def spree_nav_cache_key(section = 'header')
       base_cache_key + [current_store, spree_navigation_data_cache_key, try_spree_current_user,I18n.locale, Spree::Config[:logo], section]
