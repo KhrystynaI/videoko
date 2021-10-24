@@ -1,0 +1,17 @@
+<div class="container">
+  <%= form_for [:admin, @image_footer], url: admin_image_footer_path(@image_footer.id) do |f| %>
+  <div class="form-group">
+    <%= f.label :number, "Номер катинки"%>
+    <br/>
+    <%= f.number_field :number, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture, "Фото"%>
+  <%= f.file_field :picture, direct_upload: true%>
+</div>
+  <div class='form-group'>
+    <%= f.submit 'Зберегти', class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+  <%end%>
+  <p><%=link_to "Повернутися", admin_image_footers_path%></p>
+</div>

@@ -1,5 +1,26 @@
 #footer{
-  background: linear-gradient(#FAF9F8 40%, #00336E 10%);
+  background-color: #00336E;
+  //background: linear-gradient(#FAF9F8 40%, #00336E 10%);
+}
+
+.center_text_footer{
+  align-items: center;
+  text-align: center;
+  color: #00336E !important;
+}
+
+#big_screen{
+  text-align: center;
+}
+
+#ipad{
+  text-align: center;
+  display: none;
+}
+
+#mobile{
+  text-align: center;
+  display: none;
 }
 
 #page-container {
@@ -141,6 +162,17 @@
 }
 
 @media (max-width: 1200px) {
+
+  #big_screen{
+    display: none;
+  }
+  #ipad{
+    display: block;
+  }
+  #mobile{
+    display: none;
+  }
+
   .img_from_blob{
     height: 25vw;
   }
@@ -153,6 +185,17 @@
 
 }
 @media (max-width: 940px) {
+  #big_screen{
+    display: none;
+  }
+  #mobile{
+    display: block;
+  }
+
+  #ipad{
+    display: none;
+  }
+
   .img_from_blob{
     height: 25vw;
   }
@@ -161,6 +204,7 @@
   }
 }
 @media (max-width: 850px) {
+
   .img_from_blob{
     height: 45vw;
   }

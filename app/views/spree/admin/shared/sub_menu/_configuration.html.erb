@@ -12,4 +12,5 @@
   <%= configurations_sidebar_menu_item("Новини", spree.admin_posts_path) if can? :manage, Spree::Post%>
   <%= configurations_sidebar_menu_item("Про нас", admin_about_path(Spree::About.last.id)) if can? :manage, Spree::About%>
   <%= configurations_sidebar_menu_item("Техпідтримка", admin_technical_support_path(Spree::TechnicalSupport.last.id)) if can? :manage, Spree::TechnicalSupport%>
+  <%= configurations_sidebar_menu_item("Картинки для каруселі", admin_image_footers_path)%>
 </ul>

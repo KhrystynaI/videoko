@@ -86,6 +86,7 @@
 
   <div class="row">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <%= link_to spree.nested_taxons_path(last_taxon.permalink), class:"link_btn" do %>
     <div class="homepage-taxon mb-3">
       <div class="card card_index" >
         <%if !last_taxon.icon.nil?%>
@@ -100,6 +101,7 @@
       </div>
     </div>
     </div>
+    <%end%>
   </div>
 </div>
 </div>

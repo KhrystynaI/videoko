@@ -111,4 +111,14 @@
   <% end %>
 
 </li>
+
+<li class="list-group-item">
+  <span>Заголовок під картинками на головній сторінці</span>
+  <%=Spree::Config.title_for_footer%>
+  <%= form_with url: spree.admin_change_path, local: true do |form| %>
+  <%= form.text_field :name_new %>
+  <%= form.hidden_field :name, :value => :title_for_footer %>
+  <%= form.submit 'Змінити' %>
+  <% end %>
+</li>
 </ul>

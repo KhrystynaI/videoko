@@ -59,6 +59,7 @@ module Spree
     preference :hours_week, :string, default: '09.00-18.00'
     preference :hours_weekend, :string, default: '09.00-15.00'
     preference :email_admin, :string, default: 'videoko2016@gmail.com'
+    preference :title_for_footer, :string, default: 'Акція'
     # Store credits configurations
     preference :non_expiring_credit_types, :array, default: []
     preference :credit_to_new_allocation, :boolean, default: false

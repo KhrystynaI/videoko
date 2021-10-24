@@ -1,0 +1,29 @@
+<%=link_to "Додати новий запис", new_admin_image_footer_path, class: "btn btn-primary btn-lg btn-block"%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">№</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@image_footers.each do |im|%>
+      <tr>
+        <td><%=link_to im.id, admin_image_footer_path(im.id)%></td>
+
+        <td><%=link_to Spree.t("delete"), admin_image_footer_path(id: im.id), method: :delete%></td>
+      </tr>
+      <%end%>
+    </tbody>
+    <div class="row pl-md-4 pl-sm-4">
+      <div class="col-12">
+        <div class="plp-pagination d-none d-lg-flex">
+          <%= paginate @image_footers, window: 2, theme: 'twitter-bootstrap-4' %>
+        </div>
+
+        <div class="plp-pagination d-lg-none">
+          <%= paginate @image_footers, window: 1, theme: 'twitter-bootstrap-4'%>
+        </div>
+      </div>
+    </div>
+    </table>
+</div>
