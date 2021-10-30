@@ -54,12 +54,14 @@
     <div class="container-fluid  header-spree-fluid margin_header">
 
       <div class="row justify-content-center logo_head">
-          <div>
-            <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0 float">
-              <%= link_to logo, root_path %>
+            <div class="col-1"></div>
+            <div class="col-1">
+            <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0">
+              <%#= link_to logo, root_path %>
+              <%= link_to image_tag("logo_2.png", id: "logo_2"), root_path%>
             </figure>
-            <span class="padding_top"><span class="zn_title"><span class="second"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></span></span></span>
           </div>
+            <div class="col-4 padding_top"><span class="zn_title"><span class="second"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></span></span></div>
         </div>
 
 
@@ -82,8 +84,8 @@
     <div class="zn_size">
       <div class="logo_second">
         <div class="center_second">
-          <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0 float">
-            <%= link_to logo, root_path %>
+          <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0">
+            <%= link_to image_tag("logo_3.png", id: "logo_3"), root_path%>
           </figure>
           <div class="log_small"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></div>
         </div>

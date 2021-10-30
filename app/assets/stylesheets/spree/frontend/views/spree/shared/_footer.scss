@@ -15,11 +15,20 @@
 
 #ipad{
   text-align: center;
-  display: none;
 }
 
 #mobile{
   text-align: center;
+}
+
+#carouselExampleControlsSecond{
+}
+
+#carouselExampleControlsSecondIpad{
+  display: none;
+}
+
+#carouselExampleControlsSecondMob{
   display: none;
 }
 
@@ -163,13 +172,15 @@
 
 @media (max-width: 1200px) {
 
-  #big_screen{
+  #carouselExampleControlsSecond{
     display: none;
   }
-  #ipad{
+
+  #carouselExampleControlsSecondIpad{
     display: block;
   }
-  #mobile{
+
+  #carouselExampleControlsSecondMob{
     display: none;
   }
 
@@ -185,15 +196,16 @@
 
 }
 @media (max-width: 940px) {
-  #big_screen{
+  #carouselExampleControlsSecond{
     display: none;
-  }
-  #mobile{
-    display: block;
   }
 
-  #ipad{
+  #carouselExampleControlsSecondIpad{
     display: none;
+  }
+
+  #carouselExampleControlsSecondMob{
+    display: block;
   }
 
   .img_from_blob{

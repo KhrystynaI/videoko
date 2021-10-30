@@ -154,14 +154,22 @@ ul.header_ul li{
   color: white;
   border-bottom: 0.1rem solid #6F6354;
   text-transform: uppercase;
-  font-size: 25px;
+  font-size: 2.1rem;
 }
 .second{
   border-bottom: 0.3rem solid #6F6354;
 }
 .padding_top{
   display: inline-block;
-  padding-top: 0.7rem;
+  padding-top: 2rem;
+}
+#logo_2{
+  width: 100%;
+  height: auto;
+}
+#logo_3{
+  width: 100%;
+  height: auto;
 }
 .white{
   font-size: 16px;
@@ -307,7 +315,7 @@ ul.header_ul li{
     }
 
     .zn_title{
-      font-size: 20px;
+      font-size: 1.9rem;
     }
 
     .padding_top{
@@ -342,7 +350,7 @@ ul.header_ul li{
       }
 
       .zn_title{
-        font-size: 20px;
+        font-size: 1.9rem;
       }
 
       .padding_top{
@@ -400,6 +408,7 @@ ul.header_ul li{
     display: flex;
 }
   .log_small{
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -443,7 +452,7 @@ ul.header_ul li{
       font-size: 25px;
     }
     img{
-      height: 2rem;
+      //height: 2rem;
     }
   }
   .cart-icon{
