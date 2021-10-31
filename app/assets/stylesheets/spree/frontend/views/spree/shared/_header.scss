@@ -160,13 +160,11 @@ ul.header_ul li{
   border-bottom: 0.3rem solid #6F6354;
 }
 .padding_top{
-  display: inline-block;
-  padding-top: 2rem;
+  //display: inline-block;
+  padding-top: 2%;
+  padding-left: 2%;
 }
-#logo_2{
-  width: 100%;
-  height: auto;
-}
+
 #logo_3{
   width: 100%;
   height: auto;
@@ -318,10 +316,6 @@ ul.header_ul li{
       font-size: 1.9rem;
     }
 
-    .padding_top{
-      padding-top: 1rem;
-    }
-
   .burger_size{
     flex: 0 0 16.6666666667%;
     max-width: 16.6666666667%;
@@ -351,10 +345,6 @@ ul.header_ul li{
 
       .zn_title{
         font-size: 1.9rem;
-      }
-
-      .padding_top{
-        padding-top: 1rem;
       }
 
     .burger_size{
