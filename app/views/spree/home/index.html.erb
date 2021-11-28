@@ -47,11 +47,11 @@
       <div class="homepage-taxon mb-3">
         <div class="card card_index" >
           <%if !tax.icon.nil?%>
-          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob") %>
+          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_1") %>
           <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
-        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob last_img_index") %>
+        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob_1 last_img_index_1") %>
         <%else%>
-        <%=image_tag("no_img.png", class: "d-block w-100 default_choose img_from_blob")%>
+        <%=image_tag("no_img.png", class: "d-block w-100 default_choose img_from_blob_1")%>
         <%end%>
         <div class="card-body">
           <button class="btn btn-block spree-btn index_btn"><%= Spree.t(tax.name)%></button>
@@ -68,11 +68,11 @@
       <div class="homepage-taxon mb-3">
         <div class="card card_index" >
           <%if !tax.icon.nil?%>
-          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob") %>
+          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_1") %>
           <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
-        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob last_img_index") %>
+        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob_1 last_img_index_1") %>
         <%else%>
-        <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob")%>
+        <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob_1")%>
         <%end%>
         <div class="card-body">
           <button class="btn btn-block spree-btn index_btn"><%= Spree.t(tax.name)%></button>
@@ -90,11 +90,11 @@
     <div class="homepage-taxon mb-3">
       <div class="card card_index" >
         <%if !last_taxon.icon.nil?%>
-        <%= image_tag(main_app.url_for(last_taxon.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob") %>
+        <%= image_tag(main_app.url_for(last_taxon.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_1") %>
         <%elsif File.exist?("app/assets/images/homepage/#{last_taxon.name}.png")%>
-      <%= image_tag("homepage/#{last_taxon.name}.png", class: "d-block w-100 img_from_blob") %>
+      <%= image_tag("homepage/#{last_taxon.name}.png", class: "d-block w-100 img_from_blob_1") %>
       <%else%>
-      <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob")%>
+      <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob_1")%>
       <%end%>
       <div class="card-body">
         <button class="btn btn-block spree-btn index_btn"><%= Spree.t(last_taxon.name)%></button>
