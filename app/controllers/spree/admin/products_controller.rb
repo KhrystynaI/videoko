@@ -57,7 +57,7 @@ module Spree
         respond_to do |format|
           format.html {}
           format.zip {
-            send_zip @product.images.map{|c|c.attachment}, filename: "images_" + @product.name + ".zip"
+            send_zip @product.images.map{|c|c.attachment}, filename: "images_" + @product.name + ".zip" if @product.images&.present?
           }
         end
       end
@@ -67,7 +67,7 @@ module Spree
         respond_to do |format|
           format.html {}
           format.zip {
-            send_zip @product.volume.images.attachments, filename: "3D_" + @product.name + ".zip"
+            send_zip @product.volume.images.attachments, filename: "3D_" + @product.name + ".zip" if @product.volume&.images&.attachments.present?
           }
         end
       end

@@ -4,7 +4,7 @@ class ExportProductsJob < ApplicationJob
   def perform(*args)
     attributes = %w{name short_description sku description available_on meta_description meta_keywords taxon_names options}
 
-   file = CSV.open(File.join(Rails.root, 'tmp', 'csv', 'file.csv'), "wb") do |csv|
+   file = CSV.open(File.join(Rails.root, 'upload', 'file.csv'), "wb") do |csv|
       csv << attributes
     Spree::Product.find_each(batch_size: 100) do |product|
       csv << [
@@ -28,6 +28,6 @@ class ExportProductsJob < ApplicationJob
   end
 
   after_perform do |job|
-    File.delete(Rails.root.join('tmp', 'csv', 'file.csv')) if File.exist?(Rails.root.join('tmp', 'csv', 'file.csv'))
+    File.delete(Rails.root.join('upload', 'file.csv')) if File.exist?(Rails.root.join('upload', 'file.csv'))
   end
 end
