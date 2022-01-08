@@ -86,6 +86,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage-send_zip (0.3.4)
+      rails (> 5.2)
+      rubyzip (< 3.0)
     activejob (6.0.3.2)
       activesupport (= 6.0.3.2)
       globalid (>= 0.3.6)
@@ -569,6 +572,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_storage-send_zip
   activestorage-validator (~> 0.1.2)
   aws-sdk-ec2 (~> 1)
   aws-sdk-s3 (~> 1)

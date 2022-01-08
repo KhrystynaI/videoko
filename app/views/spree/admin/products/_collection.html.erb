@@ -70,10 +70,13 @@
 
         <%end%>
         </td>
-            <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
+            <td class="actions actions-4 text-right" data-hook="admin_products_index_row_actions">
               <%= link_to_edit product, no_text: true, class: 'edit' if can?(:edit, product) && !product.deleted? %>
               <%= link_to_clone product, no_text: true, class: 'clone' if can?(:clone, product) %>
               <%= link_to_delete product, no_text: true if can?(:delete, product) && !product.deleted? %>
+              <%= link_to "CSV", export_product_admin_product_path(product.id, format: :csv), class: 'btn btn-primary export-btn'%>
+              <%= link_to "Images", export_images_admin_product_path(product.id, format: :zip), class: 'btn btn-primary export-btn'%>
+              <%= link_to "3D", export_volume_admin_product_path(product.id, format: :zip), class: 'btn btn-primary export-btn'%>
             </td>
           </tr>
       <% end %>

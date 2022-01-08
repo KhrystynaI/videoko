@@ -14,6 +14,9 @@
 <%= submit_tag("Завантажити CSV", class: "btn-success", icon: 'add')%>
 <%end%>
 <% end %>
+<hr/>
+<%= link_to 'Експортувати товари', admin_export_products_path, remote: true, class: 'btn btn-success' %>
+<hr/>
 
 <% content_for :page_actions do %>
 <p>&nbsp;</p>

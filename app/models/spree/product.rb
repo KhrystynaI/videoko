@@ -435,13 +435,25 @@ end
       end
     end
 
-    def self.to_csv
-      attributes = %w{sku name description short_description price_master taxon_name option_type_name variant_name}
+    def to_csv
+      attributes = %w{name short_description sku description available_on meta_description meta_keywords taxon_names options}
       CSV.generate(headers:true) do |csv|
         csv << attributes
-        all.each do |product|
-          csv << attributes.map{|atr| product.send(atr)}
+        csv << [
+          self.name,
+          self.short_description,
+          self.variants&.map{|v|v.sku}&.join(" "),
+          self.description,
+          self.available_on,
+          self.meta_description,
+          self.meta_keywords,
+          self.taxons&.map{|t|t.name}&.join(" "),
+          self.variants.map do |variant|
+          keys = variant.option_values.map{|c|c.option_type.presentation}
+          values = variant.option_values.map{|c|c.presentation}
+          Hash[keys.zip values]
         end
+        ]
       end
     end
 

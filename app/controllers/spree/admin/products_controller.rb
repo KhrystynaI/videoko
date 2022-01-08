@@ -6,6 +6,7 @@ require 'csv'
 module Spree
   module Admin
     class ProductsController < ResourceController
+      include ActiveStorage::SendZip
       helper 'spree/products'
 
       before_action :load_data, except: [:index, :rate, :destroy_video, :search_taxonomy]
@@ -33,7 +34,41 @@ module Spree
 
         respond_to do |format|
           format.html {respond_with(@collection)}
-          format.csv {send_data Spree::Product.all.to_csv}
+        end
+      end
+
+      def export_products
+        ExportProductsJob.perform_later
+        head :accepted
+      end
+
+      def export_product
+        @product = Product.friendly.find(params[:id])
+        respond_to do |format|
+          format.html {}
+          format.csv {
+            send_data(@product.to_csv, filename: @product.name + ".csv")
+          }
+        end
+      end
+
+      def export_images
+        @product = Product.friendly.find(params[:id])
+        respond_to do |format|
+          format.html {}
+          format.zip {
+            send_zip @product.images.map{|c|c.attachment}, filename: "images_" + @product.name + ".zip"
+          }
+        end
+      end
+
+      def export_volume
+        @product = Product.friendly.find(params[:id])
+        respond_to do |format|
+          format.html {}
+          format.zip {
+            send_zip @product.volume.images.attachments, filename: "3D_" + @product.name + ".zip"
+          }
         end
       end
 

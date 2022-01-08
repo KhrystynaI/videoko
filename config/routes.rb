@@ -29,6 +29,9 @@ Rails.application.routes.draw do
           post "related"
           get "related"
           get "related_first"
+          get "export_product/:id", action: "export_product", as: :export_product
+          get "export_images/:id", action: "export_images", as: :export_images
+          get "export_volume/:id", action: "export_volume", as: :export_volume
           resources :volumes
         end
       end
@@ -77,6 +80,8 @@ Rails.application.routes.draw do
       get "destroy_video/:id", controller: "products", action: "destroy_video",  as: :destroy_video
       get "search_taxonomy/:id", controller: "products", action: "search_taxonomy",  as: :search_taxonomy
       post "rate", controller: "products", action: "rate", as: :rate
+      get "export_products", controller: "products", action: "export_products", as: :export_products
+      
       resources :posts
       get "post/destroy_video/:id", controller: "posts", action: "destroy_video",  as: :post_destroy_video
       get "post/create_ru_form", controller: "posts", action: "create_ru_form",  as: :create_ru_form
