@@ -23,11 +23,11 @@
               <div class="homepage-taxon mb-3">
                 <div class="card card_index">
                     <%if !subcategory.icon.nil?%>
-                    <%= image_tag(main_app.url_for(subcategory.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_tax") %>
+                    <%= image_tag(main_app.url_for(subcategory.icon.try(:attachment)),class: "d-block w-100 im default_choose") %>
                     <%elsif File.exist?("app/assets/images/#{subcategory.parent.name}/#{subcategory.name}.png")%>
-                  <%= image_tag("#{subcategory.parent.name}/#{subcategory.name}.png", class: "d-block w-100 img_from_blob_tax index_img") %>
+                  <%= image_tag("#{subcategory.parent.name}/#{subcategory.name}.png", class: "d-block w-100 index_img") %>
                   <%else%>
-                  <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob_tax")%>
+                  <%=image_tag("no_img.png", class: "d-block w-100  default_choose")%>
                   <%end%>
                   <div class="card-body">
                     <button class="btn btn-block spree-btn index_btn"> <%=subcategory.name%></button>
