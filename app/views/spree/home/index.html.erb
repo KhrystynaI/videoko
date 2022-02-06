@@ -83,25 +83,4 @@
       <%end%>
     </div>
   </div>
-
-  <div class="row">
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-    <%= link_to spree.nested_taxons_path(last_taxon.permalink), class:"link_btn" do %>
-    <div class="homepage-taxon mb-3">
-      <div class="card card_index" >
-        <%if !last_taxon.icon.nil?%>
-        <%= image_tag(main_app.url_for(last_taxon.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_1") %>
-        <%elsif File.exist?("app/assets/images/homepage/#{last_taxon.name}.png")%>
-      <%= image_tag("homepage/#{last_taxon.name}.png", class: "d-block w-100 img_from_blob_1") %>
-      <%else%>
-      <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob_1")%>
-      <%end%>
-      <div class="card-body">
-        <button class="btn btn-block spree-btn index_btn"><%= Spree.t(last_taxon.name)%></button>
-      </div>
-    </div>
-    </div>
-    <%end%>
-  </div>
-</div>
 </div>
