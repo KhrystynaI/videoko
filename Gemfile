@@ -63,7 +63,7 @@ gem 'spree_gateway', '~> 3.7'
 gem 'spree_i18n', github: 'spree-contrib/spree_i18n'
 gem 'spree_globalize', github: 'spree-contrib/spree_globalize', branch: 'master'
 gem "mina"
-gem "skylight"
+#gem "skylight"
 gem 'searchkick'
 gem 'whenever', require: false
 gem 'mina-whenever', require: false
