@@ -86,6 +86,7 @@ task :deploy do
 
     on :launch do
       in_path(fetch(:current_path)) do
+        run "bundle exec whenever --update-crontab"
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
@@ -96,10 +97,6 @@ task :deploy do
   # run(:local){ say 'done' }
 end
 
-desc "Update the crontab file"
- task :update_crontab do
-   run "cd #{current_path} && bundle exec whenever --update-crontab"
- end
 # For help in making your deploy script, see the Mina documentation:
 #
 #  - https://github.com/mina-deploy/mina/tree/master/docs
