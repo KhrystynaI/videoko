@@ -86,7 +86,7 @@ task :deploy do
 
     on :launch do
       in_path(fetch(:current_path)) do
-        command "#{fetch(:bundle_bin)} exec whenever --update-crontab"
+        command "#{fetch(:bundle_path)} exec whenever --update-crontab #{fetch(:shared_path)} --set 'environment=#{fetch(:rails_env)}&path=#{fetch(:current_path)}'"
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
