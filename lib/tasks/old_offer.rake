@@ -1,6 +1,6 @@
 namespace :old_offer do
   desc "It deletes old offer"
-  task delete: :remote_environment do
+  task delete: :environment do
     uncomplete_offer = Spree::Offer.select{|offer| offer.status == "uncomplete"}
     uncomplete_offer.each do |offer|
       if offer.created_at + 30.day > Time.now

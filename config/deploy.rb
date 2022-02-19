@@ -12,7 +12,7 @@ require 'mina/whenever'
  set :repository, "git@github.com:KhrystynaI/videoko.git"
  set :bundle_path, "/home/ubuntu/#{project_name}/shared/bundle"
  set :branch, ENV['branch'] || 'master'
- 
+
  set :shared_dirs, fetch(:shared_dirs, []).push('storage', 'upload')
  set :shared_files, fetch(:shared_files, []).push(
    'config/master.key',
@@ -86,7 +86,7 @@ task :deploy do
 
     on :launch do
       in_path(fetch(:current_path)) do
-        invoke :'whenever:update'
+        command %{bundle exec whenever --update-crontab}
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
