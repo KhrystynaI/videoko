@@ -12,8 +12,7 @@ require 'mina/whenever'
  set :repository, "git@github.com:KhrystynaI/videoko.git"
  set :bundle_path, "/home/ubuntu/#{project_name}/shared/bundle"
  set :branch, ENV['branch'] || 'master'
- set :whenever_name, 'production'
-
+ 
  set :shared_dirs, fetch(:shared_dirs, []).push('storage', 'upload')
  set :shared_files, fetch(:shared_files, []).push(
    'config/master.key',
