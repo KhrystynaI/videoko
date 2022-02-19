@@ -86,7 +86,7 @@ task :deploy do
 
     on :launch do
       in_path(fetch(:current_path)) do
-        command %{bundle exec whenever --update-crontab}
+        command "#{fetch(:bundle_bin)} exec whenever --update-crontab"
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
