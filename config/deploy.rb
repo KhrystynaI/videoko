@@ -82,11 +82,12 @@ task :deploy do
     #invoke :'rails:db_create'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
+    invoke :'whenever:clear'
+    invoke :'whenever:write'
     invoke :'deploy:cleanup'
 
     on :launch do
       in_path(fetch(:current_path)) do
-        run "bundle exec whenever --update-crontab"
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
       end
