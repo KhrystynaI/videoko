@@ -243,7 +243,7 @@ end
       variants.any?
     end
 
-    def price_for_index(role_id: role_id)
+    def price_for_index(role_id: )
 
       if self.prices.count > 0
 
