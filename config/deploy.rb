@@ -81,9 +81,9 @@ task :deploy do
     invoke :'bundle:install'
     #invoke :'rails:db_create'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
-    invoke :'whenever:clear'
-    invoke :'whenever:write'
+    #invoke :'rails:assets_precompile'
+    #invoke :'whenever:clear'
+    #invoke :'whenever:write'
     invoke :'deploy:cleanup'
 
     on :launch do
