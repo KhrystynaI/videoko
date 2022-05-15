@@ -63,8 +63,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => '3.17.155.122', protocol: 'http' }
-  config.action_mailer.asset_host = 'http://3.17.155.122/:3000'
+  config.action_mailer.default_url_options = { :host => '18.219.91.125', protocol: 'https' }
+  config.action_mailer.asset_host = 'http://18.219.91.125/:3000'
 
   config.action_mailer.smtp_settings = {
   :address => Rails.application.credentials[:aws][:address],
