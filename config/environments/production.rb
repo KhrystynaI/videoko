@@ -54,7 +54,7 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  #config.cache_store = :redis_store, "redis://18.219.91.125:6379/0/cache", { expires_in: 90.minutes }
+  config.cache_store = :redis_store, "redis://#{Rails.application.credentials[:production][:url]}:6379/0/cache", { expires_in: 90.minutes }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
@@ -63,8 +63,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => '18.219.91.125', protocol: 'https' }
-  config.action_mailer.asset_host = 'http://18.219.91.125/:3000'
+  config.action_mailer.default_url_options = { :host => Rails.application.credentials[:production][:url], protocol: 'https' }
+  config.action_mailer.asset_host = "http://#{Rails.application.credentials[:production][:url]}/:3000"
 
   config.action_mailer.smtp_settings = {
   :address => Rails.application.credentials[:aws][:address],
