@@ -183,6 +183,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.7)
+    connection_pool (2.2.3)
     crass (1.0.6)
     css_parser (1.7.1)
       addressable
@@ -238,6 +239,7 @@ GEM
     glyphicons (1.0.2)
     hashie (4.1.0)
     highline (2.0.3)
+    hiredis (0.6.3)
     htmlentities (4.3.4)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
@@ -597,8 +599,10 @@ DEPENDENCIES
   capybara (>= 2.15)
   cocoon
   coffee-rails
+  connection_pool
   factory_bot_rails
   faker
+  hiredis
   image_optimizer
   intl-tel-input-rails
   jbuilder (~> 2.7)
@@ -611,7 +615,6 @@ DEPENDENCIES
   prawn-table
   puma (>= 4.3.12)
   rails (~> 6.0.1)
-  redis
   redis-rails
   rspec-activejob
   rspec-rails

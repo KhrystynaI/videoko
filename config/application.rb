@@ -22,6 +22,11 @@ module Videoko
     end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.cache_store = :redis_cache_store, {
+      url: "redis://#{Rails.application.credentials[:production][:url]}:6379/32",
+      pool_size: ENV.fetch('RAILS_MAX_THREADS') { 20 },
+      pool_timeout: 5
+    }
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}')]
     config.i18n.available_locales = [:ru, :uk]
     config.i18n.default_locale = :uk

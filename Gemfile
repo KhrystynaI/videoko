@@ -83,5 +83,6 @@ gem "cocoon"
 gem 'intl-tel-input-rails'
 gem 'activestorage-validator', '~> 0.1.2'
 gem 'active_storage-send_zip'
-gem 'redis'
+gem 'hiredis'
 gem 'redis-rails'
+gem 'connection_pool'

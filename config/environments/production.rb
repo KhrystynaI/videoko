@@ -54,8 +54,7 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  #config.cache_store = :redis_store, "redis://#{Rails.application.credentials[:production][:url]}:6379/0/cache", { expires_in: 90.minutes }
-
+  #config.cache_store = :redis_cache_store, { url:"#{Rails.application.credentials[:production][:url]}:6379/0/cache"
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "videoko_production"
