@@ -9,6 +9,7 @@
 //= require accounting.min
 //= require spree/frontend
 //= require spree/frontend/views/spree/products/cart_form
+//= require spree/frontend/views/spree/shared/products
 //= require spree/frontend/views/spree/contact_us/contacts/new
 //= require spree/frontend/header
 //= require intlTelInput

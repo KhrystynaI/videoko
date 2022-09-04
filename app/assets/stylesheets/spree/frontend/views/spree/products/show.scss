@@ -13,3 +13,21 @@
   padding-top: 0.5rem;
   text-align: center;
 }
+.product_desc_hidden{
+  text-align: center;
+  height: auto;
+  font-size: 14px;
+  line-height: 15px;
+  color: #655352;
+  overflow: visible;
+  font-weight: 400;
+}
+.product_card:hover{
+  transform: scale(1);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+@media (max-width: 800px){
+  .product_desc_hidden{
+    font-size: 0.7rem;
+  }
+}
