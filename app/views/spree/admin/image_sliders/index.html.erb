@@ -1,0 +1,18 @@
+<%=link_to "Додати новий запис", new_admin_image_slider_path, class: "btn btn-primary btn-lg btn-block"%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">№</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@image_sliders.each do |im|%>
+      <tr>
+        <td><%=link_to im.number, admin_image_slider_path(im.id)%></td>
+
+        <td><%=link_to Spree.t("delete"), admin_image_slider_path(id: im.id), method: :delete%></td>
+      </tr>
+      <%end%>
+    </tbody>
+    </table>
+</div>

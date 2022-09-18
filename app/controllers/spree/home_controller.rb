@@ -11,6 +11,7 @@ module Spree
     def home_etag
       [
         I18n.locale,
+        Spree::ImageSlider.all&.map{|c|c&.picture&.blob&.key},
         spree_current_user,
       ].compact
     end

@@ -7,7 +7,7 @@ require 'mina/whenever'
  project_name = 'videoko'
 
  set :project_name, project_name
- set :domain, Rails.application.credentials[:production][:url]
+ set :domain, "18.219.91.125"
  set :deploy_to, "/home/ubuntu/#{project_name}"
  set :repository, "git@github.com:KhrystynaI/videoko.git"
  set :bundle_path, "/home/ubuntu/#{project_name}/shared/bundle"
@@ -81,7 +81,7 @@ task :deploy do
     invoke :'bundle:install'
     #invoke :'rails:db_create'
     invoke :'rails:db_migrate'
-    #invoke :'rails:assets_precompile'
+    invoke :'rails:assets_precompile'
     #invoke :'whenever:clear'
     #invoke :'whenever:write'
     invoke :'deploy:cleanup'

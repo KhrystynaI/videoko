@@ -81,7 +81,7 @@ Rails.application.routes.draw do
       get "search_taxonomy/:id", controller: "products", action: "search_taxonomy",  as: :search_taxonomy
       post "rate", controller: "products", action: "rate", as: :rate
       get "export_products", controller: "products", action: "export_products", as: :export_products
-      
+
       resources :posts
       get "post/destroy_video/:id", controller: "posts", action: "destroy_video",  as: :post_destroy_video
       get "post/create_ru_form", controller: "posts", action: "create_ru_form",  as: :create_ru_form
@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       resources :abouts
       resources :technical_supports
       resources :image_footers
+      resources :image_sliders
     end
 end
 end

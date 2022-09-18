@@ -1,4 +1,4 @@
-<% @body_id = 'home' %>
+<% @body_id = "home" %>
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 
@@ -13,9 +13,9 @@
     </span>
     </a>
 
+    <%if Spree::ImageSlider.first.blank?%>
     <div class="carousel-inner">
       <div class="carousel-item active">
-
           <%= image_tag('homepage/car1.png', class: "d-block w-100 im") %>
         <div class="carousel-caption d-none d-md-block car-caption">
 <%#         <div class="col-6"><%= link_to Spree.t('homepage.shop_now'), spree.products_path, class: 'btn btn_catalog spree-btn px-5' </div> %>
@@ -35,6 +35,19 @@
         </div>
       </div>
       </div>
+    <%else%>
+    <div class="carousel-inner">
+    <%Spree::ImageSlider.all&.order(:number)&.each_with_index do |image, index|%>
+      <div class="carousel-item <%= 'active' if index == 0 %>">
+        <%= image_tag(main_app.url_for(image.picture), class: "d-block w-100 im") %>
+        <div class="carousel-caption d-none d-md-block car-caption">
+          <h1><%= Spree.t("homepage.main_title_first") %></h1>
+          <h1><%= Spree.t("homepage.main_title_second") %></h1>
+        </div>
+      </div>
+     <%end%>
+     </div>
+    <%end%>
 
   </div>
 
