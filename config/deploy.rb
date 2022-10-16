@@ -7,7 +7,7 @@ require 'mina/whenever'
  project_name = 'videoko'
 
  set :project_name, project_name
- set :domain, "18.219.91.125"
+ 
  set :deploy_to, "/home/ubuntu/#{project_name}"
  set :repository, "git@github.com:KhrystynaI/videoko.git"
  set :bundle_path, "/home/ubuntu/#{project_name}/shared/bundle"
