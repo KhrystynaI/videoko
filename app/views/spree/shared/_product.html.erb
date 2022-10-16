@@ -9,6 +9,9 @@
   <%#cache product_cache(product,id) do %>
   <div class="card-body-prod name_product" title="<%= product.name %>">
     <%= product.name %>
+    <%if product.existence%>
+    <p class="existence"><%=Spree.t(:existence) %></p>
+    <%end%>
   </div>
   <div class="card-footer money_product">
     <%if product.empty_price%>

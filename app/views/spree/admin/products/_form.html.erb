@@ -53,6 +53,13 @@
         <%= f.check_box :empty_price, class: 'form-control', id: "empty_price"%>
       <% end %>
     </div>
+    
+    <div >
+      <%= f.field_container :existence, class: ['form-group'] do %>
+        <%= f.label :existence, "Наявність товару" %>
+        <%= f.check_box :existence, class: 'form-control'%>
+      <% end %>
+    </div>
 <div id="prices">
 
       <%if f.object.default_variant.prices.count < 1%>

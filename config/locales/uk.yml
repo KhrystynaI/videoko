@@ -827,6 +827,7 @@ uk:
         other:
   spree:
     empty_price: Ціну уточнюйте
+    existence: Товар в наявності
     country_select: Оберіть країну
     nova_poshta_address: Населений пункт доставки (Відправлення "Новою поштою")
     nova_poshta_number: Номер відділення

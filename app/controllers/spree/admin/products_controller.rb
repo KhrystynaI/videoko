@@ -299,7 +299,7 @@ module Spree
       end
 
       def permit_params
-        params.require(:product).permit(:show, :video, :empty_price, :iframe, :related,prices_attributes:[:id,:role_id, :variant_id, :amount_usd])
+        params.require(:product).permit(:show, :video, :empty_price, :existence, :iframe, :related,prices_attributes:[:id,:role_id, :variant_id, :amount_usd])
       end
 
       def permit_related

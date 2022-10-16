@@ -5,6 +5,7 @@
         <th><%= Spree.t(:sku) %></th>
         <th><%= Spree.t(:status) %></th>
         <th><%= Spree.t(:name)%></th>
+        <th>Кількість</th>
         <th><%= Spree.t(:taxon) %></th>
         <th><%= Spree.t(:taxonomy) %></th>
         <th><%= Spree.t(:option_values) %></th>
@@ -18,6 +19,7 @@
             <td class="sku"><%= product.sku rescue '' %></td>
             <td class="status"><%= available_status(product) %> </td>
             <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
+            <td class="status"><%= product.count_size %> </td>
             <td class="taxon"><%= product.taxons.map{|c|c.name}.join(",") %></td>
             <td class="taxonomy"><%= product.taxons.first.taxonomy.name if product.taxons.count > 0%></td>
             <td class="option_values">

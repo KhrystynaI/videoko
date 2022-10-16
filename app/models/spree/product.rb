@@ -53,6 +53,7 @@ module Spree
       name: name.gsub('’', '').gsub("'", '').downcase.gsub(/\s+/, "").gsub('-', ''),
       active: available?,
       show: show,
+      existence: existence,
       created_at: created_at,
       updated_at: updated_at,
       taxon_ids: taxon_and_ancestors.map(&:id),
@@ -179,6 +180,7 @@ end
     before_validation :normalize_slug, on: :update
     before_validation :validate_master
     before_save :update_empty_price
+    before_save :update_existence_present
 
     with_options length: { maximum: 255 }, allow_blank: true do
       validates :meta_keywords
@@ -230,6 +232,14 @@ end
 
     def find_or_build_master
       master || build_master
+    end
+
+    def update_existence_present
+     if will_save_change_to_count_size? && changes_to_save[:count_size].last >=3
+       self.existence = true
+     elsif will_save_change_to_count_size? && changes_to_save[:count_size].last < 3
+       self.existence = false
+     end
     end
 
     def update_empty_price

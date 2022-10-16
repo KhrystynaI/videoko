@@ -740,6 +740,7 @@ ru:
         other: Пользователи
   spree:
     empty_price: Цену уточняйте
+    existence: Товар в наличии
     country_select: Выберите страну
     nova_poshta_address: Город доставки(Доставка "Новою поштою")
     nova_poshta_number: Номер отделения

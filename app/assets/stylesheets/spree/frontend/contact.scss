@@ -200,7 +200,6 @@ padding-left: 20%;
   &:hover{
     .name_product{
     color:white;
-
   }
 }
 &:hover{
@@ -213,6 +212,13 @@ padding-left: 20%;
   color:white;
 }
 }
+&:hover{
+  .name_product{
+  .existence{
+    color: white;
+   }
+  }
+ }
 }
 .products_image{
   justify-content: center;
