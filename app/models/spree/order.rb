@@ -367,6 +367,10 @@ module Spree
     end
 
     def deliver_order_confirmation_email
+      sns = Aws::SNS::Client.new(region: 'us-east-2', access_key_id: Rails.application.credentials[:sns][:access_key_id], secret_access_key: Rails.application.credentials[:sns][:secret_access_key])
+      sns.publish(phone_number: Spree::Config[:admin_phone],
+                  message: "Нове замовлення!")
+
       OrderMailer.confirm_email(id).deliver_later
       OrderMailer.inform_admin(id).deliver_later
       update_column(:confirmation_delivered, true)

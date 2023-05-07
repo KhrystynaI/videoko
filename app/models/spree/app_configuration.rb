@@ -51,6 +51,7 @@ module Spree
     preference :second_mob, :string, default: '(063) 295-2-295'
     preference :viber, :string, default: '(097) 295-2-295'
     preference :telegram, :string, default: '(097) 295-2-295'
+    preference :admin_phone, :string, default: '+3800992952295'
     preference :first_phone, :string, default: '(032) 295-1-295'
     preference :second_phone, :string, default: '(032) 295-2-295'
     preference :email, :string, default: 'videoko@ukr.net'
@@ -58,7 +59,7 @@ module Spree
     preference :street_ru, :string, default: 'Шевченка, 120'
     preference :hours_week, :string, default: '09.00-18.00'
     preference :hours_weekend, :string, default: '09.00-15.00'
-    preference :email_admin, :string, default: 'videoko2016@gmail.com'
+    preference :email_admin, :string, default: 'videoko@ukr.net'
     preference :title_for_footer, :string, default: 'Акція'
     # Store credits configurations
     preference :non_expiring_credit_types, :array, default: []

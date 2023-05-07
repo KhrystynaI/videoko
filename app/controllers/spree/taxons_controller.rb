@@ -63,7 +63,7 @@ module Spree
         @products = Spree::Product.search("*",where:{or:[ [ clean_query, variant_price]]},order:{params[:sort_by]=> sort}, page: curr_page, per_page: 9)
 
       else
-      @products = Spree::Product.search("*",where:{or:[ [ clean_query, variant_price]]},page: curr_page, per_page: 9)
+      @products = Spree::Product.search("*",where:{or:[ [ clean_query, variant_price]]}, order: {updated_at: :desc},page: curr_page, per_page: 9)
     end
     end
 

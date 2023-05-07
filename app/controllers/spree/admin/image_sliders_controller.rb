@@ -25,7 +25,7 @@ module Spree
           if @image_slider.save
             format.html { redirect_to admin_image_slider_path(@image_slider.id) }
           else
-            flash[:error] = "Розмір картинки має бути від 100 до 800 кілобайт і тип може бути тільки JPEG, JPG чи PNG. Номер слайду не може бути порожнім"
+            flash[:error] = "Oops" #"Розмір картинки має бути від 100 до 800 кілобайт і тип може бути тільки JPEG, JPG чи PNG. Номер слайду не може бути порожнім"
             format.html { redirect_to new_admin_image_slider_path }
           end
       end
@@ -37,7 +37,7 @@ module Spree
           if @image_slider.update(image_slider_params)
             format.html { redirect_to admin_image_slider_path(@image_slider.id) }
           else
-            flash[:error] = "Розмір картинки має бути від 100 до 800 кілобайт і тип може бути тільки JPEG, JPG чи PNG. Номер слайду не може бути порожнім"
+            flash[:error] = "Oops"#"Розмір картинки має бути від 100 до 800 кілобайт і тип може бути тільки JPEG, JPG чи PNG. Номер слайду не може бути порожнім"
             format.html { redirect_to admin_image_sliders_path }
           end
        end
@@ -53,7 +53,7 @@ module Spree
       private
 
       def image_slider_params
-        params.require(:image_slider).permit(:id, :number, :picture)
+        params.require(:image_slider).permit(:id, :number, :url, :picture)
      end
     end
   end

@@ -1,7 +1,16 @@
 <% @body_id = "home" %>
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-
+    <a class="index_car_pointer" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="d-flex justify-content-center align-items-center carousel-icon-control-rounded index_car" aria-hidden="true">
+      <%=image_tag("index_left.png")%>
+    </span>
+    </a>
+    <a class="right index_car_pointer" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="d-flex justify-content-center align-items-center carousel-icon-control-rounded index_car" aria-hidden="true">
+      <%=image_tag("index_right.png")%>
+    </span>
+    </a>
     <%if Spree::ImageSlider.first.blank?%>
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -16,6 +25,10 @@
     <%Spree::ImageSlider.all&.order(:number)&.each_with_index do |image, index|%>
       <div class="carousel-item <%= 'active' if index == 0 %>">
         <%= image_tag(main_app.url_for(image.picture), class: "d-block w-100 im") %>
+        <div class="carousel-caption d-none d-md-block car-caption">
+          <div class="col-6"><%= link_to "Перейти", image.url, class: 'btn btn_catalog spree-btn px-5'%></div>
+          <p></p>
+        </div>
       </div>
      <%end%>
      </div>

@@ -4,6 +4,6 @@ class StatusRepairMailer < ApplicationMailer
     @message = args[:message]
     @user_email = Spree::User.find(args[:user]).email
     @comment = args[:comment]
-    mail(to: @user_email, from: "noreply@videoko.com.ua", subject: "Новина про ремонт")
+    mail(to: @user_email, from: "videoko2016@gmail.com", subject: "Новина про ремонт")
   end
 end

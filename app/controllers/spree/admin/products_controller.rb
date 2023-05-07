@@ -72,6 +72,18 @@ module Spree
         end
       end
 
+      def export_all_pictures
+        @product = Product.friendly.find(params[:id])
+        respond_to do |format|
+          format.html {}
+          format.zip {
+    #        send_zip  "#{@product.sku}_image": @product.images.map{|c|c.attachment},
+    #                  "#{@product.sku}_3D_images": @product.volume&.images&.attachments
+
+                }
+        end
+      end
+
       def update
         if params[:product][:taxon_ids].present?
           params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')

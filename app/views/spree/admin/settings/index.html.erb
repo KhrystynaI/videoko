@@ -111,6 +111,16 @@
   <% end %>
 
 </li>
+<li class="list-group-item">
+  <span>Номер телефону на який приходять повідомлення про замовлення -- </span>
+  <%=Spree::Config.admin_phone%>
+  <%= form_with url: spree.admin_change_path, local: true do |form| %>
+  <%= form.text_field :name_new %>
+  <%= form.hidden_field :name, :value => :admin_phone %>
+  <%= form.submit 'Змінити' %>
+  <% end %>
+
+</li>
 
 <li class="list-group-item">
   <span>Заголовок під картинками на головній сторінці</span>

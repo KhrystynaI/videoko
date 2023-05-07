@@ -1,6 +1,7 @@
 <div class="container">
 
 <div><%=@image_slider.number%></div>
+<div><%=@image_slider.url%></div>
 <div><%= image_tag(main_app.url_for(@image_slider.picture), size: "300x150") if @image_slider.picture %></div>
 <p><%=link_to "Змінити", edit_admin_image_slider_path(@image_slider.id)%></p>
 <p><%=link_to "Повернутися", admin_image_sliders_path%></p>

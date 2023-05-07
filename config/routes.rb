@@ -32,6 +32,7 @@ Rails.application.routes.draw do
           get "export_product/:id", action: "export_product", as: :export_product
           get "export_images/:id", action: "export_images", as: :export_images
           get "export_volume/:id", action: "export_volume", as: :export_volume
+          get "export_all_pictures/:id", action: "export_all_pictures", as: :export_all_pictures
           resources :volumes
         end
       end
