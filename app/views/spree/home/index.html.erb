@@ -25,8 +25,8 @@
     <%Spree::ImageSlider.all&.order(:number)&.each_with_index do |image, index|%>
       <div class="carousel-item <%= 'active' if index == 0 %>">
         <%= image_tag(main_app.url_for(image.picture), class: "d-block w-100 im") %>
-        <div class="carousel-caption d-none d-md-block car-caption">
-          <div class="col-6"><%= link_to "Перейти", image.url, class: 'btn btn_catalog spree-btn px-5'%></div>
+        <div class="carousel-caption d-none d-md-block">
+          <div class="col-6"><%= link_to "Перейти", image.url, class: 'btn index_catalog_button btn_catalog spree-btn px-5'%></div>
           <p></p>
         </div>
       </div>

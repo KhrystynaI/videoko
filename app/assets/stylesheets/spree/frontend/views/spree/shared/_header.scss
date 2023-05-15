@@ -65,28 +65,28 @@
 }
 .index_car_pointer{
   position: absolute;
-  width: 85%;
-  /* margin-right: 10%; */
-  padding-top: 26%;
-  top: auto;
-  bottom: auto;
+  top: 50%;
   z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  opacity: 0.4;
-  transition: opacity 0.15s ease;
 }
 .right{
   right: 0;
 }
+.index_catalog_button{
+  border-color: #00336E;
+}
+.index_catalog_button:visited{
+  border-color: #00336E !important;
+}
 .index_car {
-  background: transparent !important;
+  //background: transparent !important;
   border: 2.5px solid white;
 }
-.car-caption{
-  bottom: 15% !important;
+
+.carousel-caption{
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 35%;
 }
 #search-drop{
   overflow-x: hidden;
