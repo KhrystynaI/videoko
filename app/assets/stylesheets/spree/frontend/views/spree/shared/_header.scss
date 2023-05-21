@@ -65,7 +65,7 @@
 }
 .index_car_pointer{
   position: absolute;
-  top: 50%;
+  top: 80%;
   z-index: 1;
 }
 .right{
@@ -85,8 +85,14 @@
 .carousel-caption{
   position: absolute;
   z-index: 10;
-  top: 50%;
+  top: 80%;
   left: 35%;
+}
+.right_pointer{
+  padding-right: 2%;
+}
+.left_pointer{
+  padding-left: 2%;
 }
 #search-drop{
   overflow-x: hidden;
