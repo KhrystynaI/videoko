@@ -258,12 +258,12 @@ end
       if self.prices.count > 0
 
       if self.default_variant.prices.blank?
-        self.prices.find_by(role_id: role_id).amount
+        self.prices.where(role_id: role_id).map{|c|c&.amount}
       else
         if self.variants.count > 0
-        self.variants.map{|c|c.prices.find_by(role_id: role_id).amount}
+        self.variants.map{|c|c.prices.find_by(role_id: role_id)&.amount}
       else
-        self.default_variant.prices.where(role_id: role_id).map{|c|c.amount}
+        self.default_variant.prices.where(role_id: role_id).map{|c|c&.amount}
       end
       end
      end
