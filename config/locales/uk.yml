@@ -827,7 +827,7 @@ uk:
         other:
   spree:
     empty_price: Ціну уточнюйте
-    existence: Товар в наявності
+    existence: Є в наявності
     country_select: Оберіть країну
     nova_poshta_address: Населений пункт доставки (Відправлення "Новою поштою")
     nova_poshta_number: Номер відділення
@@ -919,6 +919,8 @@ uk:
       title: сторінка
       price_sort: По ціні
       created_at: По даті
+      updated_at: По даті
+      existence: По наявності
       clear_all: Очистити
       done: Пошук
     18n:
