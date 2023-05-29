@@ -27,18 +27,22 @@
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 .existence {
+  font-size: 125%;
   color: #00336E;
   padding-top: 0.5rem;
-  -webkit-animation: flicker 2s infinite;
+  -webkit-animation: flicker 5s infinite;
 }
 @-webkit-keyframes flicker
 {
-0% {opacity:0;}
-9% {opacity:0;}
+0% {opacity:0.2;}
+5% {opacity:.3;}
+7% {opacity:.3;}
+9% {opacity:.4;}
 10% {opacity:.5;}
-13% {opacity:0;}
-20% {opacity:.5;}
-25% {opacity:1;}
+13% {opacity:.6;}
+20% {opacity:.7;}
+25% {opacity:.8;}
+55% {opacity:1;}
 }
 @media (max-width: 800px){
   .product_desc_hidden{

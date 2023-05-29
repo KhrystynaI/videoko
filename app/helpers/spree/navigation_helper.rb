@@ -18,7 +18,7 @@ module Spree
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 5))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 7))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 9))
-      taxons
+      taxons.compact
     end
 
     def cache_posts(posts)
@@ -36,7 +36,7 @@ module Spree
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 6))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 8))
       taxons.push(Spree::Taxon.where(depth:0, hide_from_nav: false).includes(:translations).find_by(position: 10))
-      taxons
+      taxons.compact
      end
 
     def last_taxon

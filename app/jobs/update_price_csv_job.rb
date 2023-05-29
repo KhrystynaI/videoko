@@ -26,7 +26,9 @@ class UpdatePriceCsvJob < ApplicationJob
         variant.product.update!(count_size: t['q']) if t['q'].present?
         prices.each do |key, value|
           variant.prices.where(role_id: Spree::Role.find_by(name: value)).each do |price|
-            price.update!(amount_usd: t[key])
+            price_is = t[key].blank? ? 0.00 : t[key]
+            price.update!(amount_usd: price_is)
+            price.variant.product.update!(empty_price: true) if key == "6" && t[key].blank?
           end
         end
       end

@@ -9,13 +9,22 @@
   <ul class="pt-1 plp-overlay-ul">
 
     <li class="p-3 plp-overlay-ul-li">
-      <a href="<%= url_for(permitted_params.merge(sort_by: 'created_at')) %>" >
+      <a href="<%= url_for(permitted_params.merge(sort_by: 'updated_at')) %>" >
         <div class="plp-empty-dot">
           <div class="filled-dot"></div>
         </div>
         <%= Spree.t('plp.created_at') %>
       </a>
     </li>
+    <li class="p-3 plp-overlay-ul-li">
+      <a href="<%= url_for(permitted_params.merge(sort_by: 'existence')) %>" >
+        <div class="plp-empty-dot">
+          <div class="filled-dot"></div>
+        </div>
+        <%= Spree.t('plp.existence') %>
+      </a>
+    </li>
+    
     <li class="p-3 plp-overlay-ul-li">
       <a href="<%= url_for(permitted_params.merge(sort_by: 'price')) %>" >
         <div class="plp-empty-dot">

@@ -15,7 +15,10 @@
   <div class="dropdown-menu sort">
     <ul class="pt-1 plp-sort-dropdown-ul">
       <li class="p-3 plp-sort-dropdown-ul-li">
-        <%= link_to Spree.t('plp.created_at'), url_for(permitted_params.merge(sort_by: 'created_at')) %>
+        <%= link_to Spree.t('plp.created_at'), url_for(permitted_params.merge(sort_by: 'updated_at')) %>
+      </li>
+      <li class="p-3 plp-sort-dropdown-ul-li">
+        <%= link_to Spree.t('plp.existence'), url_for(permitted_params.merge(sort_by: 'existence')) %>
       </li>
       <li class="p-3 plp-sort-dropdown-ul-li">
         <%= link_to Spree.t('plp.price_sort'), url_for(permitted_params.merge(sort_by: 'price')) %>
