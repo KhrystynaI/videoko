@@ -22,7 +22,7 @@
     <%= number_to_currency(price, unit: "грн.", separator: ".", delimiter: "", format: "%n %u") %>
     <%end%>
     <%else%>
-    <%= number_to_currency(0.00, unit: "грн.", separator: ".", delimiter: "", format: "%n %u") %>
+    <%= Spree.t(:empty_price) %>
     <%end%>
     <%end%>
   </div>

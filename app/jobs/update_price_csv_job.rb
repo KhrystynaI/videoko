@@ -24,11 +24,12 @@ class UpdatePriceCsvJob < ApplicationJob
 
       Spree::Variant.where(sku: t['id']).each do |variant|
         variant.product.update!(count_size: t['q']) if t['q'].present?
+
         prices.each do |key, value|
           variant.prices.where(role_id: Spree::Role.find_by(name: value)).each do |price|
-            price_is = t[key].blank? ? 0.00 : t[key]
+            price_is = t[key].blank? ? 0 : t[key]
             price.update!(amount_usd: price_is)
-            price.variant.product.update!(empty_price: true) if key == "6" && t[key].blank?
+            price.variant.product.update!(empty_price: true) if key == "6" && (t[key].blank? || price_is == 0)
           end
         end
       end

@@ -4,7 +4,11 @@
       <div class="d-table-cell"><%= Spree.t(:total) %>:</div>
       <div class="d-table-cell text-right">
         <span id='summary-order-total' data-currency="<%= Money::Currency.find(order.currency).symbol %>">
+          <% if order.line_items.map{|c|c.product.empty_price}.exclude?(true)%>
           <%= order.display_total.to_html %>
+          <%else%>
+          <%=Spree.t(:empty_price)%>
+          <%end%>
         </span>
       </div>
     </div>

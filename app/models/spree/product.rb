@@ -135,12 +135,14 @@ end
     has_one :master,
             -> { where is_master: true },
             inverse_of: :product,
-            class_name: 'Spree::Variant'
+            class_name: 'Spree::Variant',
+            dependent: :destroy
 
     has_many :variants,
              -> { where(is_master: false).order(:position) },
              inverse_of: :product,
-             class_name: 'Spree::Variant'
+             class_name: 'Spree::Variant',
+             dependent: :destroy
 
     has_many :variants_including_master,
              -> { order(:position) },
@@ -179,7 +181,7 @@ end
     after_touch :touch_taxons
     before_validation :normalize_slug, on: :update
     before_validation :validate_master
-    before_save :update_empty_price
+    #before_save :update_empty_price
     before_save :update_existence_present
 
     with_options length: { maximum: 255 }, allow_blank: true do
@@ -235,14 +237,16 @@ end
     end
 
     def update_existence_present
-     if will_save_change_to_count_size? && changes_to_save[:count_size].last >=3
+      if count_size.present? && count_size >=3
        self.existence = true
-     elsif will_save_change_to_count_size? && changes_to_save[:count_size].last < 3
+     elsif count_size.present? && count_size < 3
        self.existence = false
+       self.empty_price = true
      end
     end
 
     def update_empty_price
+      #логіку забрали в червні 2023
       if will_save_change_to_empty_price? && changes_to_save[:empty_price] == [false, true]
         UpdateEmptyPriceJob.perform_later(self.id)
       end
@@ -254,9 +258,7 @@ end
     end
 
     def price_for_index(role_id: )
-
       if self.prices.count > 0
-
       if self.default_variant.prices.blank?
         self.prices.where(role_id: role_id).map{|c|c&.amount}
       else

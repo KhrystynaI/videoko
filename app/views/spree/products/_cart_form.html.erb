@@ -22,14 +22,14 @@
   </div>
   <%end%>
   <%end%>
-    <%# if is_product_available_in_currency %>
+    <%if !@product.empty_price %>
       <div id="product-price" class="mb-2 text-center text-md-left add-to-cart-form-price" data-hook="product_price">
         <span class="price selling" content="<%= @product_price.to_d %>">
           <%= number_to_currency(@product_price, unit: "грн.", separator: ".", delimiter: "") %>
           </span>
         <span content="<%= current_currency %>"></span>
       </div>
-    <%# end %>
+    <% end %>
 
     <hr>
       <ul id="product-variants" class="product-variants">
@@ -58,7 +58,7 @@
 
         </div>
       </ul>
-    
+
     <% if @product.can_supply? %>
       <%= hidden_field_tag "variant_id", default_variant.id %>
 

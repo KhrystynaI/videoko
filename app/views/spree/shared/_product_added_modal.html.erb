@@ -38,7 +38,9 @@
             </div>
             <div class="col-8 col-sm-6 col-lg-4 py-1 product-added-modal-product-details">
               <div class="product-added-modal-product-details-name"></div>
+              <%if !@product.empty_price%>
               <div class="product-added-modal-product-details-price"></div>
+              <%end%>
             </div>
           </div>
         </div>

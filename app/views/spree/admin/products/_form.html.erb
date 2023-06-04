@@ -53,7 +53,7 @@
         <%= f.check_box :empty_price, class: 'form-control', id: "empty_price"%>
       <% end %>
     </div>
-    
+
     <div >
       <%= f.field_container :existence, class: ['form-group'] do %>
         <%= f.label :existence, "Наявність товару" %>
@@ -297,18 +297,18 @@
   </div>
 </div>
 <script>
-$( document ).ready(function() {
-  if ($('#empty_price').is(':checked')){
-      $("#prices").hide();
-  }
-$('#empty_price').change(function() {
+//$( document ).ready(function() {
+//  if ($('#empty_price').is(':checked')){
+//      $("#prices").hide();
+//  }
+//$('#empty_price').change(function() {
 
-  if (this.checked) {
-          $("#prices").hide();
-      }else{
-        $("#prices").show();
-      }
+//  if (this.checked) {
+//          $("#prices").hide();
+//      }else{
+//        $("#prices").show();
+//      }
 
-});
-});
+//});
+//});
 </script>

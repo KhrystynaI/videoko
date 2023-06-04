@@ -152,8 +152,17 @@ module Spree
             file.write(user_file.read)
         end
         file = user_file.original_filename
+        empty_product = []
+        CSV.foreach(user_file, headers: true, skip_blanks: true) do |t|
+
+        if Spree::Variant.find_by(sku: t['id']).nil?
+          empty_product.push(t['id'])
+        end
+      end
+
         UpdatePriceCsvJob.perform_later(file)
-        redirect_to admin_products_url, notice: "Ціни оновлюються.Зачекайте"
+        send_data(empty_product.to_csv, filename: "empty_products.csv")
+        #redirect_to admin_products_url, notice: "Ціни оновлюються.Зачекайте"
       end
 
       def related
