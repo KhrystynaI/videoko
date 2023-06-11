@@ -90,6 +90,7 @@ uk:
         password:
         password_confirmation:
         spree_roles:
+        phone: номер телефону
       spree/line_item:
         description: Опис
         name: Назва
@@ -407,6 +408,7 @@ uk:
         password: Пароль
         password_confirmation: Підтвердження пароля
         spree_roles:
+        phone: номер телефону
       spree/variant:
         cost_currency: Валюта
         cost_price: Собівартість

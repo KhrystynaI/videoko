@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     post "offer_address", controller: "offers", action: "offer_address", as: :offer_address
     get "offer_show/:id", controller: "offers", action: "offer_show", as: :offer_show
 
+    get "confirm_email/:id", controller: "users", action: "confirm_email", as: :confirm_email
+
     post "find_repair_phone_user", controller: "repairs", action: "find_repair_phone_user", as: :find_repair_phone_user
     post "find_repair_number_user", controller: "repairs", action: "find_repair_number_user", as: :find_repair_number_user
     get "check_repair", controller: "repairs", action: "check_repair", as: :check_repair

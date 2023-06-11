@@ -53,6 +53,7 @@ module Spree
       name: name.gsub('’', '').gsub("'", '').downcase.gsub(/\s+/, "").gsub('-', ''),
       active: available?,
       show: show,
+      sku: sku,
       existence: existence,
       created_at: created_at,
       updated_at: updated_at,
@@ -237,9 +238,9 @@ end
     end
 
     def update_existence_present
-      if count_size.present? && count_size >=3
+      if count_size.present? && count_size >=1
        self.existence = true
-     elsif count_size.present? && count_size < 3
+     elsif count_size.present? && count_size < 1
        self.existence = false
        self.empty_price = true
      end

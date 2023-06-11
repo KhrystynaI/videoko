@@ -1,5 +1,10 @@
 <div class="form-group mb-5">
-  <%= f.email_field :email, class: 'spree-flat-input', placeholder: Spree.t(:email) %>
+  <%= f.email_field :email, class: 'spree-flat-input', placeholder: Spree.t(:email),required: true %>
+</div>
+
+<div class="form-group mb-5" id="phone">
+  <%= f.telephone_field :phone, id: "phone_code",autocomplete: "off", class: 'spree-flat-input', placeholder: Spree.t(:phone),required: true %>
+  <%=f.hidden_field :phone, id:"real_phone"%>
 </div>
 
 <div class="form-group mb-4">
@@ -10,3 +15,28 @@
   <%= f.password_field :password_confirmation, class: 'spree-flat-input', placeholder: Spree.t(:confirm_password) %>
 </div>
 <div data-hook="signup_below_password_fields"></div>
+<script>
+document.addEventListener('turbolinks:load', function () {
+  $("#phone_code").intlTelInput({
+    allowDropdown: false,
+    autoHideDialCode: false,
+    separateDialCode: true,
+    onlyCountries: ["ua"]
+  });
+
+  $( "#phone_code" ).keyup(function(e) {
+    e.preventDefault();
+    var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var intlNumber = $("#phone_code").intlTelInput("getSelectedCountryData");
+    var final_phone = `+${intlNumber.dialCode+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+  });
+
+  $( "#phone_code" ).on('countrychange', function(e, countryData){
+    var intlNumber = countryData.dialCode;
+    var input_value = $( this ).val().replace(/\s/g, '').replace(/[()]/g, '');
+    var final_phone = `+${intlNumber+input_value}`
+    $("#real_phone").val(final_phone).trigger('change');
+})
+});
+</script>

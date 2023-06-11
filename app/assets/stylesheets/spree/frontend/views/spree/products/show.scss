@@ -1,3 +1,15 @@
+.red_confirmation{
+  color: red;
+}
+.green_confirmation{
+  color: green;
+  font-weight: bold;
+}
+.text-sku{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0.5rem
+}
 #rotation{
   max-width: 50rem;
   min-width: auto;

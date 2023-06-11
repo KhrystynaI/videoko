@@ -5,7 +5,11 @@
       <%= link_to Spree.t('nav_bar.log_in'), spree_login_path, class: "main_nav main-nav-bar-item main-nav-bar-button header_title_category"  %>
     </li>
     <%else%>
-    <li class="login_out"><%= link_to spree_current_user.full_name_header, spree_logout_path, class: "main_nav full_name main-nav-bar-button header_title_category", method: :get  %></li>
+    <%if spree_current_user.confirmed_at.blank?%>
+    <li class="login_out"><%= link_to spree_current_user.full_name_header, spree_logout_path, class: "main_nav full_name main-nav-bar-button header_title_category red_confirmation", method: :get  %></li>
+    <%else%>
+    <li class="login_out"><%= link_to spree_current_user.full_name_header, spree_logout_path, class: "main_nav full_name main-nav-bar-button header_title_category green_confirmation", method: :get  %></li>
+    <% end %>
   <% end %>
   <li id="link-to-cart">
     <%= render 'spree/shared/cart', class: 'display d-xl-inline-block cart-icon--xl', size: 36, item_count: 0 %>

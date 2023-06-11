@@ -1,10 +1,17 @@
 module Spree
   module UserDecorator
     def self.prepended(base)
+      base.validates :phone, :length => { :minimum => 13, :maximum => 13, :message => "повинен містити 13 цифр" }
+      base.validates_format_of :phone, :with =>  /\d[0-9]\)*\z/ , message: "не вірний"
       base.validates_uniqueness_of :sku, allow_blank: true
       base.has_many :offers, class_name: 'Spree::Offer',dependent: :destroy
       base.has_many :mutual_settlements, class_name: 'Spree::MutualSettlement',dependent: :destroy
       base.has_many :repairs, class_name: 'Spree::Repair',dependent: :destroy
+      base.before_create :create_confirmation_token
+    end
+
+    def create_confirmation_token
+      self.confirmation_token = SecureRandom.urlsafe_base64.to_s 
     end
 
     def full_name

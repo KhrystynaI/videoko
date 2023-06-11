@@ -27,6 +27,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
+      ConfirmMailer.send_confirmation(user: resource.id).deliver_now
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up
         sign_up(resource_name, resource)

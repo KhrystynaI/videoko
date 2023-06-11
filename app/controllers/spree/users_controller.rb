@@ -43,6 +43,19 @@ class Spree::UsersController < Spree::StoreController
     end
   end
 
+  def confirm_email
+    user = Spree::User.find_by(confirmation_token: params[:id])
+    if user
+      user.update!(confirmed_at: Time.now, confirmation_token: nil)
+
+      flash[:success] = "Дякуємо, акаунт підтверджено"
+      redirect_to spree.account_path(user)
+    else
+      flash[:error] = "Вибачте, такого користувача не існує"
+      redirect_to root_url
+  end
+end
+
   private
 
   def user_params

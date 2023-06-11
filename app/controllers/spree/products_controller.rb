@@ -18,17 +18,17 @@ module Spree
         price = get_price_range(params[:price])
         price.merge!(show: true, active: true)
 
-        @products = Spree::Product.search(query,fields:[:name],misspellings:false, where:price, order: {updated_at: :desc}, page: curr_page, per_page: 9)
+        @products = Spree::Product.search(query,fields:[:name, :sku],misspellings:false, where:price, order: {updated_at: :desc}, page: curr_page, per_page: 9)
       elsif  params[:price].present? && params[:sort_by].present?
         price = get_price_range(params[:price])
         price.merge!(show: true, active: true)
         params[:sort_by] == "price"? sort = :asc : sort = :desc
-        @products = Spree::Product.search(query,fields:[:name],misspellings:false, where:price, order:{params[:sort_by]=> sort}, page: curr_page, per_page: 9)
+        @products = Spree::Product.search(query,fields:[:name, :sku],misspellings:false, where:price, order:{params[:sort_by]=> sort}, page: curr_page, per_page: 9)
       elsif !params[:price].present? && params[:sort_by].present?
         params[:sort_by] == "price"? sort = :asc : sort = :desc
-        @products = Spree::Product.search(query,fields:[:name],misspellings:false, where:{show:true, active:true}, order:{params[:sort_by]=> sort},page: curr_page, per_page: 9)
+        @products = Spree::Product.search(query,fields:[:name, :sku],misspellings:false, where:{show:true, active:true}, order:{params[:sort_by]=> sort},page: curr_page, per_page: 9)
       else
-        @products = Spree::Product.search(query,fields:[:name],misspellings:false, where:{show:true, active:true}, order: {updated_at: :desc}, page: curr_page, per_page: 9)
+        @products = Spree::Product.search(query,fields:[:name, :sku],misspellings:false, where:{show:true, active:true}, order: {updated_at: :desc}, page: curr_page, per_page: 9)
       end
     elsif params[:price].present? && !params[:sort_by].present?
         first_query = params.permit!.to_h.reject{|key,value| key < "price"}.reject{|key,value| value.blank?}

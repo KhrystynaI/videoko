@@ -8,6 +8,7 @@ Spree.config do |config|
   Spree::PermittedAttributes.product_attributes << [:short_description,:related, :empty_price]
   Spree::PermittedAttributes.line_item_attributes << [:role_id_price]
   Spree::PermittedAttributes.address_attributes << [:nova_poshta_address,:nova_poshta_number]
+  Spree::PermittedAttributes.user_attributes << [:phone]
   SpreeI18n::Config.available_locales = [:uk, :ru] # displayed on frontend select box
   Spree::Frontend::Config[:locale] = :uk
   Spree::Backend::Config[:locale] =:uk

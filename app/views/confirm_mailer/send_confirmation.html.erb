@@ -1,0 +1,4 @@
+<h4> Вітання <%= @user_name %>!</h4>
+<p>Дякуємо за реєстрацію</p>
+
+<%= link_to "Підтвердити акаунт", spree.confirm_email_path(@confirmation_token), target: :_blank %>
