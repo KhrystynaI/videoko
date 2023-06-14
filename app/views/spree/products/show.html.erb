@@ -12,7 +12,7 @@
           <h1 class="mt-3 mt-md-0 text-center text-md-left product-details-title">
             <%= product_name ? @product.translations.find_by(locale: I18n.locale).name : @product.translations.find_by(locale: :uk).name%>
           </h1>
-          <p class="text-sku product-variants-variant-title"><%=@product.sku%></p>
+          <p class="text-sku product-variants-variant-title">Артикул: <%=@product.sku%></p>
           <div id="cart-form" data-hook="cart_form">
             <%= render 'cart_form', variant_change_identifier: 'productCarousel' %>
           </div>
