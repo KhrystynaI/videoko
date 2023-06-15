@@ -13,6 +13,7 @@ module Spree
         I18n.locale,
         Spree::ImageSlider.all&.map{|c|c&.picture&.blob&.key},
         spree_current_user,
+        "1"
       ].compact
     end
 
