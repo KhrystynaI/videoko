@@ -183,7 +183,7 @@ end
     before_validation :normalize_slug, on: :update
     before_validation :validate_master
     #before_save :update_empty_price
-    before_save :update_existence_present
+    #before_save :update_existence_present
 
     with_options length: { maximum: 255 }, allow_blank: true do
       validates :meta_keywords
@@ -238,11 +238,11 @@ end
     end
 
     def update_existence_present
+      #логіку забрали в червні 2023
       if count_size.present? && count_size >=1
        self.existence = true
      elsif count_size.present? && count_size < 1
        self.existence = false
-       self.empty_price = true
      end
     end
 
