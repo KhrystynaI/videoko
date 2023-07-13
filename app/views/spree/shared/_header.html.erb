@@ -1,6 +1,5 @@
 <%# leaving #spree-header div for legacy support  %>
-<% cache spree_nav_cache_key('header') do %>
-
+<%# cache spree_nav_cache_key('header') do %>
 <div id="spree-header" data-turbolinks-permanent>
   <div id="sidenav">
   <a href='#' class='closebtn' id="closeNav" >&times;</a>
@@ -49,59 +48,35 @@
   </div>
   <div id="sidenav_blue"></div>
 
+<div class="d-flex justify-content-between background-blue">
 
-  <header id="header" class="d-flex  align-items-center header-spree border-bottom">
-    <div class="container-fluid  header-spree-fluid margin_header">
+  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
+    <figure class="flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0">
+      <%= link_to image_tag("logo_5.png", id: "logo_new"), root_path%>
+    </figure>
+    <div class="center_vartical">
 
-      <div class="row justify-content-center logo_head">
-            <div class="col-1"></div>
-            <div class="col-1">
-            <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0">
-              <%#= link_to logo, root_path %>
-              <%= link_to image_tag("logo_2.png", id: "logo_2"), root_path%>
-            </figure>
-          </div>
-            <div class="col-4 padding_top"><span class="zn_title"><span class="second"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></span></span></div>
-        </div>
-
-
-
-      <div class="d-flex flex-nowrap align-items-center ">
-        <div class="burger_size">
-        <ul class="header_ul">
-          <li>
-        <%=link_to image_tag("burger.png" , class: "size_header"), "#", id:"openNav" %>
+    <ul class='header_ul'>
+      <li>
+        <%=link_to image_tag('burger.png' , class: 'size_header'), "#", id:'openNav' %>
       </li>
       <li>
         <%= link_to image_tag("search_button.png", class: "size_header"), "#", id: "search-icon" %>
       </li>
     </ul>
-
+    </div>
     <div id="search-drop">
       <%= render partial: 'spree/shared/search' %>
     </div>
+  </div>
+  <div class="col-xl-7 col-lg-7 col-md-5 col-sm-1 display_none_title">
+    <%= render partial: 'spree/shared/main_nav_bar' %>
+  </div>
+  <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3">
+    <div class="center_vartical">
+    <%= render partial: 'spree/shared/nav_bar' %>
     </div>
-    <div class="zn_size">
-      <div class="logo_second">
-        <div class="center_second">
-          <figure class="logo flex-grow-0 flex-xl-grow-1 order-xl-0 header-spree-fluid-logo m-0">
-            <%= link_to image_tag("logo_3.png", id: "logo_3"), root_path%>
-          </figure>
-          <div class="log_small"><%= link_to Spree.t('homepage.znak'), root_path, class:"dis_link"%></div>
-        </div>
-      </div>
-        <div id="main-nav-bar" class=" flex-grow-0 display h-100 header-spree-fluid-primary-navigation">
-          <%= render partial: 'spree/shared/main_nav_bar' %>
-        </div>
-      </div>
-      <div class="burger_size_last">
-        <div id="top-nav-bar" class="flex-grow-1 header-spree-fluid-secondary-navigation">
-          <%= render partial: 'spree/shared/nav_bar' %>
-        </div>
-        <%= render partial: 'spree/shared/mobile_navigation' %>
-      </div>
-    </div>
-    </div>
-  </header>
+  </div>
+ </div>
 </div>
-<%end %>
+<%#end %>

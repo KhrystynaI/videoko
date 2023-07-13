@@ -110,6 +110,7 @@
 .card_index{
   height: -webkit-fill-available;
   //border: 1px solid black;
+  background-color: rgb(250, 250, 250);
   padding: 0.5rem;
   &:hover{
     .index_btn {
@@ -169,6 +170,7 @@
 
 .default_choose{
   background: white;
+  //background: rgb(250, 250, 250);
 // border: 1px solid black;
 }
 

@@ -1,10 +1,29 @@
+.background-blue{
+  background-color: #00336E;
+}
 .breadcrumb li a{
   font-size: 1.3rem;
+}
+.padding_logo{
+  padding-left: 9.5px
 }
 .breadcrumb li {
   font-size: 1.3rem !important;
 }
-
+.center_vartical{
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.center_vartical ul{
+  margin: auto;
+}
+.z_index{
+  z-index: 100;
+}
+.card_log{
+  list-style: none;
+}
 .header-spree {
   background: #00336E;
 }
@@ -152,6 +171,7 @@ ul.header_ul li{
   text-decoration: none;
 }
 .header_ul{
+  padding-left: 8rem;
   list-style-type: none;
 }
 
@@ -295,7 +315,7 @@ ul.header_ul li{
   min-width: 5rem !important;
 }
 .size_header{
-  height: 2rem;
+  height: 1.6rem;
 }
 .btn_lang{
   color: white;
@@ -341,7 +361,9 @@ ul.header_ul li{
 }
 
 @media (max-width: 1340px){
-
+.title_main{
+  display: none;
+}
       .white{
         font-size: 16px !important;
       }
@@ -371,6 +393,11 @@ ul.header_ul li{
 
 }
 
+@media (max-width: 1100px) {
+.display_none_title{
+  display: none;
+  }
+}
 @media (max-width: 1230px) {
   .margin_header{
     margin-top: 1%;
@@ -418,9 +445,18 @@ ul.header_ul li{
 }
 
 @media (max-width: 576px) {
-  .full_name{
-    font-size: 0.6rem;
+#logo_new{
+  height: 3rem;
   }
+.center_vartical{
+  margin-left: 3.3rem;
+}
+  .full_name{
+    display: none;
+  }
+.login_out{
+  display: none;
+}
   .burger_size{
     flex: 0 0 25%;
     max-width: 25%;

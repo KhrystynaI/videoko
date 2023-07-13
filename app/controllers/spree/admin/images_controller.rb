@@ -3,7 +3,7 @@ module Spree
     class ImagesController < ResourceController
       before_action :load_edit_data, except: :index
       before_action :load_index_data, only: :index
-      before_action :resize_image, only: [:create, :update]
+      #before_action :resize_image, only: [:create, :update]
 
       create.before :set_viewable
       update.before :set_viewable
