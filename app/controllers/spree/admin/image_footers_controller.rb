@@ -54,7 +54,7 @@ module Spree
       private
 
       def image_footer_params
-        params.require(:image_footer).permit(:id, :number, :picture)
+        params.require(:image_footer).permit(:id, :number, :url, :picture)
      end
     end
   end

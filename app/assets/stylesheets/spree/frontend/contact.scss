@@ -1,6 +1,112 @@
 body{
   background-color: rgb(250, 250, 250);
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
+.width_card{
+  max-width: 15rem;
+}
+.background_color{
+  background-color: rgb(250, 250, 250);
+}
+.index_front_size{
+  //font-size: 1.1vw;
+  overflow: hidden;
+  white-space: normal;
+}
+.car_pointer_new_item{
+  text-align: end;
+}
+.new_item_button{
+  width: 2%;
+}
+.car_new_item{
+  text-decoration: none;
+  &:link { text-decoration: none; }
+  &:visited { text-decoration: none; }
+  &:hover { text-decoration: none; }
+  &:active { text-decoration: none; }
+}
+#carouselControlsNewsProducts{
+  min-width: 100%;
+}
+.im_index{
+  object-fit: cover;
+}
+
+.index_icons{
+  width: 5%;
+  opacity: 1;
+}
+.index_li_category{
+  padding-inline-start: 0;
+  list-style-type: none;
+  display: inline-flex;
+}
+.ul_index{
+  padding-left: 0;
+  list-style-type: none;
+}
+.without_left_padding{
+  padding-left: 0;
+}
+.li_index{
+padding-inline: 1%;
+}
+.li_index_taxon a{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+}
+.without_margin_index{
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.minutes {
+  display: flex;
+  justify-content: center;
+}
+
+.minute {
+  bottom: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+.minute_first {
+  bottom: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+.wipe-in {
+  opacity: 1;
+  transition: transform 3s, opacity 3s;
+  transform: translateY(-0%);
+}
+
+.wipe-out {
+  opacity: 0;
+  transition: transform 2700ms, opacity 2700ms;
+  transform: translateY(-365%);
+}
+
+
+.wipe-in-first {
+  opacity: 1;
+  transition: transform 3s, opacity 3s;
+  transform: translateY(-0%);
+}
+
+.wipe-out-first {
+  opacity: 0;
+  transition: transform 2700ms, opacity 2700ms;
+  transform: translateY(-365%);
+}
+
 .plp-filters-card-header{
   background-color: rgb(250, 250, 250);
 }
@@ -353,11 +459,20 @@ color: #000000;
 
 }
 .carousel-icon-control-rounded{
-  background: #00336E;
+  background: rgb(250, 250, 250);
   mix-blend-mode: normal;
   box-shadow: -6px 0px 6px #070707;
   width: 3rem;
   height: 3rem;
+}
+.with_opacity{
+  opacity: 0.6;
+  &:hover{
+    opacity: 1;
+  }
+}
+.filter_for_carousel{
+  filter: brightness(0.8);
 }
 .arrow{
   overflow: hidden;
@@ -400,6 +515,9 @@ color: #000000;
   }
 
 @media (max-width: 1000px){
+  .index_icons{
+    display: none;
+  }
   .im_big{
     display: none !important;
   }
@@ -418,6 +536,12 @@ color: #000000;
 	}
 }
 @media (max-width: 800px){
+.filter_for_carousel{
+  display: none;
+}
+.padding_bottom_index{
+  padding-bottom: 10px;
+}
 	.center_span{
 		font-size: 1rem;
 	}

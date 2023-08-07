@@ -13,7 +13,7 @@
             <div class="row carousel-items-container">
               <% sliced_items.each_with_index do |item, idx| %>
                 <div class="col-6">
-                  <%= render 'spree/shared/product', product: item, id: id_role, image_class: 'w-100' %>
+                  <%= render 'spree/shared/product', product: item, id: id_role, image_class: 'w-100', width_card: "" %>
                 </div>
               <% end %>
             </div>
@@ -85,7 +85,7 @@
             <div class="row carousel-items-container">
               <% sliced_items.each do |item| %>
                 <div class="col-3">
-                  <%= render 'spree/shared/product', product: item, id: id_role,image_class: 'w-100' %>
+                  <%= render 'spree/shared/product', product: item, id: id_role,image_class: 'w-100', width_card: "" %>
                 </div>
               <% end %>
             </div>

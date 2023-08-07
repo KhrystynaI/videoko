@@ -5,7 +5,7 @@ SpreeEditor::Config.tap do |config|
   config.current_editor = 'CKEditor'
 end
 Spree.config do |config|
-  Spree::PermittedAttributes.product_attributes << [:short_description,:related, :empty_price]
+  Spree::PermittedAttributes.product_attributes << [:short_description,:related, :empty_price, :existence, :count_size, :new_item]
   Spree::PermittedAttributes.line_item_attributes << [:role_id_price]
   Spree::PermittedAttributes.address_attributes << [:nova_poshta_address,:nova_poshta_number]
   Spree::PermittedAttributes.user_attributes << [:phone]

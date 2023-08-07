@@ -1,7 +1,7 @@
 <% url = spree.product_path(product, taxon_id: @taxon&.id) %>
 
 
-<div class="card card_index product_card" >
+<div class="card card_index product_card <%=width_card%>" >
     <%= link_to url, class: 'h-100 flex-column justify-content-between display_flex' do %>
   <div class="default_choose  products_image">
     <%= plp_and_carousel_image(product, image_class) %>

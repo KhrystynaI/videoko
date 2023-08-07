@@ -1,0 +1,72 @@
+<%if spree_current_user.nil? || spree_current_user.spree_roles.last.name == "admin"%>
+<%role = "rozdrib"%>
+<%else%>
+<%role = spree_current_user.spree_roles.last.name%>
+<%end%>
+<% id_role = Spree::Role.find_by(name: role).id%>
+<h4 class="center_text_footer">новинки</h4>
+<div class="row without_margin_index">
+  <div id="carouselControlsNewsProducts" class="carousel slide" data-ride="carousel">
+
+    <div class="car_pointer_new_item">
+      <a class="car_new_item" href="#carouselControlsNewsProducts" role="button" data-slide="prev">
+      <span><%=image_tag("new_item_prev.png", class: "new_item_button")%></span>
+      </a>
+      <a class="car_new_item" href="#carouselControlsNewsProducts" role="button" data-slide="next">
+      <span><%=image_tag("new_item_next.png", class: "new_item_button")%></span>
+      </a>
+</div>
+<div>&nbsp;</div>
+
+    <span class="big_screen">
+    <div class="carousel-inner">
+    <% products.each_slice(6).with_index do |sliced_items, index| %>
+    <div class="carousel-item <%= 'active' if index == 0 %>">
+     <% sliced_items.each do |item| %>
+     <ul style="display: inline-block;list-style-type: none;">
+     <li>
+     <%= render 'spree/shared/product', product: item, id: id_role,image_class: '', width_card: "width_card" %>
+    </li>
+    </ul>
+    <%end%>
+    </div>
+    <%end%>
+    </div>
+    </span>
+
+    <span class="ipad">
+    <div class="carousel-inner">
+    <% products.each_slice(3).with_index do |sliced_items, index| %>
+    <div class="carousel-item <%= 'active' if index == 0 %>">
+     <% sliced_items.each do |item| %>
+     <ul style="display: inline-block;list-style-type: none;">
+     <li>
+     <%= render 'spree/shared/product', product: item, id: id_role,image_class: '', width_card: "width_card" %>
+    </li>
+    </ul>
+    <%end%>
+    </div>
+    <%end%>
+    </div>
+
+    </span>
+
+    <span class="mobile_car">
+    <div class="carousel-inner">
+    <% products.each_slice(2).with_index do |sliced_items, index| %>
+    <div class="carousel-item <%= 'active' if index == 0 %>">
+     <% sliced_items.each do |item| %>
+     <ul style="display: inline-block;list-style-type: none;">
+     <li>
+     <%= render 'spree/shared/product', product: item, id: id_role,image_class: '', width_card: "width_card" %>
+    </li>
+    </ul>
+    <%end%>
+    </div>
+    <%end%>
+    </div>
+    </span>
+
+
+   </div>
+</div>

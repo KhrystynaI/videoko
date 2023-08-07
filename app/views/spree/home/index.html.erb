@@ -1,16 +1,16 @@
 <% @body_id = "home" %>
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <a class="index_car_pointer left_pointer" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="d-flex justify-content-center align-items-center carousel-icon-control-rounded index_car" aria-hidden="true">
-      <%=image_tag("index_left.png")%>
+    <a class="carousel-control-prev index_icons" href="#carouselExampleControls" data-slide="prev">
+    <span >
+      <%=image_tag("index-prev.png")%>
     </span>
-    </a>
-    <a class="right right_pointer index_car_pointer" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="d-flex justify-content-center align-items-center carousel-icon-control-rounded index_car" aria-hidden="true">
-      <%=image_tag("index_right.png")%>
+  </a>
+  <a class="carousel-control-next index_icons" href="#carouselExampleControls" data-slide="next">
+    <span >
+      <%=image_tag("index-next.png")%>
     </span>
-    </a>
+  </a>
     <%if Spree::ImageSlider.first.blank?%>
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -24,11 +24,7 @@
     <div class="carousel-inner">
     <%Spree::ImageSlider.all&.order(:number)&.each_with_index do |image, index|%>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <%= image_tag(main_app.url_for(image.picture), class: "d-block w-100 im") %>
-        <div class="carousel-caption d-none d-md-block">
-          <div class="col-6"><%= link_to "Перейти", image.url, class: 'btn index_catalog_button btn_catalog spree-btn px-5'%></div>
-          <p></p>
-        </div>
+        <%= link_to image_tag(main_app.url_for(image.picture), class: "d-block w-100 im"), image.url %>
       </div>
      <%end%>
      </div>
@@ -37,48 +33,124 @@
   </div>
 
 <div>&nbsp;</div>
-<div class="container">
-  <div class="row">
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-      <%for_index_first.each do |tax|%>
-      <%= link_to spree.nested_taxons_path(tax.permalink), class:"link_btn" do %>
-      <div class="homepage-taxon mb-3">
-        <div class="card card_index" >
-          <%if !tax.icon.nil?%>
-          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_1") %>
-          <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
-        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob_1 last_img_index_1") %>
-        <%else%>
-        <%=image_tag("no_img.png", class: "d-block w-100 default_choose img_from_blob_1")%>
-        <%end%>
-        <div class="card-body">
-          <button class="btn btn-block spree-btn index_btn"><%= Spree.t(tax.name)%></button>
-        </div>
-      </div>
-      </div>
-      <%end%>
-      <%end%>
-    </div>
 
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-      <%for_index_last.each do |tax|%>
-      <%= link_to spree.nested_taxons_path(tax.permalink), class:"link_btn" do %>
-      <div class="homepage-taxon mb-3">
-        <div class="card card_index" >
-          <%if !tax.icon.nil?%>
-          <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im default_choose img_from_blob_1") %>
-          <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
-        <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 img_from_blob_1 last_img_index_1") %>
-        <%else%>
-        <%=image_tag("no_img.png", class: "d-block w-100  default_choose img_from_blob_1")%>
-        <%end%>
-        <div class="card-body">
-          <button class="btn btn-block spree-btn index_btn"><%= Spree.t(tax.name)%></button>
-        </div>
-      </div>
-      </div>
-      <%end%>
-      <%end%>
-    </div>
-  </div>
+
+<div id="carouselExampleControlsSecond" class="carousel slide" data-ride="carousel">
+<div class="carousel-inner">
+
+<span class="big_screen">
+ <%Spree::ImageFooter.all&.order(:number)&.each_slice(6)&.with_index do |image, index|%>
+<div class="carousel-item <%= 'active' if index == 0 %>">
+ <%image.each do |im|%>
+ <ul style="display: inline-block;list-style-type: none;">
+ <li>
+ <%= link_to image_tag(main_app.url_for(im.picture.variant(resize_to_limit: [250, 150])), class: "d-block w-100 im"), im.url%>
+</li>
+</ul>
+<%end%>
 </div>
+<%end%>
+</span>
+
+
+<span class="ipad">
+<%Spree::ImageFooter.all&.order(:number)&.each_slice(4)&.with_index do |image, index|%>
+<div class="carousel-item <%= 'active' if index == 0 %>">
+<%image.each do |im|%>
+<ul style="display: inline-block;list-style-type: none;">
+<li>
+<%= link_to image_tag(main_app.url_for(im.picture.variant(resize_to_limit: [150, 100])), class: "d-block w-100 im"), im.url%>
+</li>
+</ul>
+<%end%>
+</div>
+<%end%>
+</span>
+
+
+<span class="mobile_car">
+ <%Spree::ImageFooter.all&.order(:number)&.each_slice(3)&.with_index do |image, index|%>
+<div class="carousel-item <%= 'active' if index == 0 %>">
+ <%image.each do |im|%>
+ <ul style="display: inline-block;list-style-type: none;">
+ <li>
+ <%= link_to image_tag(main_app.url_for(im.picture.variant(resize_to_limit: [90, 60])), class: "d-block w-100 im"), im.url%>
+</li>
+</ul>
+<%end%>
+</div>
+<%end%>
+</span>
+
+</div>
+<a class="carousel-control-prev" href="#carouselExampleControlsSecond" role="button" data-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleControlsSecond" role="button" data-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+<span class="sr-only">Next</span>
+</a>
+</div>
+
+
+
+
+<div class="row without_margin_index">
+  <ul class="index_li_category">
+    <%for_index_first.each do |tax|%>
+    <li class="li_index">
+      <%= link_to spree.nested_taxons_path(tax.permalink), class:"" do %>
+      <div class="card background_color" >
+      <%if !tax.icon.nil?%>
+      <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im im_index") %>
+      <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
+      <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 im") %>
+      <%else%>
+      <%=image_tag("img_def.png", class: "d-block w-100 im")%>
+      <%end%>
+    <div class="card-body without_left_padding">
+      <ul class="ul_index">
+      <%tax.children.where(hide_from_nav: false).each do |item|%>
+        <li class="li_index_taxon blue index_front_size"><%=link_to item.name, spree.nested_taxons_path(item, params: permitted_product_params(item.id))%></li>
+      <%end%>
+      </ul>
+    </div>
+      <%end%>
+      </div>
+    </li>
+    <%end%>
+  </ul>
+</div>
+
+
+<div class="row without_margin_index">
+  <ul class="index_li_category">
+    <%for_index_last.each do |tax|%>
+    <li class="li_index">
+      <%= link_to spree.nested_taxons_path(tax.permalink), class:"" do %>
+      <div class="card background_color" >
+      <%if !tax.icon.nil?%>
+      <%= image_tag(main_app.url_for(tax.icon.try(:attachment)),class: "d-block w-100 im im_index") %>
+      <%elsif File.exist?("app/assets/images/homepage/#{tax.name}.png")%>
+      <%= image_tag("homepage/#{tax.name}.png", class: "d-block w-100 im") %>
+      <%else%>
+      <%=image_tag("img_def.png", class: "d-block w-100 im")%>
+      <%end%>
+    <div class="card-body without_left_padding">
+      <ul class="ul_index">
+      <%tax.children.where(hide_from_nav: false).each do |item|%>
+        <li class="li_index_taxon blue index_front_size"><%=link_to item.name, spree.nested_taxons_path(item, params: permitted_product_params(item.id))%></li>
+      <%end%>
+      </ul>
+    </div>
+      <%end%>
+      </div>
+    </li>
+    <%end%>
+  </ul>
+</div>
+
+<%if @products.size > 0%>
+<%= render 'spree/shared/carousel_4_products_index', id: 'new-products-carousel', products: @products %>
+<%end%>

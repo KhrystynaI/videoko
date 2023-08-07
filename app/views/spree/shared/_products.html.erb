@@ -19,7 +19,7 @@
 
       <% products.each_with_index do |product, index| %>
         <div id="product_<%= product.id %>" class="col-sm-4 col-6 mb-3 mb-md-4 pr-sm-0 pr-md-0 pl-md-4 pl-sm-4 ">
-          <%= render 'spree/shared/product', product: product, id: id, image_class: 'product-component-plp-image' %>
+          <%= render 'spree/shared/product', product: product, id: id, image_class: 'product-component-plp-image', width_card: "" %>
         </div>
       <% end %>
 

@@ -60,6 +60,13 @@
         <%= f.check_box :existence, class: 'form-control'%>
       <% end %>
     </div>
+
+    <div >
+      <%= f.field_container :new_item, class: ['form-group'] do %>
+        <%= f.label :new_item, "Новинка" %>
+        <%= f.check_box :new_item, class: 'form-control'%>
+      <% end %>
+    </div>
 <div id="prices">
 
       <%if f.object.default_variant.prices.count < 1%>

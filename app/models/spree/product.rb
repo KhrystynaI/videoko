@@ -55,6 +55,7 @@ module Spree
       show: show,
       sku: sku,
       existence: existence,
+      new_item: new_item,
       created_at: created_at,
       updated_at: updated_at,
       taxon_ids: taxon_and_ancestors.map(&:id),
@@ -352,8 +353,13 @@ end
     # for adding products which are closely related to existing ones
     # define "duplicate_extra" for site-specific actions, eg for additional fields
     def duplicate
-      duplicator = ProductDuplicator.new(self)
-      duplicator.duplicate
+      new_product = self.deep_dup
+      new_product.slug = "#{self.slug}_clone"
+      new_product.count_size = 0
+      new_product.taxons = self.taxons
+      new_product.option_types = self.option_types
+      new_product.save!
+      new_product
     end
 
     # use deleted? rather than checking the attribute directly. this

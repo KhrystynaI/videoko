@@ -1,34 +1,33 @@
 #footer{
   background-color: #00336E;
+  width: -webkit-fill-available;
+    margin-top: auto;
   //background: linear-gradient(#FAF9F8 40%, #00336E 10%);
 }
 
 .center_text_footer{
-  align-items: center;
   text-align: center;
   color: #00336E !important;
 }
 
-#big_screen{
+.big_screen{
   text-align: center;
 }
 
-#ipad{
+.ipad{
   text-align: center;
 }
 
-#mobile{
+.mobile_car{
   text-align: center;
 }
 
-#carouselExampleControlsSecond{
-}
 
-#carouselExampleControlsSecondIpad{
+.ipad{
   display: none;
 }
 
-#carouselExampleControlsSecondMob{
+.mobile_car{
   display: none;
 }
 
@@ -107,6 +106,32 @@
     outline: none !important;
   }
 }
+
+.btn_catalog_index{
+  border-radius: 5px;
+  color: grey;
+  border-color: grey;
+  &:hover{
+    color: black;
+    border-color: black;
+  }
+  &:focus{
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+  &:active{
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+  &:visited{
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+}
+
 .card_index{
   height: -webkit-fill-available;
   //border: 1px solid black;
@@ -176,15 +201,15 @@
 
 @media (max-width: 1200px) {
 
-  #carouselExampleControlsSecond{
+  .big_screen{
     display: none;
   }
 
-  #carouselExampleControlsSecondIpad{
+  .ipad{
     display: block;
   }
 
-  #carouselExampleControlsSecondMob{
+  .mobile_car{
     display: none;
   }
 
@@ -200,15 +225,15 @@
 
 }
 @media (max-width: 940px) {
-  #carouselExampleControlsSecond{
+  .big_screen{
     display: none;
   }
 
-  #carouselExampleControlsSecondIpad{
+  .ipad{
     display: none;
   }
 
-  #carouselExampleControlsSecondMob{
+  .mobile_car{
     display: block;
   }
 

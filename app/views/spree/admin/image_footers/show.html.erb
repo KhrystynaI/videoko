@@ -1,6 +1,9 @@
 <div class="container">
 
 <div><%=@image_footer.number%></div>
+
+<div><%=@image_footer.url%></div>
+
 <div><%= image_tag(main_app.url_for(@image_footer.picture), size: "100x100") if @image_footer.picture %></div>
 <p><%=link_to "Змінити", edit_admin_image_footer_path(@image_footer.id)%></p>
 <p><%=link_to "Повернутися", admin_image_footers_path%></p>

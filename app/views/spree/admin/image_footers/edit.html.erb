@@ -6,6 +6,11 @@
     <%= f.number_field :number, class: "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label :url, "Url катинки"%>
+    <br/>
+    <%= f.text_field :url, class: "form-control" %>
+  </div>
+  <div class="form-group">
     <%= f.label :picture, "Фото"%>
   <%= f.file_field :picture, direct_upload: true%>
 </div>
