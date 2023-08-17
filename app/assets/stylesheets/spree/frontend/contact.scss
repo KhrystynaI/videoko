@@ -4,6 +4,22 @@ body{
   min-height: 100vh;
   flex-direction: column;
 }
+.blue_for_index_first_li{
+  font-size: 20px;
+  font-weight: bold;
+  color: #00336E;
+  text-transform: capitalize;
+  border-bottom: 0.1rem solid transparent;
+  text-decoration: none;
+  padding-bottom: 0.2rem;
+  border-bottom: 0.13rem solid #E1BE64;
+  &:hover{
+    border-bottom: 0.1rem solid transparent;
+    text-decoration: none;
+    padding-bottom: 0.2rem;
+    border-bottom: 0.17rem solid #E1BE64;
+  }
+}
 .width_card{
   max-width: 15rem;
 }

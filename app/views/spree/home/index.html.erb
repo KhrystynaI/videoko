@@ -111,8 +111,11 @@
       <%end%>
     <div class="card-body without_left_padding">
       <ul class="ul_index">
+        <li class="li_index_taxon blue_for_index_first_li index_front_size">
+          <%= link_to Spree.t(tax.name), spree.nested_taxons_path(tax, params: permitted_product_params(tax.id))%>
+        </li>
       <%tax.children.where(hide_from_nav: false).each do |item|%>
-        <li class="li_index_taxon blue index_front_size"><%=link_to item.name, spree.nested_taxons_path(item, params: permitted_product_params(item.id))%></li>
+        <li class="li_index_taxon blue_for_cat index_front_size"><%=link_to item.name, spree.nested_taxons_path(item, params: permitted_product_params(item.id))%></li>
       <%end%>
       </ul>
     </div>
@@ -139,8 +142,11 @@
       <%end%>
     <div class="card-body without_left_padding">
       <ul class="ul_index">
+        <li class="li_index_taxon blue_for_index_first_li index_front_size">
+          <%= link_to Spree.t(tax.name), spree.nested_taxons_path(tax, params: permitted_product_params(tax.id))%>
+        </li>
       <%tax.children.where(hide_from_nav: false).each do |item|%>
-        <li class="li_index_taxon blue index_front_size"><%=link_to item.name, spree.nested_taxons_path(item, params: permitted_product_params(item.id))%></li>
+        <li class="li_index_taxon blue_for_cat index_front_size"><%=link_to item.name, spree.nested_taxons_path(item, params: permitted_product_params(item.id))%></li>
       <%end%>
       </ul>
     </div>
