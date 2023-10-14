@@ -85,6 +85,8 @@ Rails.application.routes.draw do
       post "rate", controller: "products", action: "rate", as: :rate
       get "export_products", controller: "products", action: "export_products", as: :export_products
 
+      get "search_taxons/:id", controller: "option_types", action: "search_taxons",  as: :search_taxons
+
       resources :posts
       get "post/destroy_video/:id", controller: "posts", action: "destroy_video",  as: :post_destroy_video
       get "post/create_ru_form", controller: "posts", action: "create_ru_form",  as: :create_ru_form

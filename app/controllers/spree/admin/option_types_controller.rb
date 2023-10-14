@@ -18,6 +18,16 @@ module Spree
         end
       end
 
+      def search_taxons
+        taxonomy = Spree::Taxonomy.find_by(id: params[:id])
+
+        @option_types = taxonomy.taxons.map{|c|c.option_types}.flatten
+
+        respond_to do |format|
+          format.html {}
+          format.js
+        end
+      end
 
       protected
 
