@@ -72,18 +72,6 @@ module Spree
         end
       end
 
-      def export_all_pictures
-        @product = Product.friendly.find(params[:id])
-        respond_to do |format|
-          format.html {}
-          format.zip {
-    #        send_zip  "#{@product.sku}_image": @product.images.map{|c|c.attachment},
-    #                  "#{@product.sku}_3D_images": @product.volume&.images&.attachments
-
-                }
-        end
-      end
-
       def update
         if params[:product][:taxon_ids].present?
           params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')
@@ -126,7 +114,7 @@ module Spree
         respond_to do |format|
           format.html {}
           format.js
-      end
+        end
       end
 
       def rate
@@ -134,50 +122,53 @@ module Spree
         Spree::Config[:last_rate] = last_rate
         @rate = Spree::Config[:rate]
         Spree::Config[:rate] = params[:rate]
-          @rate = Spree::Config[:rate]
-          @message = "Ціни оновлені"
-          respond_to do |format|
-            format.js
+        @rate = Spree::Config[:rate]
+        @message = "Ціни оновлені"
+        respond_to do |format|
+          format.js
         end
-    end
+      end
 
-    def reindex_force
-      ReindexProductJob.perform_later()
-      redirect_to admin_products_url, notice: "Товари оновлюються.Зачекайте"
-    end
+      def reindex_force
+        ReindexProductJob.perform_later()
+        redirect_to admin_products_url, notice: "Товари оновлюються.Зачекайте"
+      end
 
       def import
         user_file = params[:file]
-          File.open(Rails.root.join('upload',user_file.original_filename), 'wb') do |file|
-            file.write(user_file.read)
+        if user_file.nil? || user_file.content_type != "text/csv"
+          redirect_to admin_products_url, notice: "Завантажте csv файл"
+        else
+        File.open(Rails.root.join('upload',user_file.original_filename), 'wb') do |file|
+          file.write(user_file.read)
         end
         file = user_file.original_filename
         empty_product = []
         CSV.foreach(user_file, headers: true, skip_blanks: true) do |t|
 
-        if Spree::Variant.find_by(sku: t['id']).nil?
-          empty_product.push(t['id'])
+          if Spree::Variant.find_by(sku: t['id']).nil?
+            empty_product.push(t['id'])
+          end
         end
-      end
 
         UpdatePriceCsvJob.perform_later(file)
         send_data(empty_product.to_csv, filename: "empty_products.csv")
-        #redirect_to admin_products_url, notice: "Ціни оновлюються.Зачекайте"
+       end
       end
 
       def related
         if !params[:related].nil? && !params[:related].empty?
-        related_product = params[:related].reject { |c| c.empty? }
-        @product.update!(related: related_product)
-      end
+          related_product = params[:related].reject { |c| c.empty? }
+          @product.update!(related: related_product)
+        end
       end
 
       def related_first
         if !Spree::Product.searchkick_index.exists?
-        InformDeveloperMailer.problem_email.deliver_later
-        ReindexProductJob.perform_later()
-        redirect_to admin_products_url, notice: "Товари оновлюються.Зачекайте"
-      end
+          InformDeveloperMailer.problem_email.deliver_later
+          ReindexProductJob.perform_later()
+          redirect_to admin_products_url, notice: "Товари оновлюються.Зачекайте"
+        end
       end
 
       def remove_related
@@ -193,26 +184,26 @@ module Spree
         begin
           # TODO: why is @product.destroy raising ActiveRecord::RecordNotDestroyed instead of failing with false result
           if @product.offer_items.blank? && @product.line_items.blank?
-          @product.variants.each{|variant| variant.prices.delete_all}
-          @product.variants.delete_all
+            @product.variants.each{|variant| variant.prices.delete_all}
+            @product.variants.delete_all
 
-          translated = @product.translations.map{|c|c.id}
-          Spree::Product::Translation.unscoped do
-            translated.each do |tr|
-            Spree::Product::Translation.where(id: tr).delete_all
+            translated = @product.translations.map{|c|c.id}
+            Spree::Product::Translation.unscoped do
+              translated.each do |tr|
+                Spree::Product::Translation.where(id: tr).delete_all
+              end
+            end
+            @product.video.purge if @product.video
+            if !@product.volume.blank?
+              @product.volume.images.each{|c|c.purge}
+              @product.volume.delete
+            end
+            if !@product.images.blank?
+              @product.images.each{|c|c.attachment.purge}
+              @product.images.delete_all
+            end
+            @product.destroy
           end
-          end
-          @product.video.purge if @product.video
-          if !@product.volume.blank?
-          @product.volume.images.each{|c|c.purge}
-          @product.volume.delete
-          end
-          if !@product.images.blank?
-          @product.images.each{|c|c.attachment.purge}
-          @product.images.delete_all
-          end
-          @product.destroy
-        end
           if !@product.deleted_at.blank?
             flash[:success] = Spree.t('notice_messages.product_deleted')
           else
@@ -291,9 +282,9 @@ module Spree
         # This is to include all products and not just deleted products.
         @search = @collection.ransack(params[:q].reject { |k, _v| k.to_s == 'deleted_at_null' })
         @collection = @search.result.
-                      includes(product_includes).
-                      page(params[:page]).
-                      per(params[:per_page] || Spree::Config[:admin_products_per_page])
+        includes(product_includes).
+        page(params[:page]).
+        per(params[:per_page] || Spree::Config[:admin_products_per_page])
         @collection
       end
 
