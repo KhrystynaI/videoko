@@ -28,8 +28,8 @@ class UpdatePriceCsvJob < ApplicationJob
         variant.product.update!(count_size: t['q'])
         variant.product.update!(existence: true) if t['q'].to_i >=1
         variant.product.update!(existence: false) if t['q'].to_i < 1
-        variant.product.update!(empty_price: false) if t['q'].to_i >= 1
-        variant.product.update!(empty_price: true) if t['q'].to_i < 1
+      #  variant.product.update!(empty_price: false) if t['q'].to_i >= 1
+      #  variant.product.update!(empty_price: true) if t['q'].to_i < 1
       end
 
         prices.each do |key, value|
@@ -37,7 +37,7 @@ class UpdatePriceCsvJob < ApplicationJob
             price_is = t[key].blank? ? 0 : t[key].to_f
             price.update!(amount_usd: price_is)
 
-            price.variant.product.update!(empty_price: true) if key == '6' && price_is == 0
+        #    price.variant.product.update!(empty_price: true) if key == '6' && price_is == 0
 
           end
         end
